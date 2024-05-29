@@ -1,0 +1,16 @@
+.sideBar{
+    width: 20vw;
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: aqua;
+    
+}
+
+.sideBar button{
+    padding: 10px;
+    margin: 30px;
+}
+

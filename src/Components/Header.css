@@ -1,0 +1,9 @@
+.header{
+    background-color:red;
+    width: 100vw;
+    height: 10vh;
+}
+.header img{
+    width: 10vh;
+    margin-left: 50px;
+}

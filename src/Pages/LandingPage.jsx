@@ -8,10 +8,8 @@ import bananasplit from "../assets/images/bananasplit.jpg";
 
 function LandingPage() {
   return (
-    <>
-      <div className="landing-container">
-       
-
+    <div className="landing-container">
+      <div className="landing-container2">
         <p className="slogan">
           Fair share, <strong>fair</strong> travel
         </p>
@@ -27,14 +25,14 @@ function LandingPage() {
         <div className="img-bnncontainer">
           <img className="banana" src={bananasplit} alt="" />
         </div>
-        <Link to="/SignUpPage">
-          <button className="btn">SignUp</button>
+        <Link to="/signup">
+          <button className="btn">SignUp</button>{" "}
         </Link>
-        <Link to="">
+        <Link to="/login">
           <button className="btn">LogIn</button>
         </Link>
       </div>
-    </>
+    </div>
   );
 }
 export default LandingPage;

@@ -2,10 +2,9 @@ import { useState, useContext } from "react";
 import "./LoginPage.css";
 /* import axios from "axios"; */
 import { Link, useNavigate } from "react-router-dom";
- /* import { AuthContext } from "../context/auth.context"; */
+/* import { AuthContext } from "../context/auth.context"; */
 import emailIcon from "../assets/images/email-icon.svg";
 import paswordIcon from "../assets/images/password-icon.svg";
-
 
 const API_URL = "http://localhost:5005";
 
@@ -42,34 +41,48 @@ function LoginPage(props) {
   };
 
   return (
-    <div className="signup-container">
-      <div className="headerSP">
-        <div className="text-signup">Login</div>
-        <div className="underline"></div>
-      </div>
+    <div className="login-container">
+      <div className="signup-container">
+        <div className="headerSP">
+          <div className="text-signup">Login</div>
+          <div className="underline"></div>
+        </div>
 
-      <form onSubmit={handleLoginSubmit}>
-
-
-      <div className="input">
+        <form onSubmit={handleLoginSubmit}>
+          <div className="input">
             <img src={emailIcon} alt="" />
-            <input type="text" name="email" value={email} onChange={handleEmail} placeholder="Email" />
-
+            <input
+              type="text"
+              name="email"
+              value={email}
+              onChange={handleEmail}
+              placeholder="Email"
+            />
           </div>
 
           <div className="input">
             <img src={paswordIcon} alt="" />
-            <input type="text" name="password" value={password} onChange={handlePassword} placeholder="Password" />
+            <input
+              type="text"
+              name="password"
+              value={password}
+              onChange={handlePassword}
+              placeholder="Password"
+            />
           </div>
           <div className="btn-submit-container">
-          <button className="btn-submit">Login</button>
-        </div>
-      </form>
-      { errorMessage && <p className="error-message">{errorMessage}</p> }
+            <Link to={"/home"}>
+              <button className="btn-submit">Login</button>
+            </Link>
+          </div>
+        </form>
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p className="haveaccount">Don't have an <strong>account yet</strong>?</p>
-      <Link to={"/SignUpPage"}> Sign Up</Link>
-
+        <p className="haveaccount">
+          Don't have an <strong>account yet</strong>?
+        </p>
+        <Link to={"/signup"}> Sign Up</Link>
+      </div>
     </div>
   );
 }

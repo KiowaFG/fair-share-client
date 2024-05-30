@@ -1,22 +1,10 @@
-.body{
+.landing-container{
     margin: 0;
   padding: 0;
   box-sizing: border-box; 
+
 }
-.hello{
-    text-align: center;
-    background-color: aqua;
-}
-h2{
-    background-color: #21d8db;
-    width: 2vw;
-    height: 4vh;
-    border-radius: 50%;
-    align-items: center;
-    margin-left: 42vw;
-    margin-top: 2vh;
-}
-.landing-container{
+.landing-container2{
     background-color: hsl(165, 65%, 37%);
     padding-top: 2.5%;
     padding-left: 4%;
@@ -40,13 +28,14 @@ h2{
     margin-left:2.5vw;
     display: flex;
     justify-content: space-around;
-
-img{
-        width: 10vw;
-        height: 6vh;
-
-    }
 }
+
+.banana{
+        width: 20vw;
+        height: 18vh;
+        border-radius: 50%;
+    }
+
 
 .btn{
     width: 15vw;
@@ -70,6 +59,4 @@ img{
     justify-content: flex-end;
     flex-wrap: nowrap;
 }
-.banana{
-    border-radius: 50%;
-}
+

@@ -1,0 +1,6 @@
+.Footer {
+  width: 100%;
+  color: #850e0e;
+  display: flex;
+  flex-direction: column;
+}

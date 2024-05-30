@@ -1,10 +1,14 @@
+import GroupView from "./ExpenseOverview/GroupView"
 import "./Expenses.css"
 
 function Expenses(){
     return (
-        <nav className="expenses">
+        <div className="expenses">
             <h1>Expense Group List</h1>
-        </nav>
+            <div>
+                <GroupView/>
+            </div>
+        </div>
     )
 }
 export default Expenses

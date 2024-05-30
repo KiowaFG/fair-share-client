@@ -1,0 +1,33 @@
+.group-overview{
+    display: flex;
+    flex-direction: row;
+    border: solid 1px wheat;
+    border-radius: 10px;
+    justify-content: space-around;
+    cursor: pointer;
+}
+
+.group-viewImg{
+    width: 6em;
+    height: 6em;
+    border-radius: 50%;
+}
+
+.group-info{
+    display: flex;
+    flex-direction: column;
+    width: 80%;
+    justify-content: center;
+    
+}
+.group-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    width: 100%;
+}
+
+.centr-info{
+    display: flex;
+    align-items: center;
+}

@@ -5,6 +5,7 @@ import Header from './Components/Header'
 import Homepage from './Pages/HomePage'
 import SideBar from './Components/SideBar'
 import LandingPage from './Pages/LandingPage'
+import SignUpPage from './Pages/SignUpPage'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,12 +13,15 @@ function App() {
   return (
     <>
     <Routes>
+
       <Route path='/' element= {<LandingPage/>}/>
       <Route path='/HomePage' element={<Homepage/>}/>
+      <Route path='/SignUpPage' element={<SignUpPage/>}/>
+
     </Routes>
       
     </>
   )
 }
 
-export default App
+export default App;

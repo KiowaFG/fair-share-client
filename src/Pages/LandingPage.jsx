@@ -27,7 +27,7 @@ function LandingPage() {
         <div className="img-bnncontainer">
           <img className="banana" src={bananasplit} alt="" />
         </div>
-        <Link to="">
+        <Link to="/SignUpPage">
           <button className="btn">SignUp</button>
         </Link>
         <Link to="">

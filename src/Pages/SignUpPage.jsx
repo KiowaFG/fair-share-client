@@ -4,7 +4,7 @@ import axios from "axios";
 import "./SignUpPage.css";
 import nameIcon from "../assets/images/username-icon.png";
 import surnameIcon from "../assets/images/surname-icon.png";
-import dateOfBirth from "../assets/images/date-icon.png";
+import dateOfBirthIcon from "../assets/images/date-icon.png";
 import PhoneNumber from "../assets/images/phone-icon.svg";
 import emailIcon from "../assets/images/email-icon.svg";
 import paswordIcon from "../assets/images/password-icon.svg";
@@ -75,7 +75,7 @@ function SignUpPage(props) {
             <input type="text" name="surname" value={surname} onChange={handleSurname} placeholder="Surname" />
           </div>
           <div className="input">
-            <img src={dateOfBirth} alt="" />
+            <img src={dateOfBirthIcon} alt="" />
             <input type="text" name="dateOfBirth" value={dateOfBirth} onChange={handleDateOfBirth} placeholder="Date Of Birth" />
           </div>
           <div className="input">
@@ -103,8 +103,8 @@ function SignUpPage(props) {
 
       {errorMessage && <p className="error-message">{errorMessage}</p>}
 
-      <p>Already have account?</p>
-      <Link to={"/LoginPage"}>Login</Link>
+      <p className="haveaccount">Already have <strong>account</strong>?</p>
+      <Link to={"/LoginPage"} className="loglink">Login</Link>
     </div>
   );
 }

@@ -1,0 +1,75 @@
+.body{
+    margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+.hello{
+    text-align: center;
+    background-color: aqua;
+}
+h2{
+    background-color: #21d8db;
+    width: 2vw;
+    height: 4vh;
+    border-radius: 50%;
+    align-items: center;
+    margin-left: 42vw;
+    margin-top: 2vh;
+}
+.landing-container{
+    background-color: hsl(165, 65%, 37%);
+    padding-top: 2.5%;
+    padding-left: 4%;
+    height: 90vh;
+    overflow-y: auto;
+}
+.slogan{
+    margin-top: 1vh;
+    font-size: 60px;
+    margin-bottom: 1.5vh;
+}
+.slogansito{
+    margin-left:2.5vw;
+    font-size: 25px;
+    margin-bottom: 1.5vh;
+}
+.icons-LandingPage{
+    width: 10vw;
+    height: 10vh;
+    margin-top: 1.5vh;
+    margin-left:2.5vw;
+    display: flex;
+    justify-content: space-around;
+
+img{
+        width: 10vw;
+        height: 6vh;
+
+    }
+}
+
+.btn{
+    width: 15vw;
+    height: 5vh;
+    background-color: rgb(166, 193, 177);
+    border-radius: 3vw;
+    color: var(--Mobile-background, #000);
+    font-weight: bold;
+    margin-top: 15vh;
+    margin-bottom: 5vh;
+    margin-right: 1.5vw;
+    box-shadow: rgba(55, 59, 63, 0.5) 0px 2px 0px 0px;
+    cursor: pointer;
+
+}
+.img-bnncontainer{
+  
+    height: 30vh;
+    display: flex;
+    flex-direction:row;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+}
+.banana{
+    border-radius: 50%;
+}

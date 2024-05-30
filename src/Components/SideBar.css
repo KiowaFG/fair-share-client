@@ -6,11 +6,58 @@
     align-items: center;
     justify-content: center;
     background-color: aqua;
+    z-index: 2;
+    left: 0px;
+    animation-name: slidein;
+    animation-duration: 500ms;
+    text-decoration: none;
+    align-items: center;
+    position: absolute;
     
 }
+.slideout{
+    animation-name: slideout;
+    animation-duration: 500ms;   
+}
+
+
+@keyframes slideout {
+    from {
+      transform: translateX(0%);
+    }
+  
+    to {
+      transform: translateX(-100%);
+    }
+  }
+
+
+@keyframes slidein {
+    from {
+      transform: translateX(-100%);
+    }
+  
+    to {
+      transform: translateX(0%);
+    }
+  }
+
+  @keyframes slidedown {
+    from {
+      transform:translateY(-100%);
+    }
+  
+    to {
+      transform: translateY(0%);
+    }
+  }
 
 .sideBar button{
     padding: 10px;
     margin: 30px;
+}
+
+.closeBtn{
+    width: 20px;
 }
 

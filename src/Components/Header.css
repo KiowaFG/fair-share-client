@@ -1,9 +1,27 @@
 .header{
     background-color:red;
     width: 100vw;
-    height: 10vh;
+    height: 8vh;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
 }
-.header img{
-    width: 10vh;
+
+.logo{
+    width: 8vh;
     margin-left: 50px;
+}
+
+.profile{
+    display: flex; 
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile img{
+    width: 5vh;  
+    border-radius: 50%;
+
 }

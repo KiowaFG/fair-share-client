@@ -1,12 +1,10 @@
 .expenses{
-    background-color: rgb(101, 101, 101);
-    padding: 30px;
-    border: 1px solid black;
+    background-color:white;
     border-radius: 20px;
-    width: 80%;
+    width: 100%;
     height: 100%;
     margin: 20px;
     display: flex;
-    
+    align-items: center;
     flex-direction: column;
 }

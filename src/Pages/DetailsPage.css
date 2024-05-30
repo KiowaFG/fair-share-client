@@ -1,0 +1,61 @@
+.detailsWrap{
+width: 100%;
+display: flex;
+align-items:center ;
+justify-content: center;
+margin-top: 5vh;
+}
+.detailsPage{
+    background-color: rgb(205, 194, 194);
+    padding: 30px;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 80%;
+    height: 100%;
+    margin: 20px;
+    display: flex;
+    
+    flex-direction: column;
+}
+
+.detailsPageImg{
+    width: 70%;
+    height: 70%;
+    border-radius: 10%;
+}
+
+.mainSection{
+display: flex;
+flex-direction: row;
+justify-content: space-around;
+}
+
+.titleAndBtns{
+    display: flex;
+    flex-direction: column;  
+    justify-content: space-around;
+}
+
+.btns{
+    display: flex;
+flex-direction: row;
+
+}
+
+.detailsbtn{
+    margin: 0 15px 0 0;
+    padding: 6px;
+}
+
+.expenseItem{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1em;
+    
+}
+

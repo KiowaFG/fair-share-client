@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
-import axios from "axios";
+import "./LoginPage.css";
+/* import axios from "axios"; */
 import { Link, useNavigate } from "react-router-dom";
-import { AuthContext } from "../context/auth.context";
+ /* import { AuthContext } from "../context/auth.context"; */
 import emailIcon from "../assets/images/email-icon.svg";
 import paswordIcon from "../assets/images/password-icon.svg";
 
@@ -15,7 +16,7 @@ function LoginPage(props) {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  /*  const { storeToken, authenticateUser } = useContext(AuthContext);  */
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
 
@@ -23,7 +24,7 @@ function LoginPage(props) {
     e.preventDefault();
     const requestBody = { email, password };
 
-    axios
+    /*  axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
         console.log("JWT token", response.data.authToken);
@@ -37,7 +38,7 @@ function LoginPage(props) {
       .catch((error) => {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
-      });
+      });  */
   };
 
   return (
@@ -67,7 +68,7 @@ function LoginPage(props) {
       { errorMessage && <p className="error-message">{errorMessage}</p> }
 
       <p className="haveaccount">Don't have an <strong>account yet</strong>?</p>
-      <Link to={"/SignUpPage"}className="loglink"> Sign Up</Link>
+      <Link to={"/SignUpPage"}> Sign Up</Link>
 
     </div>
   );

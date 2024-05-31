@@ -59,52 +59,100 @@ function SignUpPage(props) {
   //....ojo....///
 
   return (
-    <div className="signup-container">
-      <div className="headerSP">
-        <div className="text-signup">Sing Up</div>
-        <div className="underline"></div>
+    <div className="sign-container">
+      <div className="signup-container">
+        <div className="headerSP">
+          <div className="text-signup">Sing Up</div>
+          <div className="underline"></div>
+        </div>
+        <form onSubmit={handleSignUpSubmit}>
+          <div className="inputs">
+            <div className="input">
+              <img src={nameIcon} alt="" />
+              <input
+                type="text"
+                name="name"
+                value={name}
+                onChange={handleName}
+                placeholder="Name"
+              />
+            </div>
+            <div className="input">
+              <img src={surnameIcon} alt="" />
+              <input
+                type="text"
+                name="surname"
+                value={surname}
+                onChange={handleSurname}
+                placeholder="Surname"
+              />
+            </div>
+            <div className="input">
+              <img src={dateOfBirthIcon} alt="" />
+              <input
+                type="text"
+                name="dateOfBirth"
+                value={dateOfBirth}
+                onChange={handleDateOfBirth}
+                placeholder="Date Of Birth"
+              />
+            </div>
+            <div className="input">
+              <img src={PhoneNumber} alt="" />
+              <input
+                type="text"
+                name="phoneNumber"
+                value={phoneNumber}
+                onChange={handlePhoneNumber}
+                placeholder="Phone Number"
+              />
+            </div>
+            <div className="input">
+              <img src={emailIcon} alt="" />
+              <input
+                type="text"
+                name="email"
+                value={email}
+                onChange={handleEmail}
+                placeholder="Email"
+              />
+            </div>
+            <div className="input">
+              <img src={paswordIcon} alt="" />
+              <input
+                type="text"
+                name="password"
+                value={password}
+                onChange={handlePassword}
+                placeholder="Password"
+              />
+            </div>
+            <div className="input">
+              <img src={passwordConfirmIcon} alt="" />
+              <input
+                type="text"
+                name="confirmPassword"
+                value={confirmPassword}
+                onChange={handleConfirmPassword}
+                placeholder="Confirm Password"
+              />
+            </div>
+          </div>
+          <div className="btn-submit-container">
+           <Link to={"/login"}><button className="btn-submit">Sign Up</button></Link>
+            
+          </div>
+        </form>
+
+        {errorMessage && <p className="error-message">{errorMessage}</p>}
+
+        <p className="haveaccount">
+          Already have <strong>account</strong>?
+        </p>
+        <Link to={"/login"} className="loglink">
+          Login
+        </Link>
       </div>
-      <form onSubmit={handleSignUpSubmit}>
-        <div className="inputs">
-          <div className="input">
-            <img src={nameIcon} alt="" />
-            <input type="text" name="name" value={name} onChange={handleName} placeholder="Name" />
-          </div>
-          <div className="input">
-            <img src={surnameIcon} alt="" />
-            <input type="text" name="surname" value={surname} onChange={handleSurname} placeholder="Surname" />
-          </div>
-          <div className="input">
-            <img src={dateOfBirthIcon} alt="" />
-            <input type="text" name="dateOfBirth" value={dateOfBirth} onChange={handleDateOfBirth} placeholder="Date Of Birth" />
-          </div>
-          <div className="input">
-            <img src={PhoneNumber} alt="" />
-            <input type="text" name="phoneNumber" value={phoneNumber} onChange={handlePhoneNumber} placeholder="Phone Number" />
-          </div>
-          <div className="input">
-            <img src={emailIcon} alt="" />
-            <input type="text" name="email" value={email} onChange={handleEmail} placeholder="Email" />
-
-          </div>
-          <div className="input">
-            <img src={paswordIcon} alt="" />
-            <input type="text" name="password" value={password} onChange={handlePassword} placeholder="Password" />
-          </div>
-          <div className="input">
-            <img src={passwordConfirmIcon} alt="" />
-            <input type="text" name="confirmPassword" value={confirmPassword} onChange={handleConfirmPassword} placeholder="Confirm Password" />
-          </div>
-        </div>
-        <div className="btn-submit-container">
-          <button className="btn-submit">Sign Up</button>
-        </div>
-      </form>
-
-      {errorMessage && <p className="error-message">{errorMessage}</p>}
-
-      <p className="haveaccount">Already have <strong>account</strong>?</p>
-      <Link to={"/LoginPage"} className="loglink">Login</Link>
     </div>
   );
 }

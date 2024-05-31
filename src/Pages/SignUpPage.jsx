@@ -53,7 +53,7 @@ function SignUpPage(props) {
     axios
       .post(`${API_URL}/auth/signup`, requestBody)
       .then((response) => {
-        // navigate("/login");
+       navigate("/login");
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;

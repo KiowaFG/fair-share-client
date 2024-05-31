@@ -8,12 +8,15 @@ const API_URL = import.meta.env.VITE_API_URL
 
 function GroupView() {
 
-
+    const storedToken = localStorage.getItem("authToken");
     const [groups, setGroups] = useState([]);
 
     const getAllGroups = () => {
         axios
-            .get(`${API_URL}/groups`)
+            .get(
+                `${API_URL}/groups`,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
             .then((response) => setGroups(response.data))
             .catch((error) => console.log(error));
     };
@@ -28,7 +31,7 @@ function GroupView() {
             {groups.map((group) => {
                 return (
 
-                    <Link to={`/details/${group._id}`}>
+                    <Link key={group._id} to={`/details/${group._id}`}>
                         <div className="group-overview">
                             <img className="group-viewImg" src="https://images.delunoalotroconfin.com/Content/images/000/Productos/Prod_2828_1.jpg" alt="" />
                             <div className="group-info">

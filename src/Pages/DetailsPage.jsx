@@ -7,37 +7,40 @@ import { useState, useEffect } from "react";
 const API_URL = import.meta.env.VITE_API_URL
 
 function DetailsPage() {
+    const storedToken = localStorage.getItem("authToken");
+    const [group, setGroup] = useState({})
+    const { groupId } = useParams();
 
-const [group, setGroup] = useState({})
-const { groupId } = useParams();
+    const getGroup = () => {
+        axios
+            .get(
+                `${API_URL}/groups/${groupId}`,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
+            .then((response) => {
+                const oneGroup = response.data;
+                setGroup(oneGroup);
+            })
+            .catch((error) => console.log(error));
+    }
 
-const getGroup =()=>{
-    axios
-    .get(`${API_URL}/groups/${groupId}`)
-    .then((response) => {
-        const oneGroup = response.data;
-        setGroup(oneGroup);
-      })
-      .catch((error) => console.log(error));
-}
-
-useEffect(()=> {            
-    getGroup();
-  }, [] );
+    useEffect(() => {
+        getGroup();
+    }, []);
 
 
     return (
         <div className="detailsWrap">
             <div className="detailsPage">
-                    <img className="detailsPageImg" src="https://images.delunoalotroconfin.com/Content/images/000/Productos/Prod_2828_1.jpg" alt="" />
-                    <div className="titleAndBtns">
-                        <h2>{group.name}</h2>
-                        <h3>Total expense: 900€</h3>
-                        <div className="Btns">
-                            <button className="detailsbtn">Add Expense</button>
-                            <button className="detailsbtn">Settle Up</button>
-                        </div>
+                <img className="detailsPageImg" src="https://images.delunoalotroconfin.com/Content/images/000/Productos/Prod_2828_1.jpg" alt="" />
+                <div className="titleAndBtns">
+                    <h2>{group.name}</h2>
+                    <h3>Total expense: 900€</h3>
+                    <div className="Btns">
+                        <button className="detailsbtn">Add Expense</button>
+                        <button className="detailsbtn">Settle Up</button>
                     </div>
+                </div>
                 <div className="expenseItem">
                     <p>Name: visas</p>
                     <p>Price: 300€</p>

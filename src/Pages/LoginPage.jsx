@@ -1,8 +1,8 @@
 import { useState, useContext } from "react";
 import "./LoginPage.css";
-/* import axios from "axios"; */
+import axios from "axios";
 import { Link, useNavigate } from "react-router-dom";
-/* import { AuthContext } from "../context/auth.context"; */
+import { AuthContext } from "../context/auth.context";
 import emailIcon from "../assets/images/email-icon.svg";
 import paswordIcon from "../assets/images/password-icon.svg";
 
@@ -13,17 +13,18 @@ function LoginPage(props) {
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(undefined);
 
-  const navigate = useNavigate();
-
-  /*  const { storeToken, authenticateUser } = useContext(AuthContext);  */
   const handleEmail = (e) => setEmail(e.target.value);
   const handlePassword = (e) => setPassword(e.target.value);
+
+  const navigate = useNavigate();
+
+  const { storeToken, authenticateUser } = useContext(AuthContext);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
     const requestBody = { email, password };
 
-    /*  axios
+    axios
       .post(`${API_URL}/auth/login`, requestBody)
       .then((response) => {
         console.log("JWT token", response.data.authToken);
@@ -31,13 +32,13 @@ function LoginPage(props) {
         storeToken(response.data.authToken);
 
         authenticateUser();
-        navigate("/");
+        navigate("/home");
       })
 
       .catch((error) => {
         const errorDescription = error.response.data.message;
         setErrorMessage(errorDescription);
-      });  */
+      });
   };
 
   return (
@@ -71,9 +72,7 @@ function LoginPage(props) {
             />
           </div>
           <div className="btn-submit-container">
-            <Link to={"/home"}>
-              <button className="btn-submit">Login</button>
-            </Link>
+            <button className="btn-submit">Login</button>
           </div>
         </form>
         {errorMessage && <p className="error-message">{errorMessage}</p>}

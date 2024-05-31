@@ -4,11 +4,14 @@ import './App.css'
 import Header from './Components/Header'
 import Homepage from './Pages/HomePage'
 import SideBar from './Components/SideBar'
-import { Routes, Route } from 'react-router-dom'
 import DetailsPage from './Pages/DetailsPage'
 import LandingPage from './Pages/LandingPage'
 import SignUpPage from './Pages/SignUpPage'
 import LoginPage from './Pages/LoginPage'
+import axios from "axios"
+
+const API__URL = import.meta.env.VITE_API_URL
+
 
 
 function App() {
@@ -23,7 +26,7 @@ function App() {
     <Routes>
       <Route path='/' element= {<LandingPage/>}/>
       <Route path='/home' element={<Homepage/>}/>
-      <Route path="/details" element={<DetailsPage/>}/>
+      <Route path="/details/:groupId" element={<DetailsPage/>}/>
               <Route path='/SignUpPage' element={<SignUpPage/>}/>
       <Route path='/LoginPage' element={<LoginPage/>}/>
     </Routes>

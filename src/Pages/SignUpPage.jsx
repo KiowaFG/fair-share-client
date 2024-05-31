@@ -14,7 +14,7 @@ const API_URL = "http://localhost:5005";
 
 function SignUpPage(props) {
   const [name, setName] = useState("");
-  const [surname, setSurname] = useState("");
+  const [lastName, setLastName] = useState("");
   const [dateOfBirth, setDateOfBirth] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
   const [email, setEmail] = useState("");
@@ -25,7 +25,7 @@ function SignUpPage(props) {
   const navigate = useNavigate();
 
   const handleName = (e) => setName(e.target.value);
-  const handleSurname = (e) => setSurname(e.target.value);
+  const handleLastName = (e) => setLastName(e.target.value);
   const handleDateOfBirth = (e) => setDateOfBirth(e.target.value);
   const handlePhoneNumber = (e) => setPhoneNumber(e.target.value);
   const handleEmail = (e) => setEmail(e.target.value);
@@ -35,20 +35,25 @@ function SignUpPage(props) {
   const handleSignUpSubmit = (e) => {
     e.preventDefault();
 
+    if (password !== confirmPassword){
+      setErrorMessage("Passwords need to coincide");
+      return
+    };
+
+    // name, lastName, dateOfBirth, phoneNumber, email, password
     const requestBody = {
       name,
-      surname,
+      lastName,
       dateOfBirth,
-      PhoneNumber,
+      phoneNumber,
       email,
-      password,
-      confirmPassword,
+      password
     };
 
     axios
-      .post(`${API_URL}/auth/sigup`, requestBody)
+      .post(`${API_URL}/auth/signup`, requestBody)
       .then((response) => {
-        navigate("/login");
+        // navigate("/login");
       })
       .catch((error) => {
         const errorDescription = error.response.data.message;
@@ -81,16 +86,16 @@ function SignUpPage(props) {
               <img src={surnameIcon} alt="" />
               <input
                 type="text"
-                name="surname"
-                value={surname}
-                onChange={handleSurname}
-                placeholder="Surname"
+                name="lastname"
+                value={lastName}
+                onChange={handleLastName}
+                placeholder="Last name"
               />
             </div>
             <div className="input">
               <img src={dateOfBirthIcon} alt="" />
               <input
-                type="text"
+                type="date"
                 name="dateOfBirth"
                 value={dateOfBirth}
                 onChange={handleDateOfBirth}
@@ -120,7 +125,7 @@ function SignUpPage(props) {
             <div className="input">
               <img src={paswordIcon} alt="" />
               <input
-                type="text"
+                type="password"
                 name="password"
                 value={password}
                 onChange={handlePassword}
@@ -130,7 +135,7 @@ function SignUpPage(props) {
             <div className="input">
               <img src={passwordConfirmIcon} alt="" />
               <input
-                type="text"
+                type="password"
                 name="confirmPassword"
                 value={confirmPassword}
                 onChange={handleConfirmPassword}
@@ -139,7 +144,7 @@ function SignUpPage(props) {
             </div>
           </div>
           <div className="btn-submit-container">
-           <Link to={"/login"}><button className="btn-submit">Sign Up</button></Link>
+           <button className="btn-submit">Sign Up</button>
             
           </div>
         </form>

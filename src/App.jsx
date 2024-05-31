@@ -8,6 +8,9 @@ import DetailsPage from "./Pages/DetailsPage";
 import LandingPage from "./Pages/LandingPage";
 import SignUpPage from "./Pages/SignUpPage";
 import LoginPage from "./Pages/LoginPage";
+import axios from "axios"
+
+const API__URL = import.meta.env.VITE_API_URL
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
@@ -20,12 +23,12 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Homepage />} />
+                <Route path="/details/:groupId" element={<DetailsPage/>}/>
           <Route path="/details" element={<DetailsPage />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
         </Routes>
       </div>
-
     </>
   );
 }

@@ -1,5 +1,5 @@
-.header{
-    background-color:red;
+.header {
+    background-color: red;
     width: 100vw;
     height: 8vh;
     border-bottom-left-radius: 10px;
@@ -9,23 +9,47 @@
     justify-content: space-around;
 }
 
-.logo{
+.logo {
     width: 8vh;
     margin-left: 50px;
 }
 
-.profile{
-    display: flex; 
+.profile {
+    display: flex;
     flex-direction: row;
     align-items: center;
+    height: 100%;
+    cursor: pointer;
+    /* position: fixed; */
 }
 
-.profile img{
-    width: 5vh;  
+.profile img {
+    width: 5vh;
     border-radius: 50%;
-
 }
 
-.burger{
+.burger {
     width: 30px;
+}
+
+.profile-wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
+    position: relative;
+}
+
+.profile-menu {
+    position: absolute;
+    width: fit-content;
+    bottom: -30px;
+    left: 0px;
+    background-color: white;
+    border: 1px solid black;
+    width: 100px;
+
+    ul {
+        list-style-type: none;
+    }
 }

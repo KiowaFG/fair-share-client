@@ -1,97 +1,163 @@
-.sign-container{
-    margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    height: 100vh;
-    background-color: rgb(157, 46, 157);
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;800&family=Roboto&family=Satisfy&display=swap");
+.sign-container {
+  margin: 0;
+  padding: 0;
+  width: 27vw;
+  height: 75vh;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #da761ffb;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 35%;
+  margin-top: 8vh;
+  margin-bottom: 10vh;
 }
-.signup-container{
-    display: flex;
-    flex-direction: column;
-    margin:auto;
-    margin-top: 50px;
-    width: 300px;
-    height: 600px;
-    background: #fff;
-    padding-bottom: 15px;
-    border-radius: 5px;
-    
+.signup-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 50px;
+  width: 25vw;
+  height: 65vh;
+  background-color: #fff;
+  padding-bottom: 15px;
+  border-radius: 30px;
 }
-.headerSP{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 4.5px;
-    width: 100%;
-    margin-top: 15px;
+
+.headerSP {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.sp-text-signup {
+  color: rgb(89, 27, 190);
+  font-size: 20px;
+  font-weight: 600;
+}
+.underline-sp {
+  width: 7vw;
+  height: 0.65vh;
+  background-color: rgb(89, 27, 190);
+  border-radius: 4px;
+}
+.sp-form {
+  margin: 0;
+  height: 49vh;
+}
+.sp-inputs {
+  margin-top: 27px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.sp-input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 22vw;
+  height: 4vh;
+  background: #eaeaea;
+  border-radius: 6px;
+}
+.sp-input img {
+  width: 1.5vw;
+  margin: 0px 15px;
+}
+.sp-input input {
+  height: 4vh;
+  width: 20vw;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #797979;
+  font-size: 14px;
+}
+.sp-btn-submit-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 35px;
+}
+.sp-btn-submit {
+  width: 40vw;
+  height: 6vh;
+  color: #fff;
+  background-color: rgb(89, 27, 190);
+  border-radius: 50px;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+}
+.sp-haveaccount {
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  margin-left: 2vw;
+}
+.sp-loglink {
+  font-weight: 600;
+  font-size: 12px;
+  margin-left: 2vw;
+  color: #6c14c9;
+}
+.sp-loglink:hover {
+  text-decoration: underline;
+}
+@media(min-width:375px){
+
+    .sign-container{
+        width: 70vw;
+        margin-left: 15%;
+        border-bottom: 10vh;
+
+     }
+     .signup-container{
+        width:65vw;
+     }
+     .sp-input{
+        width: 45vw;
+     }
+     .sp-input img{
+        width: 3vw;
+     }
+     .sp-input input{
+        width: 55vw;
+        font-size: 12px;
+     }
+     .sp-btn-submit{
+        width: 60vw;
+     }
 
 
-}
-.text-signup{
-    color: blue;
-    font-size: 25px;
-    font-weight: 700;
+ }
+ @media (min-width: 1024px) {
+    .sign-container {
+        width: 27vw;
+        margin-left: 35%;
+    }
 
-}
-.underline{
-    width: 31px;
-    height: 3px;
-    background-color: blue;
-    border-radius: 4px;
+    .signup-container {
+        width: 25vw;
+    }
 
-}
-.inputs{
-    margin-top: 27px;
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
+    .sp-input {
+        width: 22vw;
+    }
 
-}
-.input{
-    display: flex;
-    align-items: center;
-    margin: auto;
-    width: 240px;
-    height: 40px;
-    background: #eaeaea;
-    border-radius: 3px;
-}
-.input img{
-    width: 3vw;
-    margin: 0px 15px;
+    .sp-input img {
+        width: 1.5vw;
+    }
 
-}
-.input input{
-    height: 50px;
-    width: 400px;
-    background: transparent;
-    border:none;
-    outline: none;
-    color: #797979;
-    font-size: 14px;
-}
-.btn-submit-container{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 35px;
-}
-.btn-submit{
-   
-    width: 150px;
-    height: 59px;
-    color: #fff;
-    background: #4c00b4;
-    border-radius: 50px;
-    font-size: 19px;
-    font-weight: 700;
-    cursor: pointer;
-}
-.haveaccount{
-    font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    margin-left: 2vw;
+    .sp-input input {
+        width: 20vw;
+    }
 
-}
-.loglink{
-    font-weight: 500;
-    margin-left: 2vw;
+    .sp-btn-submit {
+        width: 40vw;
+    }
 }

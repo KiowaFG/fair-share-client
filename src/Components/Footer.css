@@ -1,6 +1,155 @@
-.Footer {
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;800&family=Roboto&family=Satisfy&display=swap");
+
+.footer-container {
+  background-color: hsl(147, 86%, 41%);
   width: 100%;
-  color: #850e0e;
+  height: 10vh;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0px 20px;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+  position: absolute;
+  padding-top: 10px;
+}
+
+.footerLeft-container {
   display: flex;
   flex-direction: column;
+  justify-content: flex-end;
+  align-items: start;
+  height: 100%;
+  width: 33vw;
+  padding: 20px 0px;
 }
+
+.footerMid-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 100%;
+  width: 33vw;
+  padding-top: 30px;
+}
+
+.footerIconLogos-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  width: 100%;
+}
+
+.footer-logo {
+  width: 20px;
+  height: 20px;
+  fill: #585858;
+  filter: invert(31%) sepia(56%) saturate(0%) hue-rotate(165deg) brightness(94%) contrast(92%);
+  transition: 500ms;
+}
+
+.instagram:hover {
+  filter: invert(28%) sepia(46%) saturate(3577%) hue-rotate(319deg) brightness(92%) contrast(91%);
+  transform: scale(1.5);
+}
+
+.facebook:hover {
+  filter: invert(37%) sepia(75%) saturate(465%) hue-rotate(182deg) brightness(90%) contrast(94%);
+  transform: scale(1.5);
+}
+
+.linkedin:hover {
+  filter: invert(25%) sepia(72%) saturate(4587%) hue-rotate(199deg) brightness(89%) contrast(92%);
+  transform: scale(1.5);
+}
+
+.youtube:hover {
+  filter: invert(23%) sepia(91%) saturate(7488%) hue-rotate(356deg) brightness(91%) contrast(123%);
+  transform: scale(1.5);
+}
+
+.xlogo:hover {
+  filter: invert(100%) sepia(5%) saturate(426%) hue-rotate(314deg) brightness(116%) contrast(100%);
+  transform: scale(1.5);
+}
+
+.logo-separator {
+  height: 50px;
+  font-size: 50px;
+  color: #585858;
+  cursor: default;
+}
+
+.footerRight-container {
+  display: flex;
+  align-items: end;
+  justify-content: flex-end;
+  height: 100%;
+  width: 33vw;
+  padding: 20px 0px;
+}
+
+.logo-separator {
+  height: 40px;
+  font-size: 25px;
+  color: #585858;
+  font-family: Arrow;
+  text-align: center;
+  vertical-align: middle;
+}
+
+.footer-paragraph {
+  font-size: 18px;
+  color:#fff;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  cursor: default;
+}
+
+.footer-paragraph.left {
+margin-right: 4vw;
+  cursor: pointer;
+}
+.footer-paragraph.left:hover{
+text-decoration: underline;
+} 
+
+.footerLogo-container{
+  padding-bottom: 20px;
+}
+@media (max-width:800px) {
+
+ .footer-container {
+    background-color: #0aa16f;
+    width: 100%;
+    height: 20%;
+    grid-template-columns: repeat(1, 1fr);
+    box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em, rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
+    position: absolute;
+   
+    gap: 10px;
+  }
+  .footerIconLogos-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 2vh;
+    gap: 2px;
+    width: 90%;
+  }
+  .footer-paragraph {
+    font-size: 12px;
+    color:#fff;
+    font-weight: 500;
+    font-family: "Poppins", sans-serif;
+    cursor: default;
+    margin-left: 1.5vw;
+  }
+  
+}
+
+

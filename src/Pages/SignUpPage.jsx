@@ -67,12 +67,12 @@ function SignUpPage(props) {
     <div className="sign-container">
       <div className="signup-container">
         <div className="headerSP">
-          <div className="text-signup">Sing Up</div>
-          <div className="underline"></div>
+          <div className="sp-text-signup">Sing Up</div>
+          <div className="underline-sp"></div>
         </div>
-        <form onSubmit={handleSignUpSubmit}>
-          <div className="inputs">
-            <div className="input">
+        <form className="sp-form" onSubmit={handleSignUpSubmit}>
+          <div className="sp-inputs">
+            <div className="sp-input">
               <img src={nameIcon} alt="" />
               <input
                 type="text"
@@ -82,7 +82,7 @@ function SignUpPage(props) {
                 placeholder="Name"
               />
             </div>
-            <div className="input">
+            <div className="sp-input">
               <img src={surnameIcon} alt="" />
               <input
                 type="text"
@@ -92,7 +92,7 @@ function SignUpPage(props) {
                 placeholder="Last name"
               />
             </div>
-            <div className="input">
+            <div className="sp-input">
               <img src={dateOfBirthIcon} alt="" />
               <input
                 type="date"
@@ -102,7 +102,7 @@ function SignUpPage(props) {
                 placeholder="Date Of Birth"
               />
             </div>
-            <div className="input">
+            <div className="sp-input">
               <img src={PhoneNumber} alt="" />
               <input
                 type="text"
@@ -112,17 +112,17 @@ function SignUpPage(props) {
                 placeholder="Phone Number"
               />
             </div>
-            <div className="input">
+            <div className="sp-input">
               <img src={emailIcon} alt="" />
               <input
-                type="text"
+                type="email"
                 name="email"
                 value={email}
                 onChange={handleEmail}
                 placeholder="Email"
               />
             </div>
-            <div className="input">
+            <div className="sp-input">
               <img src={paswordIcon} alt="" />
               <input
                 type="password"
@@ -132,7 +132,7 @@ function SignUpPage(props) {
                 placeholder="Password"
               />
             </div>
-            <div className="input">
+            <div className="sp-input">
               <img src={passwordConfirmIcon} alt="" />
               <input
                 type="password"
@@ -143,18 +143,18 @@ function SignUpPage(props) {
               />
             </div>
           </div>
-          <div className="btn-submit-container">
-           <button className="btn-submit">Sign Up</button>
+          <div className="sp-btn-submit-container">
+           <button className="sp-btn-submit">Sign Up</button>
             
           </div>
         </form>
 
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {errorMessage && <p className="sp-error-message">{errorMessage}</p>}
 
-        <p className="haveaccount">
+        <div className="sp-haveaccount">
           Already have <strong>account</strong>?
-        </p>
-        <Link to={"/login"} className="loglink">
+        </div>
+        <Link to={"/login"} className="sp-loglink">
           Login
         </Link>
       </div>

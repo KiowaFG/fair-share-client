@@ -1,20 +1,26 @@
 import "./Header.css"
 import burger from "../assets/hamburger.png"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
 import { useContext, useState } from "react"
 import { AuthContext } from "../context/auth.context"
 import closeIcon from "../assets/X.png"
 
 function Header({ setShowSidebar, showSidebar }) {
 
-    const { user, setUser, logOut } = useContext(AuthContext);
+    const { user, setUser, logOut, avatarPic } = useContext(AuthContext);
     const [profileMenu, setProfileMenu] = useState(false);
+    
+    const navigate = useNavigate()
 
     const profilImageMenu = () => {
         return (
             <div className="profile-menu">
                 <ul>
-                    <li>User Profile</li>
+                    <li onClick={() => {
+                        navigate("/user")
+                        setProfileMenu(false);
+                    }
+                    }>User Profile</li>
                     <li onClick={() => {
                         setProfileMenu(false);
                         setUser(null);
@@ -35,7 +41,7 @@ function Header({ setShowSidebar, showSidebar }) {
             </Link>
             <div className="profile-wrapper">
                 <div className="profile" onClick={() => setProfileMenu(!profileMenu)} >
-                    <img src="https://www.shutterstock.com/image-vector/vector-illustration-orange-octopus-sea-600nw-2147414107.jpg" alt="" />
+                    <img src={avatarPic}  alt="" />
                     <p>{user && user.name}</p>
                 </div>
                 {profileMenu && profilImageMenu()}

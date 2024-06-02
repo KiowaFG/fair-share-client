@@ -18,7 +18,7 @@ function LoginPage(props) {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { storeToken, authenticateUser, setAvatarPic } = useContext(AuthContext);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +30,8 @@ function LoginPage(props) {
         console.log("JWT token", response.data.authToken);
 
         storeToken(response.data.authToken);
-
+        setAvatarPic(response.data.data.profilePic);
+        
         authenticateUser();
         navigate("/home");
       })

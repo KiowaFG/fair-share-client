@@ -27,7 +27,6 @@ function GroupView() {
         user && getAllGroups();
     }, [user]);
 
-
     return (
         <>
             {groups.map((group) => {

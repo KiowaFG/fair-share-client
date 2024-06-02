@@ -9,6 +9,7 @@ function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [user, setUser] = useState(null);
+  const [avatarPic, setAvatarPic] = useState("https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/06/Gandalf-Lord-Of-The-Rings-You-Shall-Not-Pass.jpg")
 
   const navigate = useNavigate();
   
@@ -64,10 +65,12 @@ function AuthProviderWrapper(props) {
         isLoggedIn,
         isLoading,
         user,
+        avatarPic,
         setUser,
         storeToken,
         authenticateUser,
-        logOut   
+        logOut,
+        setAvatarPic
       }}
     >
       {props.children}

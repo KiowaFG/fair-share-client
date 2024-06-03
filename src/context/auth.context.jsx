@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 const API_URL = "http://localhost:5005";
 
 const AuthContext = React.createContext();
@@ -11,6 +11,7 @@ function AuthProviderWrapper(props) {
   const [user, setUser] = useState(null);
   const [avatarPic, setAvatarPic] = useState("https://tgcxojdndrjkwxfwxjvw.supabase.co/storage/v1/object/public/fair-share/profile_picture_6659aedd0ba6e3a417794481_4391.png")
 
+  let location = useLocation();
   const navigate = useNavigate();
   
   const storeToken = (token) => {
@@ -32,6 +33,7 @@ function AuthProviderWrapper(props) {
         const user = response.data;
 
         setIsLoggedIn(true);
+        location.pathname === "/login" && navigate("/home");
         setIsLoading(false);
         setUser(user);  
         setAvatarPic(user.profilePic);

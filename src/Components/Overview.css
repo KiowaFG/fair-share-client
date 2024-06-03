@@ -1,10 +1,10 @@
 .overview{
-    background-color: rgb(205, 121, 121);
     padding: 30px;
     border: 1px solid black;
     border-radius: 20px;
     width: 80%;
     margin: 20px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
 }

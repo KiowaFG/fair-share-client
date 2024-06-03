@@ -137,7 +137,6 @@ const UserProfilePage = () => {
                         name="profile"
                     />
                     {profilePic && <img src={profilePic} alt="" />}
-                    <button>Remove file</button> {/* ask Marcel */}
                     <button onClick={handleSubmit}>Save</button>
                 </form>
                 <p>{messageOutput && messageOutput}</p>

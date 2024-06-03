@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { Route, Routes, Link } from "react-router-dom";
 import "./App.css";
+import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import Homepage from "./Pages/HomePage";
 import SideBar from "./Components/SideBar";
@@ -29,6 +30,7 @@ function App() {
           <Route path="/user" element={<UserProfilePage />} />
         </Routes>
       </div>
+      <Footer/>
     </>
   );
 }

@@ -14,7 +14,7 @@ function DetailsPage() {
     const getGroup = () => {
         axios
             .get(
-                `${API_URL}/groups/${groupId}`,
+                `${API_URL}/groups/details/${groupId}`,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
@@ -24,12 +24,16 @@ function DetailsPage() {
             .catch((error) => console.log(error));
     }
 
+
     useEffect(() => {
         getGroup();
     }, []);
 
 
     return (
+
+
+
         <div className="detailsWrap">
             <div className="detailsPage">
                 <img className="detailsPageImg" src="https://images.delunoalotroconfin.com/Content/images/000/Productos/Prod_2828_1.jpg" alt="" />
@@ -41,15 +45,24 @@ function DetailsPage() {
                         <button className="detailsbtn">Settle Up</button>
                     </div>
                 </div>
-                <div className="expenseItem">
-                    <p>Name: visas</p>
-                    <p>Price: 300€</p>
-                    <p>Date: 15/6/2024</p>
-                    <img src={downArrow} alt="" />
-                </div>
+
+                {group.expenses? group.expenses.map((expense) => {
+                    return (
+
+                        <div className="expenseItem">
+                            <p>Name: {expense.name}</p>
+                            <p>Price: {expense.amount}€</p>
+                            <p>Date: 15/6/2024</p>
+                            <img src={downArrow} alt="" />
+                        </div>
+                    )
+                }): <p>Loading expenses</p> }
             </div>
 
         </div>
+
+
+
     )
 }
 export default DetailsPage

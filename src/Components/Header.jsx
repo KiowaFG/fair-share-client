@@ -5,7 +5,7 @@ import { useContext, useState } from "react"
 import { AuthContext } from "../context/auth.context"
 import closeIcon from "../assets/X.png"
 
-function Header({ showSidebar }) {
+function Header({ showSidebar, handleHideSidebar }) {
 
     const { user, setUser, logOut, avatarPic } = useContext(AuthContext);
     const [profileMenu, setProfileMenu] = useState(false);

@@ -1,16 +1,16 @@
 import "./Header.css"
 import burger from "../assets/hamburger.png"
-import { Link } from "react-router-dom"
-import { useContext, useEffect } from "react"
+import { Link, useNavigate } from "react-router-dom"
+import { useContext, useState } from "react"
 import { AuthContext } from "../context/auth.context"
 import closeIcon from "../assets/X.png"
 
-function Header({ setShowSidebar, showSidebar }) {
+function Header({ showSidebar }) {
 
     const { user, setUser, logOut, avatarPic } = useContext(AuthContext);
     const [profileMenu, setProfileMenu] = useState(false);
     
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     const profilImageMenu = () => {
         return (

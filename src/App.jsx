@@ -20,7 +20,7 @@ function App() {
     <>
       <Header setShowSidebar={setShowSidebar} />
       <div className="bodyView">
-        {showSidebar && <SideBar setShowSidebar={setShowSidebar} />}
+        {showSidebar && <SideBar setShowSidebar={setShowSidebar} showSidebar={showSidebar} />}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Homepage />} />

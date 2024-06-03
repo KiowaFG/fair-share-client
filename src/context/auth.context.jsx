@@ -7,8 +7,7 @@ const AuthContext = React.createContext();
 function AuthProviderWrapper(props) {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [userName, setUserName] = useState(null);
-  const [userId, setUserId] = useState(null);
+  const [user, setUser] = useState(null);
 
   
   const storeToken = (token) => {
@@ -27,35 +26,29 @@ function AuthProviderWrapper(props) {
       )
       .then((response) => {
          
-        const {_id, name} = response.data;
-        
-        console.log(response);
+        const user = response.data;
 
         setIsLoggedIn(true);
         setIsLoading(false);
-        setUserName(name);   
-        setUserId(_id);        
+        setUser(user);          
       })
       .catch((error) => {
              
         setIsLoggedIn(false);
         setIsLoading(false);
-        setUserName(null);   
-        setUserId(null);        
+        setUser(null);   
       });      
     } else {
       
         setIsLoggedIn(false);
         setIsLoading(false);
-        setUserName(null);
-        setUserId(null);      
+        setUser(null);
     }   
   }
 
   
   useEffect(() => {   
     authenticateUser();                                                
-    
   }, []);
 
   
@@ -64,8 +57,7 @@ function AuthProviderWrapper(props) {
       value={{ 
         isLoggedIn,
         isLoading,
-        userName,
-        userId,
+        user,
         storeToken,
         authenticateUser        
       }}

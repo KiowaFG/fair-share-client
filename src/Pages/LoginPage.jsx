@@ -18,7 +18,7 @@ function LoginPage(props) {
 
   const navigate = useNavigate();
 
-  const { storeToken, authenticateUser } = useContext(AuthContext);
+  const { storeToken, authenticateUser, setAvatarPic } = useContext(AuthContext);
 
   const handleLoginSubmit = (e) => {
     e.preventDefault();
@@ -30,7 +30,7 @@ function LoginPage(props) {
         console.log("JWT token", response.data.authToken);
 
         storeToken(response.data.authToken);
-
+        
         authenticateUser();
         navigate("/home");
       })
@@ -42,18 +42,19 @@ function LoginPage(props) {
   };
 
   return (
+    
     <div className="login-container">
-      <div className="signup-container">
-        <div className="headerSP">
-          <div className="text-signup">Login</div>
-          <div className="underline"></div>
+      <div className="log-container">
+        <div className="header-lg">
+          <div className="lg-text-signup">Login</div>
+          <div className="lg-underline"></div>
         </div>
 
-        <form onSubmit={handleLoginSubmit}>
-          <div className="input">
+        <form className="lg-form" onSubmit={handleLoginSubmit}>
+          <div className="lg-input">
             <img src={emailIcon} alt="" />
             <input
-              type="text"
+              type="email"
               name="email"
               value={email}
               onChange={handleEmail}
@@ -61,26 +62,26 @@ function LoginPage(props) {
             />
           </div>
 
-          <div className="input">
+          <div className="lg-input">
             <img src={paswordIcon} alt="" />
             <input
-              type="text"
+              type="password"
               name="password"
               value={password}
               onChange={handlePassword}
               placeholder="Password"
             />
           </div>
-          <div className="btn-submit-container">
-            <button className="btn-submit">Login</button>
+          <div className="lg-btn-submit-container">
+            <button className="lg-btn-submit">Login</button>
           </div>
         </form>
-        {errorMessage && <p className="error-message">{errorMessage}</p>}
+        {errorMessage && <p className="lg-error-message">{errorMessage}</p>}
 
-        <p className="haveaccount">
+        <p className="lg-haveaccount">
           Don't have an <strong>account yet</strong>?
         </p>
-        <Link to={"/signup"}> Sign Up</Link>
+        <Link to={"/signup"} className="lg-link-signup"> Sign Up</Link>
       </div>
     </div>
   );

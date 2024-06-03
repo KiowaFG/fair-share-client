@@ -1,16 +1,19 @@
 import { useState } from "react";
 import { Route, Routes, Link } from "react-router-dom";
 import "./App.css";
+import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import Homepage from "./Pages/HomePage";
 import SideBar from "./Components/SideBar";
 import DetailsPage from "./Pages/DetailsPage";
 import LandingPage from "./Pages/LandingPage";
 import SignUpPage from "./Pages/SignUpPage";
+import UserProfilePage from "./Pages/UserProfilePage";
 import LoginPage from "./Pages/LoginPage";
 import AddExpense from "./Components/Add/AddExpense"
 import AddGroup from "./Components/Add/AddGroup"
 import axios from "axios"
+
 
 const API__URL = import.meta.env.VITE_API_URL
 
@@ -46,8 +49,11 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/addexpense" element={<AddExpense/>} />
           <Route path="/addgroup" element={<AddGroup/>} />
+          <Route path="/user" element={<UserProfilePage />} />
+
         </Routes>
       </div>
+      <Footer/>
     </>
   );
 }

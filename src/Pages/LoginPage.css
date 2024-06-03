@@ -1,97 +1,182 @@
-.login-container{
+@import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;800&family=Roboto&family=Satisfy&display=swap");
+.login-container {
+  margin: 0;
+  padding: 0;
+  width: 40vw;
+  height: 65vh;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  background-color: #da761ffb;
+  border-radius: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 30%;
+  margin-top: 3%;
+  margin-bottom: 6.8%;
+}
+
+.log-container {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  margin-top: 50px;
+  width: 38vw;
+  height: 50vh;
+  background: white;
+  padding-bottom: 25px;
+  border-radius: 30px;
+}
+.lg-form{
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-    height: 100vh;
-    /* background-color: rgb(46, 147, 45); */
+    height: 31vh;
 }
-.signup-container{
-    display: flex;
-    flex-direction: column;
-    margin:auto;
-    margin-top: 50px;
-    width: 300px;
-    background: white;
-    padding-bottom: 25px;
-    border-radius: 5px;
-    
+.header-lg {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 9.5px;
+  width: 100%;
+  margin-top: 15px;
 }
-.headerSP{
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 9.5px;
-    width: 100%;
-    margin-top: 15px;
-
-
+.lg-text-signup {
+  color: blue;
+  font-size: 25px;
+  font-weight: 700;
 }
-.text-signup{
-    color: blue;
-    font-size: 25px;
-    font-weight: 700;
-
+.lg-underline {
+  width: 7vw;
+  height: 0.65vh;
+  background-color: blue;
+  border-radius: 4px;
+  margin-bottom: 1.5vh;
 }
-.underline{
-    width: 31px;
-    height: 3px;
-    background-color: blue;
-    border-radius: 4px;
-    gap: 10px;
-
+.lg-inputs {
+  margin-top: 27px;
+  display: flex;
+  flex-direction: column;
 }
-.inputs{
-    margin-top: 27px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-
+.lg-input {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 35vw;
+  height: 6vh;
+  background: #eaeaea;
+  border-radius: 3px;
+  margin-bottom: 1.5vh;
+  border-radius: 10px;
+  gap: 10px;
 }
-.input{
-    display: flex;
-    align-items: center;
-    margin: auto;
-    width: 240px;
-    height: 40px;
-    background: #eaeaea;
-    border-radius: 3px;
+.lg-input img {
+  width: 2vw;
+  margin: 0px 15px;
 }
-.input img{
-    width: 3vw;
-    margin: 0px 15px;
-
+.lg-input input {
+  height: 4vh;
+  width: 16vw;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #797979;
+  font-size: 16px;
 }
-.input input{
-    height: 50px;
-    width: 400px;
-    background: transparent;
-    border:none;
-    outline: none;
-    color: #797979;
-    font-size: 14px;
+.lg-btn-submit-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 35px;
 }
-.btn-submit-container{
-    display: flex;
-    justify-content: center;
-    gap: 10px;
-    margin: 35px;
-}
-.btn-submit{
-   
-    width: 150px;
-    height: 59px;
+.lg-btn-submit {
+    width: 40vw;
+    height: 6vh;
     color: #fff;
-    background: #4c00b4;
+    background-color: rgb(89, 27, 190);
     border-radius: 50px;
-    font-size: 19px;
+    font-size: 16px;
     font-weight: 700;
     cursor: pointer;
 }
-.haveaccount{
-    font-family: apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+.lg-haveaccount {
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
     margin-left: 2vw;
 
 }
-.loglink{
-    font-weight: 500;
-    margin-left: 27vw;
+
+.lg-link-signup{
+  margin-left: 2vw;
+  font-weight: 700;
+  font-size: 16px;
+  margin-left: 2vw;
+  color: #6c14c9;
+}
+.lg-link-signup:hover{
+  text-decoration: underline;
+
+}
+@media (max-width:800px){
+
+  .login-container{
+      width: 70vw;
+      margin-left: 15%;
+      margin-bottom: 15.5vh;
+
+   }
+   .log-container{
+      width:65vw;
+   }
+   .lg-input{
+      width: 45vw;
+   }
+   .lg-input img{
+      width: 3vw;
+   }
+   .lg-input input{
+      width: 55vw;
+      font-size: 12px;
+   }
+   .lg-btn-submit{
+      width: 60vw;
+   }
+   .lg-input input {
+    height: 4vh;
+    width: 100%;
+    background: transparent;
+    
+    outline: none;
+    color: #797979;
+    font-size: 16px;
+  }
+
+
+}
+@media (min-width: 1024px) {
+  .login-container {
+      width: 27vw;
+      margin-left: 35%;
+  }
+
+  .log-container {
+      width: 25vw;
+  }
+
+  .lg-input {
+      width: 22vw;
+  }
+
+  .lg-input img {
+      width: 1.5vw;
+  }
+
+  .lg-input input {
+      width: 20vw;
+  }
+
+  .lg-btn-submit {
+      width: 40vw;
+  }
 }

@@ -30,7 +30,6 @@ function LoginPage(props) {
         console.log("JWT token", response.data.authToken);
 
         storeToken(response.data.authToken);
-        setAvatarPic(response.data.data.profilePic);
         
         authenticateUser();
         navigate("/home");

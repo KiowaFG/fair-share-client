@@ -33,7 +33,8 @@ function AuthProviderWrapper(props) {
 
         setIsLoggedIn(true);
         setIsLoading(false);
-        setUser(user);          
+        setUser(user);  
+        setAvatarPic(user.profilePic);
       })
       .catch((error) => {
              
@@ -52,6 +53,7 @@ function AuthProviderWrapper(props) {
   const logOut = () => {
     localStorage.removeItem("authToken");
     setIsLoggedIn(false);
+    setAvatarPic("https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/06/Gandalf-Lord-Of-The-Rings-You-Shall-Not-Pass.jpg")
     navigate("/login");
   };
   

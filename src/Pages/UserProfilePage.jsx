@@ -9,9 +9,10 @@ const API_URL = import.meta.env.VITE_API_URL
 const UserProfilePage = () => {
 
     const storedToken = localStorage.getItem("authToken");
-    const { user, setUser, avatarPic, setAvatarPic } = useContext(AuthContext);
-    const [userData, setUserData] = useState("")
-    const [messageOutput, setMessageOutput] = useState("")
+    const { user, avatarPic, storeToken, authenticateUser } = useContext(AuthContext);
+    const [userData, setUserData] = useState("");
+    const [profilePic, setProfilePic] = useState("");
+    const [messageOutput, setMessageOutput] = useState("");
 
     const getUser = () => {
         axios
@@ -40,23 +41,7 @@ const UserProfilePage = () => {
 
         const pic_path = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/${data.fullPath}`;
 
-        axios
-            .put(
-                `${API_URL}/user/${user._id}`,
-                {profilePic: pic_path},
-                { headers: { Authorization: `Bearer ${storedToken}` } }
-            )
-            .then((profilePicUpdated) => {
-                setMessageOutput(profilePicUpdated.data.message);
-            })
-            .catch((error) => {
-                setMessageOutput(error.response.data.message);
-            });
-
-        setAvatarPic(
-        `${import.meta.env.VITE_SUPABASE_URL
-            }/storage/v1/object/public/${data.fullPath}`
-        );
+        setProfilePic(pic_path);
     };
 
     const handleInput = (e) => {
@@ -66,17 +51,22 @@ const UserProfilePage = () => {
     };
 
     const handleSubmit = (e) => {
-        e.preventDefault()
+        e.preventDefault();
+
+        !profilePic && setProfilePic(user.profilePic);
 
         axios
             .put(
                 `${API_URL}/user/${user._id}`,
-                userData,
+                { ...userData, profilePic },
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((userUpdated) => {
                 setMessageOutput(userUpdated.data.message);
-                setUser({ ...user, name: userData.name }); // check with Marcel!
+                storeToken(userUpdated.data.authToken);
+
+                setProfilePic(null);
+                authenticateUser();
             })
             .catch((error) => {
                 setMessageOutput(error.response.data.message);
@@ -146,6 +136,7 @@ const UserProfilePage = () => {
                         type="file"
                         name="profile"
                     />
+                    {profilePic && <img src={profilePic} alt="" />}
                     <button>Remove file</button> {/* ask Marcel */}
                     <button onClick={handleSubmit}>Save</button>
                 </form>

@@ -8,3 +8,7 @@
     align-items: center;
     flex-direction: column;
 }
+
+.expensesGroupCard{
+    width: 80%;
+}

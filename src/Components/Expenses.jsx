@@ -5,7 +5,7 @@ function Expenses(){
     return (
         <div className="expenses">
             <h1>Expense Group List</h1>
-            <div>
+            <div className="expensesGroupCard">
                 <GroupView/>
             </div>
         </div>

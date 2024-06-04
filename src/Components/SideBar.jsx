@@ -3,7 +3,7 @@ import { useState } from 'react'
 import Xicon from "../assets/X.png"
 import { Link } from "react-router-dom"
 
-function SideBar({ setShowSidebar,hideSidebar }){
+function SideBar({ setShowSidebar,hideSidebar,setShowAddExpense,setShowAddGroup }){
 
 
 
@@ -13,8 +13,8 @@ function SideBar({ setShowSidebar,hideSidebar }){
             <Link to={"/home"}> <button>Home Page</button></Link>
             
             <button>All Expenses </button>
-           <Link to={"/addexpense"}> <button>Add Expense</button> </Link>
-           <Link to={"/addgroup"}> <button>Add Group</button> </Link>
+            <button onClick={() => setShowAddExpense(true)}>Add Expense</button>
+            <button onClick={() => setShowAddGroup(true)}>Add Group</button> 
 
         </div>
     )

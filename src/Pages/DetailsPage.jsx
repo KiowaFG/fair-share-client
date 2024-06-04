@@ -1,15 +1,17 @@
 import "./DetailsPage.css"
 import downArrow from "../assets/DownArrow.svg"
-import { Link, useParams } from "react-router-dom";
+import { Link, Navigate, useParams } from "react-router-dom";
 import axios from "axios"
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 const API_URL = import.meta.env.VITE_API_URL
 
-function DetailsPage() {
+function DetailsPage(setShowAddGroup) {
     const storedToken = localStorage.getItem("authToken");
     const [group, setGroup] = useState({})
     const { groupId } = useParams();
+    const navigate = useNavigate();
 
     const getGroup = () => {
         axios
@@ -22,6 +24,20 @@ function DetailsPage() {
                 setGroup(oneGroup);
             })
             .catch((error) => console.log(error));
+        }
+        
+        const deleteGroup = ()=>{
+            axios
+            .delete(
+                `${API_URL}/groups/${groupId}`,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
+            .then((response) => {
+                console.log("The group has been deleted",response);
+                navigate("/home")
+            })
+            .catch((error) => console.log(error));
+            
     }
 
 
@@ -42,7 +58,8 @@ function DetailsPage() {
                     <h3>Total expense: 900€</h3>
                     <div className="Btns">
                         <button className="detailsbtn">Add Expense</button>
-                        <button className="detailsbtn">Settle Up</button>
+                        <button onClick={() => setShowAddGroup(true)} className="detailsbtn">Edit Group</button>
+                        <button onClick={deleteGroup} className="detailsbtn">Delete Group</button>
                     </div>
                 </div>
 

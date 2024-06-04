@@ -9,7 +9,11 @@ const API_URL = import.meta.env.VITE_API_URL
 function Overview() {
     const storedToken = localStorage.getItem("authToken");
     const { user } = useContext(AuthContext);
-    const [data, setData] = useState();
+    const [calculations, setCalculations] = useState({
+        paid: 0,
+        borrowed: 0,
+        balance: 0
+    });
 
     const getAllGroups = () => {
         axios
@@ -17,7 +21,17 @@ function Overview() {
                 `${API_URL}/groups/${user._id}`,
                 { headers: { Authorization: `Bearer ${storedToken}` } },
             )
-            .then((response) => setData(response.data.map((group) => group.groupExpenses).flat()))
+            .then((response) => {
+                const data = response.data.map((group) => group.groupExpenses).flat();
+                const paid = Math.round(data.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
+                const borrowed = Math.round(data.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount / curr.expenseUsers.length) : acc + 0, 0));
+                const balance = paid - borrowed;
+                setCalculations({
+                    paid,
+                    borrowed,
+                    balance
+                });
+            })
             .catch((error) => console.log(error));
     };
 
@@ -25,13 +39,9 @@ function Overview() {
         user && getAllGroups();
     }, [user]);
 
-    const paid = data && Math.round(data.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
-    const borrowed = data && Math.round(data.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount / curr.expenseUsers.length) : acc + 0, 0));
-    const balance = data && paid - borrowed;
-
     const dataPie = [
-        { name: 'Paid', value: paid },
-        { name: 'Borrowed', value: borrowed }
+        { name: 'Paid', value: calculations.paid },
+        { name: 'Borrowed', value: calculations.borrowed }
     ];
 
     const COLORS = ['#00C49F', '#E89090'];
@@ -52,9 +62,9 @@ function Overview() {
     return (
         <div className="overview">
             <h1>Overview</h1>
-            <h3>Total Balance: {`${balance} €`}</h3>
-            <h3>Total Paid: {`${paid} €`}</h3>
-            <h3>Total Borrowed: {`${borrowed} €`}</h3>
+            <h3>Total Balance: {`${calculations.balance} €`}</h3>
+            <h3>Total Paid: {`${calculations.paid} €`}</h3>
+            <h3>Total Borrowed: {`${calculations.borrowed} €`}</h3>
 
             <PieChart width={250} height={200}>
                 <Pie

@@ -1,0 +1,41 @@
+.expenseCard-wrapper{
+    display: flex;
+    flex-direction: column;
+    border: 1px solid black;
+    border-radius: 20px;
+    width: 100%;
+    padding: 1rem;
+    margin-top: 1em;
+}
+
+.expenseItem {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.trash-bin-image {
+    width: 20px;
+    height: 20px;
+}
+
+.content-visible {
+    padding: 0 18px;
+    display: block;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    transition: max-height 0.2s ease-out;
+}
+
+.content-not-visible {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+    transition: 0.3s;
+}
+
+.expense-picture{
+    width: 100px;
+    height: 100px;
+}

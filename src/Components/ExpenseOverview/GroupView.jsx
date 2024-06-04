@@ -18,7 +18,16 @@ function GroupView() {
                 `${API_URL}/groups/${user._id}`,
                 { headers: { Authorization: `Bearer ${storedToken}` } },
             )
-            .then((response) => { setGroups(response.data) })
+            .then((response) => {
+                setGroups(response.data);
+                const clean_data = response.data.map((group) => {
+                    const paid = Math.round(group.groupExpenses.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
+                    const borrowed = Math.round(group.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount / curr.expenseUsers.length) : acc + 0, 0));
+                    const balance = paid - borrowed;
+                    return ({ ...group, paid, borrowed, balance })
+                })
+                setGroups(clean_data);
+            })
             .catch((error) => console.log(error));
     };
 
@@ -29,10 +38,6 @@ function GroupView() {
     return (
         <>
             {groups.map((group) => {
-                const paid = Math.round(group.groupExpenses.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
-                const borrowed = Math.round(group.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount/curr.expenseUsers.length) : acc + 0, 0));
-                const balance = paid - borrowed;
-
                 return (
                     <Link key={group._id} to={`/details/${group._id}`}>
                         <div className="group-overview">
@@ -42,15 +47,15 @@ function GroupView() {
                                 <div className="group-details">
                                     <div className="center-info">
                                         <h5>Trip Balance:</h5>
-                                        <p>{`${balance} €`}</p>
+                                        <p>{`${group.balance} €`}</p>
                                     </div>
                                     <div className="center-info">
                                         <h5>Paid:</h5>
-                                        <p>{`${paid} €`}</p>
+                                        <p>{`${group.paid} €`}</p>
                                     </div>
                                     <div className="center-info">
                                         <h5>Borrowed:</h5>
-                                        <p>{`${borrowed} €`}</p>
+                                        <p>{`${group.borrowed} €`}</p>
                                     </div>
                                 </div>
                             </div>

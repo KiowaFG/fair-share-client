@@ -1,6 +1,5 @@
 import { useState } from "react";
-import { Route, Routes, Link } from "react-router-dom";
-import "./App.css";
+import { Route, Routes, Link, useLocation } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
 import Homepage from "./Pages/HomePage";
@@ -10,15 +9,15 @@ import LandingPage from "./Pages/LandingPage";
 import SignUpPage from "./Pages/SignUpPage";
 import UserProfilePage from "./Pages/UserProfilePage";
 import LoginPage from "./Pages/LoginPage";
-import AddExpense from "./Components/Add/AddExpense"
-import AddGroup from "./Components/Add/AddGroup"
-import axios from "axios"
-
-
-const API__URL = import.meta.env.VITE_API_URL
+import AddExpense from "./Components/Add/AddExpense";
+import AddGroup from "./Components/Add/AddGroup";
+import "./App.css";
+import IsAnon from "./Components/IsAnon";
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
+  const [hideSidebar, setHideSidebar] = useState(false);
+  let location = useLocation();
 
   const [hideSidebar, setHideSidebar]= useState(false)
 
@@ -28,21 +27,19 @@ function App() {
 
   function handleHideSidebar (){
     if (showSidebar) {
-      setHideSidebar(true)
+      setHideSidebar(true);
       setTimeout(() => {
-        setShowSidebar(false)
+        setShowSidebar(false);
       }, 480);
-    }
-    else{
-      setShowSidebar(true)
-      setHideSidebar(false)
-    }
-      
-  } 
+    } else {
+      setShowSidebar(true);
+      setHideSidebar(false);
+    };
+  };
 
   return (
     <>
-      <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleHideSidebar={handleHideSidebar} />
+      {!["/", "/signup", "/login"].includes(location.pathname) && <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleHideSidebar={handleHideSidebar} />}
       <div className="bodyView">
         {showSidebar && <SideBar setShowAddGroup={setShowAddGroup} setShowAddExpense={setShowAddExpense} setShowSidebar={setShowSidebar} showSidebar={showSidebar} hideSidebar={hideSidebar} />}
         {showAddExpense && <AddExpense setShowAddExpense={setShowAddExpense}/>}
@@ -54,10 +51,9 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/user" element={<UserProfilePage />} />
-
         </Routes>
       </div>
-      <Footer/>
+      <Footer />
     </>
   );
 }

@@ -7,9 +7,9 @@ function SideBar({ setShowSidebar,hideSidebar,setShowAddExpense,setShowAddGroup 
 
 
 
-    return(
+    return (
         <div className={hideSidebar ? "sideBar slideout" : "sideBar"}>
-            
+
             <Link to={"/home"}> <button>Home Page</button></Link>
             
             <button>All Expenses </button>

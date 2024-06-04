@@ -1,15 +1,24 @@
-import "./DetailsPage.css"
-import downArrow from "../assets/DownArrow.svg"
-import { Link, useParams } from "react-router-dom";
-import axios from "axios"
-import { useState, useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { AuthContext } from "../context/auth.context";
+import { useState, useEffect, useContext } from "react";
+import trashBin from "../assets/images/bin.png";
+import "./DetailsPage.css";
+import ExpenseCard from "../Components/ExpenseCard";
 
-const API_URL = import.meta.env.VITE_API_URL
+const API_URL = import.meta.env.VITE_API_URL;
 
 function DetailsPage() {
     const storedToken = localStorage.getItem("authToken");
-    const [group, setGroup] = useState({})
+    const { user } = useContext(AuthContext);
     const { groupId } = useParams();
+    const [group, setGroup] = useState(null);
+    const [calculations, setCalculations] = useState({
+        paid: 0,
+        borrowed: 0,
+        balance: 0,
+        total: 0
+    })
 
     const getGroup = () => {
         axios
@@ -18,47 +27,53 @@ function DetailsPage() {
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
-                const oneGroup = response.data;
-                setGroup(oneGroup);
+                setGroup(response.data);
+                const paid = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
+                const borrowed = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount / curr.expenseUsers.length) : acc + 0, 0));
+                const total = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + curr.amount : acc + 0, 0));
+                const balance = paid - borrowed;
+                setCalculations({
+                    paid: paid,
+                    borrowed: borrowed,
+                    balance: balance,
+                    total: total
+                })
             })
             .catch((error) => console.log(error));
-    }
-
+    };
 
     useEffect(() => {
         getGroup();
     }, []);
 
-
     return (
-
-
-
         <div className="detailsWrap">
-            <div className="detailsPage">
-                <img className="detailsPageImg" src="https://images.delunoalotroconfin.com/Content/images/000/Productos/Prod_2828_1.jpg" alt="" />
-                <div className="titleAndBtns">
-                    <h2>{group.name}</h2>
-                    <h3>Total expense: 900€</h3>
-                    <div className="Btns">
-                        <button className="detailsbtn">Add Expense</button>
-                        <button className="detailsbtn">Settle Up</button>
-                    </div>
-                </div>
-
-                {group.expenses? group.expenses.map((expense) => {
-                    return (
-
-                        <div className="expenseItem">
-                            <p>Name: {expense.name}</p>
-                            <p>Price: {expense.amount}€</p>
-                            <p>Date: 15/6/2024</p>
-                            <img src={downArrow} alt="" />
+            {group &&
+                <div className="detailsPage">
+                    <div className="titleAndBtns">
+                        <h3>{group.name}</h3>
+                        <img className="detailsPageImg" src={group.groupPic} alt="" />
+                        <p>{`Description: ${group.description}`}</p>
+                        <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>
+                        <p>{`Date: ${group.createdAt.split("T")[0]}`}</p>
+                        <h3>{`Total Trip: ${calculations.total} €`}</h3>
+                        <h3>{`Total Balance: ${calculations.balance} €`}</h3>
+                        <h3>{`Total Paid: ${calculations.paid} €`}</h3>
+                        <h3>{`Total Borrowed: ${calculations.borrowed} €`}</h3>
+                        <div className="Btns">
+                            <button className="detailsbtn">Add Expense</button>
+                            <button className="detailsbtn">Edit Group</button>
+                            <button className="detailsbtn">Delete Group</button>
                         </div>
-                    )
-                }): <p>Loading expenses</p> }
-            </div>
+                    </div>
 
+                    {group.groupExpenses ? group.groupExpenses.map((expense) => {
+                        return (
+                            <ExpenseCard key={expense._id} expense={expense} />
+                        )
+                    }) : <p>Loading expenses</p>}
+                </div>
+            }
         </div>
 
 

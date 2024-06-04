@@ -1,5 +1,5 @@
-import GroupView from "./ExpenseOverview/GroupView"
-import "./Expenses.css"
+import GroupView from "./ExpenseOverview/GroupView";
+import "./Expenses.css";
 
 function Expenses(){
     return (
@@ -9,6 +9,7 @@ function Expenses(){
                 <GroupView/>
             </div>
         </div>
-    )
-}
+    );
+};
+
 export default Expenses

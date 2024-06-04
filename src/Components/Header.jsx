@@ -37,7 +37,7 @@ function Header({ showSidebar, handleHideSidebar }) {
 
                 <img onClick={()=>handleHideSidebar()} className="burger" src={showSidebar ? closeIcon  : burger} alt="" />
                 <Link to={"/home"}>
-                <img className="logo" src="https://img.freepik.com/vector-gratis/vector-degradado-logotipo-colorido-pajaro_343694-1365.jpg?size=338&ext=jpg&ga=GA1.1.34264412.1711411200&semt=ais" alt="" />
+                <img className="logo" src="https://img.freepik.com/vector-gratis/vector-degradado-logotipo-colorido-pajaro_343694-1365.jpg" alt="" />
             </Link>
             <div className="profile-wrapper">
                 <div className="profile" onClick={() => setProfileMenu(!profileMenu)} >

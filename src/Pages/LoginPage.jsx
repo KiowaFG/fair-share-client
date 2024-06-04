@@ -32,7 +32,6 @@ function LoginPage(props) {
         storeToken(response.data.authToken);
         
         authenticateUser();
-        navigate("/home");
       })
 
       .catch((error) => {

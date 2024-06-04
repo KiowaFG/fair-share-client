@@ -46,16 +46,3 @@ flex-direction: row;
     margin: 0 15px 0 0;
     padding: 6px;
 }
-
-.expenseItem{
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    border: 1px solid black;
-    border-radius: 20px;
-    width: 100%;
-    padding: 1rem;
-    margin-top: 1em;
-    
-}
-

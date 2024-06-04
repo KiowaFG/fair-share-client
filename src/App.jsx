@@ -19,14 +19,19 @@ function App() {
   const [hideSidebar, setHideSidebar] = useState(false);
   let location = useLocation();
 
-  function handleHideSidebar() {
+  const [hideSidebar, setHideSidebar]= useState(false)
+
+  const [showAddGroup, setShowAddGroup]=useState(false)
+
+  const [ showAddExpense, setShowAddExpense]=useState(false)
+
+  function handleHideSidebar (){
     if (showSidebar) {
       setHideSidebar(true);
       setTimeout(() => {
         setShowSidebar(false);
       }, 480);
-    }
-    else {
+    } else {
       setShowSidebar(true);
       setHideSidebar(false);
     };
@@ -36,16 +41,16 @@ function App() {
     <>
       {!["/", "/signup", "/login"].includes(location.pathname) && <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleHideSidebar={handleHideSidebar} />}
       <div className="bodyView">
-        {showSidebar && <SideBar setShowSidebar={setShowSidebar} showSidebar={showSidebar} hideSidebar={hideSidebar} />}
+        {showSidebar && <SideBar setShowAddGroup={setShowAddGroup} setShowAddExpense={setShowAddExpense} setShowSidebar={setShowSidebar} showSidebar={showSidebar} hideSidebar={hideSidebar} />}
+        {showAddExpense && <AddExpense setShowAddExpense={setShowAddExpense}/>}
+        {showAddGroup && <AddGroup setShowAddGroup={setShowAddGroup}/>}
         <Routes>
           <Route path="/" element={<LandingPage />} />
+          <Route path="/home" element={<Homepage />} />
+          <Route path="/details/:groupId" element={<DetailsPage setShowAddGroup={setShowAddGroup} />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/home" element={<IsAnon><Homepage /></IsAnon>} />
-          <Route path="/details/:groupId" element={<IsAnon><DetailsPage /></IsAnon>} />
-          {/* <Route path="/addexpense" element={<AddExpense />} /> */}
-          {/* <Route path="/addgroup" element={<AddGroup />} /> */}
-          <Route path="/user" element={<IsAnon><UserProfilePage /></IsAnon>} />
+          <Route path="/user" element={<UserProfilePage />} />
         </Routes>
       </div>
       <Footer />

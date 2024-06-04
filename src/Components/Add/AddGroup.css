@@ -4,3 +4,22 @@
     align-items: center;
     justify-content: center;
 }
+
+.closeBtn{
+    width: 20px;
+}
+
+.formWrap{
+    background-color: grey;
+    position: fixed;
+    z-index: 2;
+    top:50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);   
+}
+
+.group-picture{
+    width: 10px;
+    height: 10px;
+}
+

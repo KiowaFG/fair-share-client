@@ -2,16 +2,19 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useState, useEffect, useContext } from "react";
-import trashBin from "../assets/images/bin.png";
-import "./DetailsPage.css";
 import ExpenseCard from "../Components/ExpenseCard";
+import trashBin from "../assets/images/bin.png";
+import { useNavigate } from "react-router-dom";
+import "./DetailsPage.css";
+
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-function DetailsPage() {
+function DetailsPage(setShowAddGroup) {
     const storedToken = localStorage.getItem("authToken");
     const { user } = useContext(AuthContext);
     const { groupId } = useParams();
+    const navigate = useNavigate();
     const [group, setGroup] = useState(null);
     const [calculations, setCalculations] = useState({
         paid: 0,
@@ -40,6 +43,20 @@ function DetailsPage() {
                 })
             })
             .catch((error) => console.log(error));
+        }
+        
+        const deleteGroup = ()=>{
+            axios
+            .delete(
+                `${API_URL}/groups/${groupId}`,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
+            .then((response) => {
+                console.log("The group has been deleted",response);
+                navigate("/home")
+            })
+            .catch((error) => console.log(error));
+            
     };
 
     useEffect(() => {
@@ -62,8 +79,8 @@ function DetailsPage() {
                         <h3>{`Total Borrowed: ${calculations.borrowed} €`}</h3>
                         <div className="Btns">
                             <button className="detailsbtn">Add Expense</button>
-                            <button className="detailsbtn">Edit Group</button>
-                            <button className="detailsbtn">Delete Group</button>
+                        <button onClick={() => setShowAddGroup(true)} className="detailsbtn">Edit Group</button>
+                        <button onClick={deleteGroup} className="detailsbtn">Delete Group</button>
                         </div>
                     </div>
 

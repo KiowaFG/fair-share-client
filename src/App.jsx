@@ -47,7 +47,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Homepage />} />
-          <Route path="/details/:groupId" element={<DetailsPage setShowAddGroup={setShowAddGroup} />} />
+          <Route path="/details/:groupId" element={<DetailsPage setShowAddExpense={setShowAddExpense} setShowAddGroup={setShowAddGroup} />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/user" element={<UserProfilePage />} />

@@ -13,7 +13,7 @@ function Footer() {
     <div className="footer-container">
       <div className="footerLeft-container">
         <p className="footer-paragraph">
-          © {date.getFullYear()} Developed by Alvaro, Kiowa & Nisol
+          © {date.getFullYear()} Fair Share Limited
         </p>
       </div>
       <div className="footerMid-container">
@@ -56,7 +56,7 @@ function Footer() {
         </div>
       </div>
       <div className="footerRight-container">
-        <p className="footer-paragraph left">about Us</p>
+        <p className="footer-paragraph left">About Us</p>
       </div>
     </div>
   );

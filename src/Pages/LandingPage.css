@@ -4,8 +4,9 @@
 .landing-container {
   margin: 0;
   padding: 0;
-  width: 100%;
- 
+  width: 100vw;
+  height: 85vh;
+ background-image: url("../assets/Logo.png");
 }
 .landing-container2 {
  
@@ -52,14 +53,12 @@
   width: 20vw;
   height: 6vh;
   color: #fff;
-  background-color: rgb(89, 27, 190);
+  background-color: #233565;
   border-radius: 50px;
   font-size: 14px;
   font-weight: 700;
   cursor: pointer;
-  margin-top: 10vh;
-  margin-left: 1vw;
-  margin-bottom: 3vh;
+
 }
 .img-bnncontainer {
   height: 20vh;
@@ -70,33 +69,39 @@
   margin-right: 2vw;
 }
 @media (max-width:800px){
+
   .landing-container2 {
-    background-color: hsl(165, 80%, 90%);
+    background-color: hsl(0, 0%, 100%);
     padding-top: 2.5%;
     padding-left: 4%;
     height: 100%;
     overflow-y: auto;
+    background-image: url("../assets/owl.png");
+    background-repeat:no-repeat;
+    background-size:contain;
+    background-position:center;
+    
+  }
+  .landingBtns{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: absolute;
+    top:70%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
   }
   .btn {
-    width: 20vw;
+    width: 50vw;
     height: 3.5vh;
     color: #fff;
-    background-color: rgb(89, 27, 190);
+    background-color: #233565;
     border-radius: 50px;
-    font-size: 12px;
+    font-size: 20px;
     font-weight: 700;
     cursor: pointer;
-    margin-bottom: 2.5vh;
-  }
-  .img-bnncontainer {
-    height: 20vh;
-
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-end;
-    flex-wrap: nowrap;
-    margin-right: 5vw;
-  
+    
   }
   .slogan {
     font-size: 40px;
@@ -109,4 +114,8 @@
     font-family: "Poppins", sans-serif;
     margin-bottom: 1.5vh;
   }
+  .landingPageLink{
+    width: 30px;
+  }
+  
 }

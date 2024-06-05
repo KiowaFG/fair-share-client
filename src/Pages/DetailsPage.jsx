@@ -10,7 +10,7 @@ import "./DetailsPage.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-function DetailsPage({ setShowAddGroup, getGroup, calculations, group }) {
+function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
     const storedToken = localStorage.getItem("authToken");
     const { user } = useContext(AuthContext);
     const { groupId } = useParams();

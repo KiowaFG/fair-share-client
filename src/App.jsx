@@ -113,7 +113,7 @@ function App() {
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Homepage />} />
-          <Route path="/details/:groupId" element={<DetailsPage setShowAddGroup={setShowAddGroup} getGroup={getGroup} group={group} calculations={calculations} />} />
+          <Route path="/details/:groupId" element={<DetailsPage setShowAddExpense={setShowAddExpense} getGroup={getGroup} group={group} calculations={calculations} />} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/user" element={<UserProfilePage />} />

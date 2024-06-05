@@ -16,7 +16,6 @@ import IsAnon from "./Components/IsAnon";
 
 function App() {
   const [showSidebar, setShowSidebar] = useState(false);
-  const [hideSidebar, setHideSidebar] = useState(false);
   let location = useLocation();
 
   const [hideSidebar, setHideSidebar]= useState(false)

@@ -18,7 +18,7 @@ function AddGroup({ setShowAddGroup }) {
         description: '',
         groupAuthor: user._id,
         groupUsers: user._id,
-        groupPic: ''
+        groupPic: "https://tgcxojdndrjkwxfwxjvw.supabase.co/storage/v1/object/public/fair-share/profile_picture_6659aedd0ba6e3a417794481_388493.png"
     });
 
 

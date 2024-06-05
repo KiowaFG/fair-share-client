@@ -15,16 +15,17 @@ import "./App.css";
 import IsAnon from "./Components/IsAnon";
 
 function App() {
-  const [showSidebar, setShowSidebar] = useState(false);
+
   let location = useLocation();
 
-  const [hideSidebar, setHideSidebar]= useState(false)
+  const [showSidebar, setShowSidebar] = useState(false)
+  const [hideSidebar, setHideSidebar] = useState(false)
 
-  const [showAddGroup, setShowAddGroup]=useState(false)
+  const [showAddGroup, setShowAddGroup] = useState(false)
 
-  const [ showAddExpense, setShowAddExpense]=useState(false)
+  const [showAddExpense, setShowAddExpense] = useState(false)
 
-  function handleHideSidebar (){
+  function handleHideSidebar() {
     if (showSidebar) {
       setHideSidebar(true);
       setTimeout(() => {
@@ -41,8 +42,8 @@ function App() {
       {!["/", "/signup", "/login"].includes(location.pathname) && <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleHideSidebar={handleHideSidebar} />}
       <div className="bodyView">
         {showSidebar && <SideBar setShowAddGroup={setShowAddGroup} setShowAddExpense={setShowAddExpense} setShowSidebar={setShowSidebar} showSidebar={showSidebar} hideSidebar={hideSidebar} />}
-        {showAddExpense && <AddExpense setShowAddExpense={setShowAddExpense}/>}
-        {showAddGroup && <AddGroup setShowAddGroup={setShowAddGroup}/>}
+        {showAddExpense && <AddExpense setShowAddExpense={setShowAddExpense} />}
+        {showAddGroup && <AddGroup setShowAddGroup={setShowAddGroup} />}
         <Routes>
           <Route path="/" element={<LandingPage />} />
           <Route path="/home" element={<Homepage />} />

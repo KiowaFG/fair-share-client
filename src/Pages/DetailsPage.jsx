@@ -2,6 +2,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useState, useEffect, useContext } from "react";
+import Select from 'react-select';
 import { useNavigate } from "react-router-dom";
 import ExpenseCard from "../Components/ExpenseCard";
 import "./DetailsPage.css";
@@ -9,7 +10,7 @@ import "./DetailsPage.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-function DetailsPage({setShowAddGroup}) {
+function DetailsPage({ setShowAddGroup }) {
     const storedToken = localStorage.getItem("authToken");
     const { user } = useContext(AuthContext);
     const { groupId } = useParams();
@@ -17,8 +18,10 @@ function DetailsPage({setShowAddGroup}) {
     const [group, setGroup] = useState(null);
     const [editMode, setEditMode] = useState(false)
 
-    const [name, setName] = useState("")
-    const [description, setDescription] = useState("")
+    const [name, setName] = useState("");
+    const [description, setDescription] = useState("");
+    const [selectUsers, setSelectUsers] = useState("");
+    const [selectAdmin, setSelectAdmin] = useState("");
     const [groupAuthor, setGroupAuthor] = useState("")
     const handleName = (e) => setName(e.target.value);
     const handleDescription = (e) => setDescription(e.target.value)
@@ -108,18 +111,37 @@ function DetailsPage({setShowAddGroup}) {
 
     };
 
+    const handleSelectUsers = () => {
+        axios
+            .get(
+                `${API_URL}/groups/details/${groupId}`,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
+            .then((response) => {
+                let data = response.data.groupUsers;
+                setSelectUsers(data.map((user) => { return { value: user._id, label: `${user.name} ${user.lastName}` } }));
+            })
+            .catch((error) => console.log(error));
+    };
+
+    const handleSelectAdmin = (e) => {
+        console.log(e);
+        setSelectAdmin(e.value);
+        console.log(selectAdmin);
+    }
+
     useEffect(() => {
         getGroup();
+        handleSelectUsers();
     }, []);
 
     function handleEditMode() {
         if (editMode) {
 
-
             const inputs = {
                 name,
                 description,
-                
+                groupAuthor: selectAdmin,
             }
             axios
                 .put(
@@ -149,10 +171,11 @@ function DetailsPage({setShowAddGroup}) {
                     <div className="detailsWrap-inner">
                         <div className="detailsPage">
                             <div className="titleAndBtns">
-                        {editMode ? <input value={name} onChange={handleName} ></input> : <h3>{group.name}</h3>}
-                        <img className="detailsPageImg" src={group.groupPic} alt="" />
-                        {editMode ? <input value={description} onChange={handleDescription}></input> : <p>{`Description: ${group.description}`}</p>}
-                        {editMode ? <input value={`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`} onChange={handleGroupAuthor}></input> : <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>}
+                                {editMode ? <input value={name} onChange={handleName} placeholder="New Group Name" ></input> : <h3>{group.name}</h3>}
+                                <img className="detailsPageImg" src={group.groupPic} alt="" />
+                                {editMode ? <input value={description} onChange={handleDescription} placeholder="New Group Description"></input> : <p>{`Description: ${group.description}`}</p>}
+                                {editMode ? <Select options={selectUsers} onChange={handleSelectAdmin} placeholder="Select New Admin" /> : <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>}
+                                {/* {editMode ? <input value={`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`} onChange={handleGroupAuthor}></input> : <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>} */}
                                 <p>{`Date: ${group.createdAt.split("T")[0]}`}</p>
                                 <h3>{`Total Trip: ${calculations.total} €`}</h3>
                                 <h3>{`Total Balance: ${calculations.balance} €`}</h3>

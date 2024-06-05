@@ -5,52 +5,45 @@
   margin: 0;
   padding: 0;
   width: 100vw;
-  height: 85vh;
- background-image: url("../assets/Logo.png");
+  height: 100vh;
 }
+
 .landing-container2 {
- 
+
   padding-top: 2.5%;
   padding-left: 4%;
   height: 100%;
   overflow-y: auto;
   box-sizing: border-box;
-  
+
+
 }
+
 .slogan {
   margin-top: 1vh;
   font-family: "Poppins", sans-serif;
   font-size: 6vw;
   margin-bottom: 1.5vh;
 }
+
 .slogansito {
   margin-left: 2.5vw;
   font-size: 2.5vw;
   margin-bottom: 1.5vh;
 }
+
 .icons-LandingPage {
   width: 12vw;
   height: 12vh;
-  margin-top:5vh;
+  margin-top: 5vh;
   margin-left: 2.5vw;
   display: flex;
   justify-content: space-around;
 
 }
-.lp-icon {
-  width: 25vw;
-  height: 8.5vh;
-  margin-left: 1vw;
-}
-
-.banana {
-  width: 35vw;
-  height: 28vh;
-  border-radius: 50%;
-}
 
 .btn {
-  width: 20vw;
+  width: 10em;
   height: 6vh;
   color: #fff;
   background-color: #233565;
@@ -60,62 +53,112 @@
   cursor: pointer;
 
 }
-.img-bnncontainer {
-  height: 20vh;
+
+
+
+.landingBtns {
   display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
-  flex-wrap: nowrap;
-  margin-right: 2vw;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
 }
-@media (max-width:800px){
+
+.btn {
+  width: 10em;
+  height: 2em;
+  color: #fff;
+  background-color: #233565;
+  margin-top: 20px;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+
+}
+
+.slogan {
+  font-size: 40px;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 0.5vh;
+}
+
+.slogansito {
+  margin-left: 2.5vw;
+  font-size: 16px;
+  font-family: "Poppins", sans-serif;
+  margin-bottom: 1.5vh;
+}
+
+.landingPageLink {
+  width: 30px;
+}
+
+.landingText {
+  padding: 5vw;
+}
+
+.backgroundImg {
+  width: 100%;
+  z-index: -1;
+}
+
+.device {
+  width: 14px;
+}
+
+.platformDevice {
+  margin-top: 1em;
+}
+
+.landingImageDeco {
+  width: 100%;
+  margin-top: 5vh;
+}
+
+/* .landingExtras{
+    display: none;
+  } */
+
+
+
+@media (min-width: 850px) {
+.logoText{
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+
+  .landingExtras {
+    display: block;
+  }
+
+  .backgroundImg {
+    position: static;
+    transform: none;
+    z-index: -1;
+    width: 80%;
+
+  }
 
   .landing-container2 {
-    background-color: hsl(0, 0%, 100%);
-    padding-top: 2.5%;
-    padding-left: 4%;
-    height: 100%;
-    overflow-y: auto;
-    background-image: url("../assets/owl.png");
-    background-repeat:no-repeat;
-    background-size:contain;
-    background-position:center;
-    
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+
   }
-  .landingBtns{
+
+  .landingBtns {
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
-    position: absolute;
-    top:70%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
+    flex-direction: row;
+    gap: 50px;
+
   }
-  .btn {
-    width: 50vw;
-    height: 3.5vh;
-    color: #fff;
-    background-color: #233565;
-    border-radius: 50px;
-    font-size: 20px;
-    font-weight: 700;
-    cursor: pointer;
-    
+
+  .landingImageDeco{
+    width: 80%;
+    margin-top: 10vh;
   }
-  .slogan {
-    font-size: 40px;
-    font-family: "Poppins", sans-serif;
-    margin-bottom: 0.5vh;
-  }
-  .slogansito {
-    margin-left: 2.5vw;
-    font-size: 12px;
-    font-family: "Poppins", sans-serif;
-    margin-bottom: 1.5vh;
-  }
-  .landingPageLink{
-    width: 30px;
-  }
-  
 }

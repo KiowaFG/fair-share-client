@@ -175,7 +175,7 @@ function DetailsPage({ setShowAddGroup, getGroup, calculations, group }) {
                                 <h3>{`Total Paid: ${calculations.paid} €`}</h3>
                                 <h3>{`Total Borrowed: ${calculations.borrowed} €`}</h3>
                                 <div className="Btns">
-                                    <button className="detailsbtn">Add Expense</button>
+                                    <button onClick={()=>setShowAddExpense(true)} className="detailsbtn">Add Expense</button>
                                     <button onClick={handleEditMode} className="detailsbtn">{editMode ? "Save" : "Edit Group"}</button>
                                     <button onClick={deleteGroup} className="detailsbtn">Delete Group</button>
                                 </div>

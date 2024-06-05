@@ -10,23 +10,16 @@ function LandingPage() {
   return (
     <div className="landing-container">
       <div className="landing-container2">
-        <p className="slogan">Fair share, <strong>fair</strong> travel</p>
-        <p className="slogansito"> "Expense <strong>equality </strong>for your journeys"</p>
-        <div className="icons-LandingPage">
-          <img className="lp-icon" src={travelIcon} alt=" travelIcon" />
-          <img className="lp-icon"src={shareIcon} alt=" shareIcon" />
-          <img  className="lp-icon" src={moneyIcon} alt=" moneyIcon" />
-        </div>
-
-        <div className="img-bnncontainer">
-          <img className="banana" src={bananasplit} alt="" />
-        </div>
+        <p className="slogan"> <strong>Fair share,</strong> Split Wisely</p>
+        <p className="slogansito"> "Easy Bills  <strong>easy life"</strong></p>
+      <div className="landingBtns">
         <Link to="/signup">
           <button className="btn">SignUp</button>{" "}
         </Link>
         <Link to="/login">
           <button className="btn">LogIn</button>
         </Link>
+        </div>
       </div>
     </div>
   );

@@ -15,12 +15,23 @@ function DetailsPage(setShowAddGroup) {
     const { groupId } = useParams();
     const navigate = useNavigate();
     const [group, setGroup] = useState(null);
+    const [editMode, setEditMode] = useState(false)
+
+    const [name, setName] = useState("")
+    const [description, setDescription] = useState("")
+    const [groupAuthor, setGroupAuthor] = useState("")
+    const handleName = (e) => setName(e.target.value);
+    const handleDescription = (e) => setDescription(e.target.value)
+    const handleGroupAuthor = (e) => setGroupAuthor(e.target.value)
+
     const [calculations, setCalculations] = useState({
         paid: 0,
         borrowed: 0,
         balance: 0,
         total: 0
-    });
+
+    })
+    const [edit, setEdit] = useState(false)
 
     const getGroup = () => {
         axios
@@ -44,7 +55,9 @@ function DetailsPage(setShowAddGroup) {
                 })
             })
             .catch((error) => console.log(error));
+
     };
+
 
     const deleteGroup = () => {
         axios
@@ -57,6 +70,7 @@ function DetailsPage(setShowAddGroup) {
                 navigate("/home")
             })
             .catch((error) => console.log(error));
+
     };
 
     const getBalance = (data) => {
@@ -91,11 +105,42 @@ function DetailsPage(setShowAddGroup) {
         });
 
         return data;
+
     };
 
     useEffect(() => {
         getGroup();
     }, []);
+
+    function handleEditMode() {
+        if (editMode) {
+
+
+            const inputs = {
+                name,
+                description,
+                
+            }
+            axios
+                .put(
+                    `${API_URL}/groups/${groupId}`,
+                    inputs,
+                    { headers: { Authorization: `Bearer ${storedToken}` } }
+                )
+                .then((response) => {
+                    console.log("The group has been updated", response);
+                    setEditMode(false)
+                    getGroup()
+                })
+                .catch((error) => console.log(error));
+
+        }
+        else {
+
+
+            setEditMode(true)
+        }
+    }
 
     return (
         <div className="detailsWrap-outter">
@@ -104,10 +149,10 @@ function DetailsPage(setShowAddGroup) {
                     <div className="detailsWrap-inner">
                         <div className="detailsPage">
                             <div className="titleAndBtns">
-                                <h3>{group.name}</h3>
-                                <img className="detailsPageImg" src={group.groupPic} alt="" />
-                                <p>{`Description: ${group.description}`}</p>
-                                <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>
+                        {editMode ? <input value={name} onChange={handleName} ></input> : <h3>{group.name}</h3>}
+                        <img className="detailsPageImg" src={group.groupPic} alt="" />
+                        {editMode ? <input value={description} onChange={handleDescription}></input> : <p>{`Description: ${group.description}`}</p>}
+                        {editMode ? <input value={`Admin: ${groupAuthor.name} ${group.groupAuthor.lastName}`} onChange={handleGroupAuthor}></input> : <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>}
                                 <p>{`Date: ${group.createdAt.split("T")[0]}`}</p>
                                 <h3>{`Total Trip: ${calculations.total} €`}</h3>
                                 <h3>{`Total Balance: ${calculations.balance} €`}</h3>

@@ -9,7 +9,7 @@ import "./DetailsPage.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-function DetailsPage(setShowAddGroup) {
+function DetailsPage({setShowAddGroup}) {
     const storedToken = localStorage.getItem("authToken");
     const { user } = useContext(AuthContext);
     const { groupId } = useParams();
@@ -152,7 +152,7 @@ function DetailsPage(setShowAddGroup) {
                         {editMode ? <input value={name} onChange={handleName} ></input> : <h3>{group.name}</h3>}
                         <img className="detailsPageImg" src={group.groupPic} alt="" />
                         {editMode ? <input value={description} onChange={handleDescription}></input> : <p>{`Description: ${group.description}`}</p>}
-                        {editMode ? <input value={`Admin: ${groupAuthor.name} ${group.groupAuthor.lastName}`} onChange={handleGroupAuthor}></input> : <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>}
+                        {editMode ? <input value={`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`} onChange={handleGroupAuthor}></input> : <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>}
                                 <p>{`Date: ${group.createdAt.split("T")[0]}`}</p>
                                 <h3>{`Total Trip: ${calculations.total} €`}</h3>
                                 <h3>{`Total Balance: ${calculations.balance} €`}</h3>
@@ -160,7 +160,7 @@ function DetailsPage(setShowAddGroup) {
                                 <h3>{`Total Borrowed: ${calculations.borrowed} €`}</h3>
                                 <div className="Btns">
                                     <button className="detailsbtn">Add Expense</button>
-                                    <button onClick={() => setShowAddGroup(true)} className="detailsbtn">Edit Group</button>
+                                    <button onClick={handleEditMode} className="detailsbtn">{editMode ? "Save" : "Edit Group"}</button>
                                     <button onClick={deleteGroup} className="detailsbtn">Delete Group</button>
                                 </div>
                             </div>

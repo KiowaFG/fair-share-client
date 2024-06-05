@@ -17,7 +17,7 @@ function Footer() {
         </p>
       </div>
       <div className="footerMid-container">
-        <div className="footerIconLogos-container">
+        
           <a href="https://www.instagram.com/" target="__blank">
             <img
               className="footer-logo instagram"
@@ -53,7 +53,7 @@ function Footer() {
           <a href="https://twitter.com/" target="__blank">
             <img className="footer-logo xlogo" src={xLogo} alt="x logo" />
           </a>
-        </div>
+        
       </div>
       <div className="footerRight-container">
         <p className="footer-paragraph left">About Us</p>

@@ -6,7 +6,7 @@ import { AuthContext } from "../context/auth.context";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-function ExpenseCard({ expense }) {
+function ExpenseCard({ expense, getGroup, groupId }) {
     const storedToken = localStorage.getItem("authToken");
     const [showInfo, setShowInfo] = useState("content-not-visible");
     const [expenseInfo, setExpenseInfo] = useState("");
@@ -31,7 +31,10 @@ function ExpenseCard({ expense }) {
                 `${API_URL}/expenses/${expense.group}/${user._id}/${expense._id}`,
                 { headers: { Authorization: `Bearer ${storedToken}` } },
             )
-            .then((response) => console.log(response.message))
+            .then((response) => {
+                console.log(response.message);
+                getGroup(groupId);
+            })
             .catch((error) => console.log(error.response.data.message));
     };
 

@@ -68,7 +68,9 @@ function AddGroup({ setShowAddGroup }) {
             formData,
             { headers: { Authorization: `Bearer ${storedToken}` } }
         )
-            .then((data) => { navigate("/home") })
+            .then((response) => {
+                navigate(`/details/${response.data._id}`)
+            })
             .catch((error) => { console.log("there has been an error") })
 
         setShowAddGroup(false);

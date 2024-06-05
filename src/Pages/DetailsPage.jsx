@@ -10,12 +10,12 @@ import "./DetailsPage.css";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
-function DetailsPage({ setShowAddExpense }) {
+function DetailsPage({ setShowAddGroup, getGroup, calculations, group }) {
     const storedToken = localStorage.getItem("authToken");
     const { user } = useContext(AuthContext);
     const { groupId } = useParams();
     const navigate = useNavigate();
-    const [group, setGroup] = useState(null);
+    // const [group, setGroup] = useState(null);
     const [editMode, setEditMode] = useState(false)
 
     const [name, setName] = useState("");
@@ -26,40 +26,38 @@ function DetailsPage({ setShowAddExpense }) {
     const handleName = (e) => setName(e.target.value);
     const handleDescription = (e) => setDescription(e.target.value)
     const handleGroupAuthor = (e) => setGroupAuthor(e.target.value)
+    // const [calculations, setCalculations] = useState({
+    //     paid: 0,
+    //     borrowed: 0,
+    //     balance: 0,
+    //     total: 0
+    // });
 
-    const [calculations, setCalculations] = useState({
-        paid: 0,
-        borrowed: 0,
-        balance: 0,
-        total: 0
-
-    })
     const [edit, setEdit] = useState(false)
 
-    const getGroup = () => {
-        axios
-            .get(
-                `${API_URL}/groups/details/${groupId}`,
-                { headers: { Authorization: `Bearer ${storedToken}` } }
-            )
-            .then((response) => {
-                let data = response.data;
-                data = getBalance(data);
-                setGroup(data);
-                const paid = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
-                const borrowed = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount / curr.expenseUsers.length) : acc + 0, 0));
-                const total = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + curr.amount : acc + 0, 0));
-                const balance = paid - borrowed;
-                setCalculations({
-                    paid: paid,
-                    borrowed: borrowed,
-                    balance: balance,
-                    total: total
-                })
-            })
-            .catch((error) => console.log(error));
-
-    };
+    // const getGroup = () => {
+    //     axios
+    //         .get(
+    //             `${API_URL}/groups/details/${groupId}`,
+    //             { headers: { Authorization: `Bearer ${storedToken}` } }
+    //         )
+    //         .then((response) => {
+    //             let data = response.data;
+    //             data = getBalance(data);
+    //             setGroup(data);
+    //             const paid = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
+    //             const borrowed = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount / curr.expenseUsers.length) : acc + 0, 0));
+    //             const total = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + curr.amount : acc + 0, 0));
+    //             const balance = paid - borrowed;
+    //             setCalculations({
+    //                 paid: paid,
+    //                 borrowed: borrowed,
+    //                 balance: balance,
+    //                 total: total
+    //             })
+    //         })
+    //         .catch((error) => console.log(error));
+    // };
 
 
     const deleteGroup = () => {
@@ -73,43 +71,41 @@ function DetailsPage({ setShowAddExpense }) {
                 navigate("/home")
             })
             .catch((error) => console.log(error));
-
     };
 
-    const getBalance = (data) => {
-        const user_set = data.groupUsers.map(user => { return { id: user._id, paid: 0, contributed: 0 } });
+    // const getBalance = (data) => {
+    //     const user_set = data.groupUsers.map(user => { return { id: user._id, paid: 0, contributed: 0 } });
 
-        user_set.forEach((user) => {
-            let paid = 0;
-            let contributed = 0;
-            data.groupExpenses.forEach((expense) => {
-                if (expense.expenseAuthor === user.id) {
-                    paid += expense.amount;
-                };
-                if (expense.expenseUsers.includes(user.id)) {
-                    contributed += expense.amount / expense.expenseUsers.length;
-                };
-            })
-            user.paid = paid;
-            user.contributed = contributed;
-        });
+    //     user_set.forEach((user) => {
+    //         let paid = 0;
+    //         let contributed = 0;
+    //         data.groupExpenses.forEach((expense) => {
+    //             if (expense.expenseAuthor === user.id) {
+    //                 paid += expense.amount;
+    //             };
+    //             if (expense.expenseUsers.includes(user.id)) {
+    //                 contributed += expense.amount / expense.expenseUsers.length;
+    //             };
+    //         })
+    //         user.paid = paid;
+    //         user.contributed = contributed;
+    //     });
 
-        user_set.forEach((user) => {
-            user.paid = Number(user.paid.toFixed(2));
-            user.contributed = Number(user.contributed.toFixed(2));
-            user.balance = user.paid - user.contributed;
-        });
+    //     user_set.forEach((user) => {
+    //         user.paid = Number(user.paid.toFixed(2));
+    //         user.contributed = Number(user.contributed.toFixed(2));
+    //         user.balance = user.paid - user.contributed;
+    //     });
 
 
-        data.groupUsers.forEach((user1) => {
-            user_set.map((user2) => {
-                user1._id === user2.id ? user1.balance = user2.balance : false;
-            });
-        });
+    //     data.groupUsers.forEach((user1) => {
+    //         user_set.map((user2) => {
+    //             user1._id === user2.id ? user1.balance = user2.balance : false;
+    //         });
+    //     });
 
-        return data;
-
-    };
+    //     return data;
+    // };
 
     const handleSelectUsers = () => {
         axios
@@ -130,11 +126,6 @@ function DetailsPage({ setShowAddExpense }) {
         console.log(selectAdmin);
     }
 
-    useEffect(() => {
-        getGroup();
-        handleSelectUsers();
-    }, []);
-
     function handleEditMode() {
         if (editMode) {
 
@@ -152,17 +143,19 @@ function DetailsPage({ setShowAddExpense }) {
                 .then((response) => {
                     console.log("The group has been updated", response);
                     setEditMode(false)
-                    getGroup()
+                    getGroup(groupId)
                 })
                 .catch((error) => console.log(error));
-
         }
         else {
-
-
             setEditMode(true)
         }
-    }
+    };
+
+    useEffect(() => {
+        getGroup(groupId);
+        handleSelectUsers();
+    }, [groupId]);
 
     return (
         <div className="detailsWrap-outter">
@@ -190,7 +183,7 @@ function DetailsPage({ setShowAddExpense }) {
 
                             {group.groupExpenses ? group.groupExpenses.map((expense) => {
                                 return (
-                                    <ExpenseCard key={expense._id} expense={expense} />
+                                    <ExpenseCard key={expense._id} expense={expense} getGroup={getGroup} groupId={groupId}/>
                                 )
                             }) : <p>Loading expenses</p>}
                         </div>

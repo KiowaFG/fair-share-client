@@ -1,48 +1,75 @@
-.detailsWrap{
-width: 100%;
-display: flex;
-align-items:center ;
-justify-content: center;
-margin-top: 5vh;
+.detailsWrap-inner {
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 5vh;
 }
-.detailsPage{
+
+.detailsWrap-outter {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.detailsPage {
     background-color: rgb(205, 194, 194);
     padding: 30px;
     border: 1px solid black;
     border-radius: 20px;
-    width: 80%;
+    width: 100%;
     height: 100%;
     margin: 20px;
     display: flex;
-    
     flex-direction: column;
 }
 
-.detailsPageImg{
+.detailsPageImg {
     width: 70%;
     height: 70%;
     border-radius: 10%;
 }
 
-.mainSection{
-display: flex;
-flex-direction: row;
-justify-content: space-around;
-}
-
-.titleAndBtns{
+.mainSection {
     display: flex;
-    flex-direction: column;  
+    flex-direction: row;
     justify-content: space-around;
 }
 
-.btns{
+.titleAndBtns {
     display: flex;
-flex-direction: row;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.btns {
+    display: flex;
+    flex-direction: row;
 
 }
 
-.detailsbtn{
+.detailsbtn {
     margin: 0 15px 0 0;
     padding: 6px;
+}
+
+.users-wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+}
+
+.profile-details{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+}
+
+.user-profile-picture{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    margin-right: 10px;
 }

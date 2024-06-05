@@ -54,7 +54,7 @@ function App() {
           total: total
         })
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log("error look here"));
   };
 
   const getBalance = (data) => {
@@ -107,8 +107,8 @@ function App() {
     <>
       {!["/", "/signup", "/login"].includes(location.pathname) && <Header showSidebar={showSidebar} setShowSidebar={setShowSidebar} handleHideSidebar={handleHideSidebar} />}
       <div className="bodyView">
-        {showSidebar && <SideBar setShowAddGroup={setShowAddGroup} setShowAddExpense={setShowAddExpense} setShowSidebar={setShowSidebar} showSidebar={showSidebar} hideSidebar={hideSidebar} />}
-        {showAddExpense && <AddExpense setShowAddExpense={setShowAddExpense} getGroup={getGroup}/>}
+        {showSidebar && <SideBar handleHideSidebar={handleHideSidebar} setShowAddGroup={setShowAddGroup} setShowAddExpense={setShowAddExpense} setShowSidebar={setShowSidebar} showSidebar={showSidebar} hideSidebar={hideSidebar} />}
+        {showAddExpense && <AddExpense setShowAddExpense={setShowAddExpense} getGroup={getGroup} />}
         {showAddGroup && <AddGroup setShowAddGroup={setShowAddGroup} />}
         <Routes>
           <Route path="/" element={<LandingPage />} />

@@ -11,13 +11,14 @@ import "./AddExpense.css"
 
 const API_URL = import.meta.env.VITE_API_URL
 
-function AddExpense({ setShowAddExpense, getGroup }) {
+function AddExpense({ setShowAddExpense, getGroup, handleHideSidebar }) {
     const storedToken = localStorage.getItem("authToken");
     const navigate = useNavigate()
     const { user } = useContext(AuthContext);
     const [group, setGroup] = useState("");
     const [selectGroup, setSelectGroup] = useState("");
     const [selectPayers, setSelectPayer] = useState("");
+    const [errorMessage, setErrorMessage] = useState(null);
 
     const [formData, setFormData] = useState({
         name: '',
@@ -42,26 +43,36 @@ function AddExpense({ setShowAddExpense, getGroup }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        axios.post(
-            `${API_URL}/expenses/`,
-            formData,
-            { headers: { Authorization: `Bearer ${storedToken}` } }
-        )
-            .then((response) => {
-                const expenseId = response.data._id;
-                const groupId = response.data.group;
-                axios.put(
-                    `${API_URL}/groups/${groupId}/${expenseId}`,
-                    { expenseId, groupId },
-                    { headers: { Authorization: `Bearer ${storedToken}` } }
-                )
-                    .then((updatedGroup) => {
-                        getGroup(groupId);
-                        navigate(`/details/${formData.group}`);
-                    })
-                    .catch((error) => console.log(error));
-            })
-            .catch((error) => { console.log("there has been an error") })
+        if (Object.values(formData).includes("")) {
+            setErrorMessage("Please fill all the information");
+            setTimeout(() => { setErrorMessage(null) }, 2000);
+        } else {
+            axios.post(
+                `${API_URL}/expenses/`,
+                formData,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
+                .then((response) => {
+                    const expenseId = response.data._id;
+                    const groupId = response.data.group;
+                    axios.put(
+                        `${API_URL}/groups/${groupId}/${expenseId}`,
+                        { expenseId, groupId },
+                        { headers: { Authorization: `Bearer ${storedToken}` } }
+                    )
+                        .then((updatedGroup) => {
+                            getGroup(groupId);
+                            setErrorMessage("Expense added");
+                            setTimeout(() => {
+                                setErrorMessage(null);
+                                setShowAddExpense(false);
+                                navigate(`/details/${formData.group}`);
+                            }, 1000);
+                        })
+                        .catch((error) => console.log(error));
+                })
+                .catch((error) => { console.log("there has been an error") })
+        };
     };
 
     const getSelectGroup = () => {
@@ -186,6 +197,7 @@ function AddExpense({ setShowAddExpense, getGroup }) {
                         {formData.groupPic && <img className='group-picture' src={formData.groupPic}></img>}
                     </div>
                     <button type="submit">Submit</button>
+                    {errorMessage && <p>{errorMessage}</p>}
                 </form>
             </div>
         </div>

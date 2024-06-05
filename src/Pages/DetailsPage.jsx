@@ -15,97 +15,35 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
     const { user } = useContext(AuthContext);
     const { groupId } = useParams();
     const navigate = useNavigate();
-    // const [group, setGroup] = useState(null);
     const [editMode, setEditMode] = useState(false)
 
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [selectUsers, setSelectUsers] = useState("");
-    const [selectAdmin, setSelectAdmin] = useState("");
-    const [groupAuthor, setGroupAuthor] = useState("")
+    const [selectAdmin, setSelectAdmin] = useState(null);
     const handleName = (e) => setName(e.target.value);
     const handleDescription = (e) => setDescription(e.target.value)
-    const handleGroupAuthor = (e) => setGroupAuthor(e.target.value)
-    // const [calculations, setCalculations] = useState({
-    //     paid: 0,
-    //     borrowed: 0,
-    //     balance: 0,
-    //     total: 0
-    // });
 
-    const [edit, setEdit] = useState(false)
-
-    // const getGroup = () => {
-    //     axios
-    //         .get(
-    //             `${API_URL}/groups/details/${groupId}`,
-    //             { headers: { Authorization: `Bearer ${storedToken}` } }
-    //         )
-    //         .then((response) => {
-    //             let data = response.data;
-    //             data = getBalance(data);
-    //             setGroup(data);
-    //             const paid = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
-    //             const borrowed = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount / curr.expenseUsers.length) : acc + 0, 0));
-    //             const total = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + curr.amount : acc + 0, 0));
-    //             const balance = paid - borrowed;
-    //             setCalculations({
-    //                 paid: paid,
-    //                 borrowed: borrowed,
-    //                 balance: balance,
-    //                 total: total
-    //             })
-    //         })
-    //         .catch((error) => console.log(error));
-    // };
-
+    const [editGroupMessage, setEditGroupMessage] = useState(null)
 
     const deleteGroup = () => {
-        axios
-            .delete(
-                `${API_URL}/groups/${groupId}`,
-                { headers: { Authorization: `Bearer ${storedToken}` } }
-            )
-            .then((response) => {
-                console.log("The group has been deleted", response);
-                navigate("/home")
-            })
-            .catch((error) => console.log(error));
+        if (group.groupAuthor._id !== user._id) {
+            console.log(group);
+            setEditGroupMessage("You are not the admin of this group");
+            setTimeout(() => { setEditGroupMessage(null) }, 3000);
+        } else {
+            axios
+                .delete(
+                    `${API_URL}/groups/${groupId}`,
+                    { headers: { Authorization: `Bearer ${storedToken}` } }
+                )
+                .then((response) => {
+                    console.log("The group has been deleted", response);
+                    navigate("/home")
+                })
+                .catch((error) => console.log(error));
+        };
     };
-
-    // const getBalance = (data) => {
-    //     const user_set = data.groupUsers.map(user => { return { id: user._id, paid: 0, contributed: 0 } });
-
-    //     user_set.forEach((user) => {
-    //         let paid = 0;
-    //         let contributed = 0;
-    //         data.groupExpenses.forEach((expense) => {
-    //             if (expense.expenseAuthor === user.id) {
-    //                 paid += expense.amount;
-    //             };
-    //             if (expense.expenseUsers.includes(user.id)) {
-    //                 contributed += expense.amount / expense.expenseUsers.length;
-    //             };
-    //         })
-    //         user.paid = paid;
-    //         user.contributed = contributed;
-    //     });
-
-    //     user_set.forEach((user) => {
-    //         user.paid = Number(user.paid.toFixed(2));
-    //         user.contributed = Number(user.contributed.toFixed(2));
-    //         user.balance = user.paid - user.contributed;
-    //     });
-
-
-    //     data.groupUsers.forEach((user1) => {
-    //         user_set.map((user2) => {
-    //             user1._id === user2.id ? user1.balance = user2.balance : false;
-    //         });
-    //     });
-
-    //     return data;
-    // };
 
     const handleSelectUsers = () => {
         axios
@@ -121,35 +59,38 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
     };
 
     const handleSelectAdmin = (e) => {
-        console.log(e);
         setSelectAdmin(e.value);
         console.log(selectAdmin);
-    }
+    };
 
     function handleEditMode() {
-        if (editMode) {
-
-            const inputs = {
-                name,
-                description,
-                groupAuthor: selectAdmin,
+        if (group.groupAuthor._id !== user._id) {
+            setEditGroupMessage("You are not the admin of this group");
+            setTimeout(() => { setEditGroupMessage(null) }, 3000);
+        } else {
+            if (editMode) {
+                const inputs = {
+                    name,
+                    description,
+                    groupAuthor: selectAdmin === null ? group.groupAuthor._id : selectAdmin,
+                }
+                axios
+                    .put(
+                        `${API_URL}/groups/${groupId}`,
+                        inputs,
+                        { headers: { Authorization: `Bearer ${storedToken}` } }
+                    )
+                    .then((response) => {
+                        console.log("The group has been updated", response);
+                        setEditMode(false)
+                        getGroup(groupId)
+                    })
+                    .catch((error) => console.log(error));
             }
-            axios
-                .put(
-                    `${API_URL}/groups/${groupId}`,
-                    inputs,
-                    { headers: { Authorization: `Bearer ${storedToken}` } }
-                )
-                .then((response) => {
-                    console.log("The group has been updated", response);
-                    setEditMode(false)
-                    getGroup(groupId)
-                })
-                .catch((error) => console.log(error));
-        }
-        else {
-            setEditMode(true)
-        }
+            else {
+                setEditMode(true)
+            };
+        };
     };
 
     useEffect(() => {
@@ -168,22 +109,23 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
                                 <img className="detailsPageImg" src={group.groupPic} alt="" />
                                 {editMode ? <input value={description} onChange={handleDescription} placeholder="New Group Description"></input> : <p>{`Description: ${group.description}`}</p>}
                                 {editMode ? <Select options={selectUsers} onChange={handleSelectAdmin} placeholder="Select New Admin" /> : <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>}
-                                {/* {editMode ? <input value={`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`} onChange={handleGroupAuthor}></input> : <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>} */}
                                 <p>{`Date: ${group.createdAt.split("T")[0]}`}</p>
                                 <h3>{`Total Trip: ${calculations.total} €`}</h3>
                                 <h3>{`Total Balance: ${calculations.balance} €`}</h3>
                                 <h3>{`Total Paid: ${calculations.paid} €`}</h3>
                                 <h3>{`Total Borrowed: ${calculations.borrowed} €`}</h3>
                                 <div className="Btns">
-                                    <button onClick={()=>setShowAddExpense(true)} className="detailsbtn">Add Expense</button>
+                                    <button onClick={() => setShowAddExpense(true)} className="detailsbtn">Add Expense</button>
                                     <button onClick={handleEditMode} className="detailsbtn">{editMode ? "Save" : "Edit Group"}</button>
+                                    {editMode && <button onClick={() => setEditMode(false)} className="detailsbtn">Cancel</button>}
                                     <button onClick={deleteGroup} className="detailsbtn">Delete Group</button>
                                 </div>
+                                {editGroupMessage && <p>{editGroupMessage}</p>}
                             </div>
 
                             {group.groupExpenses ? group.groupExpenses.map((expense) => {
                                 return (
-                                    <ExpenseCard key={expense._id} expense={expense} getGroup={getGroup} groupId={groupId}/>
+                                    <ExpenseCard key={expense._id} expense={expense} getGroup={getGroup} groupId={groupId} />
                                 )
                             }) : <p>Loading expenses</p>}
                         </div>

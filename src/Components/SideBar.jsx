@@ -1,21 +1,32 @@
+import { useContext } from "react";
 import "./SideBar.css"
-import { useState } from 'react'
-import Xicon from "../assets/X.png"
 import { Link } from "react-router-dom"
+import { AuthContext } from "../context/auth.context";
 
-function SideBar({ setShowSidebar,hideSidebar,setShowAddExpense,setShowAddGroup }){
+function SideBar({ hideSidebar, setShowAddExpense, setShowAddGroup, handleHideSidebar }) {
 
-
+    const { logOut } = useContext(AuthContext);
 
     return (
         <div className={hideSidebar ? "sideBar slideout" : "sideBar"}>
-
-            <Link to={"/home"}> <button>Home Page</button></Link>
-            
-            <button>All Expenses </button>
-            <button onClick={() => setShowAddExpense(true)}>Add Expense</button>
-            <button onClick={() => setShowAddGroup(true)}>Add Group</button> 
-
+            <Link to={"/home"}> <button onClick={() => {
+                handleHideSidebar();
+            }}>Home Page</button></Link>
+            <button onClick={() => {
+                setShowAddExpense(true);
+                handleHideSidebar();
+            }}>Add Expense</button>
+            <button onClick={() => {
+                setShowAddGroup(true);
+                handleHideSidebar();
+            }}>Add Group</button>
+            <Link to={"/user"}><button onClick={() => {
+                handleHideSidebar();
+            }}>User Profile</button></Link>
+            <button onClick={() => {
+                logOut();
+                handleHideSidebar();
+            }}>Log Out</button>
         </div>
     )
 }

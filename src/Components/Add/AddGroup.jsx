@@ -15,6 +15,7 @@ function AddGroup({ setShowAddGroup }) {
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
     const [selectUsers, setSelectUsers] = useState(null);
+    const [errorMessage, setErrorMessage] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -25,7 +26,6 @@ function AddGroup({ setShowAddGroup }) {
 
 
     const handleChange = (e) => {
-        console.log(e);
         const { name, value } = e.target;
         setFormData({
             ...formData,
@@ -58,22 +58,27 @@ function AddGroup({ setShowAddGroup }) {
     const handleSubmit = (e) => {
         e.preventDefault();
 
-        setFormData({
-            ...formData,
-            groupUsers: formData.groupUsers.push(user._id)
-        });
+        if (Object.values(formData).includes("")) {
+            setErrorMessage("Please fill all the information");
+            setTimeout(() => { setErrorMessage(null) }, 2000);
+        } else {
+            setFormData({
+                ...formData,
+                groupUsers: formData.groupUsers.push(user._id)
+            });
 
-        axios.post(
-            `${API_URL}/groups/`,
-            formData,
-            { headers: { Authorization: `Bearer ${storedToken}` } }
-        )
-            .then((response) => {
-                navigate(`/details/${response.data._id}`)
-            })
-            .catch((error) => { console.log("there has been an error") })
+            axios.post(
+                `${API_URL}/groups/`,
+                formData,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
+                .then((response) => {
+                    navigate(`/details/${response.data._id}`)
+                })
+                .catch((error) => { console.log("there has been an error") })
 
-        setShowAddGroup(false);
+            setShowAddGroup(false);
+        };
     };
 
     const uploadImage = async (e) => {
@@ -138,6 +143,7 @@ function AddGroup({ setShowAddGroup }) {
                         {formData.groupPic && <img className='group-picture' src={formData.groupPic}></img>}
                     </div>
                     <button type="submit">Submit</button>
+                    {errorMessage && <p>{errorMessage}</p>}
                 </form>
             </div >
         </div >

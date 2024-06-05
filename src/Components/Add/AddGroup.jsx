@@ -1,8 +1,9 @@
 import axios from 'axios';
 import supabase from '../../utils/config';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
+import Select from 'react-select';
 import { AuthContext } from '../../context/auth.context';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import closeBtn from "../../assets/X.png"
 import "./AddGroup.css"
 
@@ -13,6 +14,7 @@ function AddGroup({ setShowAddGroup }) {
     const storedToken = localStorage.getItem("authToken");
     const navigate = useNavigate();
     const { user } = useContext(AuthContext);
+    const [selectUsers, setSelectUsers] = useState(null);
     const [formData, setFormData] = useState({
         name: '',
         description: '',
@@ -23,6 +25,7 @@ function AddGroup({ setShowAddGroup }) {
 
 
     const handleChange = (e) => {
+        console.log(e);
         const { name, value } = e.target;
         setFormData({
             ...formData,
@@ -30,10 +33,35 @@ function AddGroup({ setShowAddGroup }) {
         });
     };
 
+    const handleChangeUsers = (e) => {
+        const users_selected = e.map((user) => user.value);
+        setFormData({
+            ...formData,
+            groupUsers: users_selected
+        });
+    };
+
+    const handleSelectUsers = () => {
+        axios
+            .get(
+                `${API_URL}/user`,
+                { headers: { Authorization: `Bearer ${storedToken}` } }
+            )
+            .then((response) => {
+                let data = response.data;
+                data = data.map((user) => { return { value: user._id, label: `${user.name} ${user.lastName}` } });
+                setSelectUsers(data.filter((userFilter) => userFilter.value !== user._id));
+            })
+            .catch((error) => console.log(error));
+    };
 
     const handleSubmit = (e) => {
-
         e.preventDefault();
+
+        setFormData({
+            ...formData,
+            groupUsers: formData.groupUsers.push(user._id)
+        });
 
         axios.post(
             `${API_URL}/groups/`,
@@ -69,6 +97,10 @@ function AddGroup({ setShowAddGroup }) {
         });
     };
 
+    useEffect(() => {
+        handleSelectUsers()
+    }, []);
+
     return (
         <div className='formWrap'>
             <img onClick={() => setShowAddGroup(false)} className='closeBtn' src={closeBtn} alt="" />
@@ -91,13 +123,7 @@ function AddGroup({ setShowAddGroup }) {
                     </div>
                     <div>
                         <label>Users:</label>
-                        {/* <input
-                            type="text"
-                            name="users"
-                            value={formData.users}
-                            onChange={handleChange} /> */}
-                            <select name="users">
-                             </select>
+                        <Select options={selectUsers} name="users" onChange={handleChangeUsers} isMulti />
                     </div>
                     <div>
                         <label> Image:</label>
@@ -111,8 +137,8 @@ function AddGroup({ setShowAddGroup }) {
                     </div>
                     <button type="submit">Submit</button>
                 </form>
-            </div>
-        </div>
+            </div >
+        </div >
     );
 }
 

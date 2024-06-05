@@ -2,9 +2,8 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { AuthContext } from "../context/auth.context";
 import { useState, useEffect, useContext } from "react";
-import ExpenseCard from "../Components/ExpenseCard";
-import trashBin from "../assets/images/bin.png";
 import { useNavigate } from "react-router-dom";
+import ExpenseCard from "../Components/ExpenseCard";
 import "./DetailsPage.css";
 
 
@@ -21,7 +20,7 @@ function DetailsPage(setShowAddGroup) {
         borrowed: 0,
         balance: 0,
         total: 0
-    })
+    });
 
     const getGroup = () => {
         axios
@@ -30,7 +29,9 @@ function DetailsPage(setShowAddGroup) {
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
-                setGroup(response.data);
+                let data = response.data;
+                data = getBalance(data);
+                setGroup(data);
                 const paid = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
                 const borrowed = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount / curr.expenseUsers.length) : acc + 0, 0));
                 const total = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + curr.amount : acc + 0, 0));
@@ -43,20 +44,53 @@ function DetailsPage(setShowAddGroup) {
                 })
             })
             .catch((error) => console.log(error));
-        }
-        
-        const deleteGroup = ()=>{
-            axios
+    };
+
+    const deleteGroup = () => {
+        axios
             .delete(
                 `${API_URL}/groups/${groupId}`,
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
             .then((response) => {
-                console.log("The group has been deleted",response);
+                console.log("The group has been deleted", response);
                 navigate("/home")
             })
             .catch((error) => console.log(error));
-            
+    };
+
+    const getBalance = (data) => {
+        const user_set = data.groupUsers.map(user => { return { id: user._id, paid: 0, contributed: 0 } });
+
+        user_set.forEach((user) => {
+            let paid = 0;
+            let contributed = 0;
+            data.groupExpenses.forEach((expense) => {
+                if (expense.expenseAuthor === user.id) {
+                    paid += expense.amount;
+                };
+                if (expense.expenseUsers.includes(user.id)) {
+                    contributed += expense.amount / expense.expenseUsers.length;
+                };
+            })
+            user.paid = paid;
+            user.contributed = contributed;
+        });
+
+        user_set.forEach((user) => {
+            user.paid = Number(user.paid.toFixed(2));
+            user.contributed = Number(user.contributed.toFixed(2));
+            user.balance = user.paid - user.contributed;
+        });
+
+
+        data.groupUsers.forEach((user1) => {
+            user_set.map((user2) => {
+                user1._id === user2.id ? user1.balance = user2.balance : false;
+            });
+        });
+
+        return data;
     };
 
     useEffect(() => {
@@ -64,32 +98,51 @@ function DetailsPage(setShowAddGroup) {
     }, []);
 
     return (
-        <div className="detailsWrap">
+        <div className="detailsWrap-outter">
             {group &&
-                <div className="detailsPage">
-                    <div className="titleAndBtns">
-                        <h3>{group.name}</h3>
-                        <img className="detailsPageImg" src={group.groupPic} alt="" />
-                        <p>{`Description: ${group.description}`}</p>
-                        <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>
-                        <p>{`Date: ${group.createdAt.split("T")[0]}`}</p>
-                        <h3>{`Total Trip: ${calculations.total} €`}</h3>
-                        <h3>{`Total Balance: ${calculations.balance} €`}</h3>
-                        <h3>{`Total Paid: ${calculations.paid} €`}</h3>
-                        <h3>{`Total Borrowed: ${calculations.borrowed} €`}</h3>
-                        <div className="Btns">
-                            <button className="detailsbtn">Add Expense</button>
-                        <button onClick={() => setShowAddGroup(true)} className="detailsbtn">Edit Group</button>
-                        <button onClick={deleteGroup} className="detailsbtn">Delete Group</button>
+                <>
+                    <div className="detailsWrap-inner">
+                        <div className="detailsPage">
+                            <div className="titleAndBtns">
+                                <h3>{group.name}</h3>
+                                <img className="detailsPageImg" src={group.groupPic} alt="" />
+                                <p>{`Description: ${group.description}`}</p>
+                                <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>
+                                <p>{`Date: ${group.createdAt.split("T")[0]}`}</p>
+                                <h3>{`Total Trip: ${calculations.total} €`}</h3>
+                                <h3>{`Total Balance: ${calculations.balance} €`}</h3>
+                                <h3>{`Total Paid: ${calculations.paid} €`}</h3>
+                                <h3>{`Total Borrowed: ${calculations.borrowed} €`}</h3>
+                                <div className="Btns">
+                                    <button className="detailsbtn">Add Expense</button>
+                                    <button onClick={() => setShowAddGroup(true)} className="detailsbtn">Edit Group</button>
+                                    <button onClick={deleteGroup} className="detailsbtn">Delete Group</button>
+                                </div>
+                            </div>
+
+                            {group.groupExpenses ? group.groupExpenses.map((expense) => {
+                                return (
+                                    <ExpenseCard key={expense._id} expense={expense} />
+                                )
+                            }) : <p>Loading expenses</p>}
                         </div>
                     </div>
-
-                    {group.groupExpenses ? group.groupExpenses.map((expense) => {
-                        return (
-                            <ExpenseCard key={expense._id} expense={expense} />
-                        )
-                    }) : <p>Loading expenses</p>}
-                </div>
+                    <div className="users-wrapper">
+                        {
+                            group.groupUsers.map((user) => {
+                                return (
+                                    <div key={user._id} className="profile-details">
+                                        <img className="user-profile-picture" src={user.profilePic} alt="" />
+                                        <div>
+                                            <p>{`${user.name} ${user.lastName}`}</p>
+                                            <p>{`${user.balance} €`}</p>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
+                </>
             }
         </div>
 

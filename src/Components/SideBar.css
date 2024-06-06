@@ -75,7 +75,6 @@
   color: #3c4043;
   cursor: pointer;
   font-family: arial, sans-serif;
-  font-size: 14px;
   height: 36px;
   line-height: 27px;
   width: 70%;
@@ -112,9 +111,7 @@
   .button-sidebar {
     font-size: 14px;
     margin: 12.5px 0px 12.5px 0px;
-
   }
-
 }
 
 @media (min-width: 1024px) {

@@ -217,23 +217,10 @@
 }
 
 @media (min-width: 1024px) {
-    /* .header {
-        height: 6vh;
+    .header {
+        padding-left: 40px;
+        padding-right: 40px;
     }
-
-    .logo {
-        height: 4vh;
-    }
-
-    .profile img {
-        height: 3.6vh;
-    }
-
-    .header-separator-center {
-        a {
-            height: 4vh;
-        }
-    } */
 
     .header-email {
         padding-left: 10px;

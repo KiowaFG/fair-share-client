@@ -1,7 +1,7 @@
 import { useContext, useState } from "react"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
-import closeIcon from "../assets/X.png"
+import closeIcon from "../assets/close.png"
 import Logo from "../assets/owl.png"
 import burger from "../assets/hamburger.png"
 import "./Header.css"

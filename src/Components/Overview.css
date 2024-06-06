@@ -10,12 +10,12 @@
 }
 
 .overTitle{
-    align-items: center;
-    justify-content: center;
+color: #233565;
 }
 
 .lineOverview{
     height: 3px;
     width: 80vw;
     background-color: #233565;
+    border-radius: 30%;
 }

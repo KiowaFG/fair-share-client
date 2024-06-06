@@ -36,13 +36,13 @@ In this documentation we will mainly focused about client details and functional
 - `MongoDB`
     - Non-relation database used to store the app information.
 - `React`
-    - JS front-end framework used to build the client app.
+    - JavaScript front-end framework used to build the client app.
 - `Vite`
     - Project generator for setting up the react application
 - `Javascript`
     - Main language used to develop this software.
 - `Axios`
-    - JS Library used to fetch data from back-end to client.
+    - JavaScript Library used to fetch data from back-end to client.
 - `Supabase`
     - Service used to allow users upload their own pictures.
 - `Deployment`

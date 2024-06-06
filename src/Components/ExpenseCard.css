@@ -4,6 +4,7 @@
     border: 1px solid black;
     border-radius: 20px;
     width: 100%;
+    max-width: 450px;
     padding: 1rem;
     margin-top: 1em;
 }
@@ -17,6 +18,12 @@
 .trash-bin-image {
     width: 20px;
     height: 20px;
+    margin-top: 5px;
+}
+.glassIcon-image{
+    width: 20px;
+    height: 20px;
+    margin-bottom: 5px;
 }
 
 .content-visible {
@@ -38,4 +45,21 @@
 .expense-picture{
     width: 100px;
     height: 100px;
+}
+
+.expenseCardImg{
+    display: flex;
+    flex-direction: column;
+}
+
+.column-div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.imgInDetails{
+    display: flex;
+    justify-content: space-around;
 }

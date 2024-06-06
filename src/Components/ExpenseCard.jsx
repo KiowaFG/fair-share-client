@@ -6,7 +6,8 @@ import { AuthContext } from "../context/auth.context";
 import trashBin from "../assets/images/bin.png";
 import glassIcon from "../assets/images/magnifying-glass.png";
 import editIcon from "../assets/images/edit.png";
-import "./ExpenseCard.css";
+import "./ExpenseCard.css"; 
+import closeBtn from"../assets/X.png"; 
 
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -164,20 +165,40 @@ function ExpenseCard({ expense, getGroup, groupId }) {
     return (
         <div className="expenseCard-wrapper">
             <div className="expenseItem">
-                {showInfo === "content-not-visible" && <p>{`Name: ${expense.name}`}</p>}
-                {showInfo === "content-not-visible" && <p>{showInfo === "content-not-visible" && `Price: ${expense.amount} €`}</p>}
-                {showInfo === "content-not-visible" && <p>{showInfo === "content-not-visible" && `Date: ${expense.createdAt.split("T")[0]}`}</p>}
-                {showInfo === "content-not-visible" && <img className="trash-bin-image" src={glassIcon} alt="" onClick={displayInfo} />}
-                {showInfo === "content-not-visible" && <img className="trash-bin-image" src={trashBin} alt="" onClick={handleDelete} />}
+                {showInfo === "content-not-visible" &&
+                    <div className="column-div">
+                        <p>Name:</p>
+                        <p>{expense.name}</p>
+                    </div>
+                }
+                {showInfo === "content-not-visible" &&
+                    <div className="column-div">
+                        <p>Price:</p>
+                        <p>{expense.amount} €</p>
+                    </div>
+                }
+                {showInfo === "content-not-visible" &&
+                    <div className="column-div">
+                        <p>Date:</p>
+                        <p>{expense.createdAt.split("T")[0]}</p>
+                    </div>
+                }
+                <div className="expenseCardImg">
+                    {showInfo === "content-not-visible" && <img className="glassIcon-image" src={glassIcon} alt="" onClick={displayInfo} />}
+                    {showInfo === "content-not-visible" && <img className="trash-bin-image" src={trashBin} alt="" onClick={handleDelete} />}
+                </div>
             </div>
             {expenseInfo &&
                 <div className={showInfo}>
-                    <img className="trash-bin-image" src={glassIcon} alt="" onClick={displayInfo} />
+                    <div className="imgInDetails">
+                    <img className="trash-bin-image" src={editMode ? closeBtn : glassIcon} alt="" onClick={displayInfo} />
                     <img className="trash-bin-image" src={editIcon} alt="" onClick={() => {
                         setEditMode(true);
                         getPayers();
                     }} />
                     <img className="trash-bin-image" src={trashBin} alt="" onClick={handleDelete} />
+                    </div>
+                    <div>
                     {editMode ? <input type="text" placeholder="Name of expense" name="name" onChange={handleChange} /> : <p>{`Name: ${expenseInfo.name}`}</p>}
                     {editMode ? <select name="concept" onChange={handleChange} >
                         <option value="---">--</option>
@@ -207,6 +228,7 @@ function ExpenseCard({ expense, getGroup, groupId }) {
                     }
                     {editMode ? <input type="file" onChange={uploadImage} /> : <img className="expense-picture" src={expenseInfo.expensePic} alt="" />}
                     {editMode && <img src={formData.expensePic} />}
+                    </div>
                     {editMode && <button onClick={handleSubmit}>Save</button>}
                     {editMode && <button onClick={() => setEditMode(false)}>Cancel</button>}
                     {editMessage && <p>{editMessage}</p>}

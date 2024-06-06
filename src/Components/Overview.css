@@ -79,7 +79,7 @@
     }
 }
 
-@media (min-width: 750px) {
+@media (min-width: 750px )and(max-width: 1024px) {
     .overviewWithoutTitle {
 
         flex-direction: row;
@@ -111,4 +111,26 @@
     }
 
 
+}
+
+@media (min-width: 1024px) {
+    .lineOverview {
+display: none;
+    }
+
+    .overview {
+        padding: 20px 30px 30px 30px;
+        border-radius: 20px;
+        width: 80%;
+        margin: 0px 5px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    
+    }
+
+    .overTitle{
+        margin-bottom: 18px;
+    }
 }

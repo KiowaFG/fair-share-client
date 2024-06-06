@@ -105,15 +105,17 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
                     <div className="detailsWrap-inner">
                         <div className="detailsPage">
                             <div className="titleAndBtns">
-                                {editMode ? <input value={name} onChange={handleName} placeholder="New Group Name" ></input> : <h3>{group.name}</h3>}
+                                {editMode ? <input value={name} onChange={handleName} placeholder="New Group Name" ></input> : <h1>{group.name}</h1>}
                                 <img className="detailsPageImg" src={group.groupPic} alt="" />
                                 {editMode ? <input value={description} onChange={handleDescription} placeholder="New Group Description"></input> : <p>{`Description: ${group.description}`}</p>}
                                 {editMode ? <Select options={selectUsers} onChange={handleSelectAdmin} placeholder="Select New Admin" /> : <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>}
                                 <p>{`Date: ${group.createdAt.split("T")[0]}`}</p>
-                                <h3>{`Total Trip: ${calculations.total} €`}</h3>
-                                <h3>{`Total Balance: ${calculations.balance} €`}</h3>
-                                <h3>{`Total Paid: ${calculations.paid} €`}</h3>
-                                <h3>{`Total Borrowed: ${calculations.borrowed} €`}</h3>
+                                <div className="detailsMetricsWrap">
+                                <p className="detailsMetric">{`Total Trip: ${calculations.total} €`}</p>
+                                <p className="detailsMetric">{`Total Balance: ${calculations.balance} €`}</p>
+                                <p className="detailsMetric">{`Total Paid: ${calculations.paid} €`}</p>
+                                <p className="detailsMetric">{`Total Borrowed: ${calculations.borrowed} €`}</p>
+                                </div>
                                 <div className="Btns">
                                     <button onClick={() => setShowAddExpense(true)} className="detailsbtn">Add Expense</button>
                                     <button onClick={handleEditMode} className="detailsbtn">{editMode ? "Save" : "Edit Group"}</button>
@@ -130,10 +132,15 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
                             }) : <p>Loading expenses</p>}
                         </div>
                     </div>
+                    <div className="detailsDivision"></div>
                     <div className="users-wrapper">
+                    <h2 className="group-members">Group Members</h2>
                         {
+                            
                             group.groupUsers.map((user) => {
                                 return (
+                                    <>
+                                   
                                     <div key={user._id} className="profile-details">
                                         <img className="user-profile-picture" src={user.profilePic} alt="" />
                                         <div>
@@ -141,6 +148,7 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
                                             <p>{`${user.balance} €`}</p>
                                         </div>
                                     </div>
+                                    </>
                                 )
                             })
                         }

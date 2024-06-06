@@ -3,7 +3,6 @@
 .footerMid-container {
   height: 100%;
   width: 50vw;
-
   display: flex;
   flex-direction: row;
   justify-content: space-between;

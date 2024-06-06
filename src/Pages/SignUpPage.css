@@ -1,34 +1,26 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;800&family=Roboto&family=Satisfy&display=swap");
-.sign-container {
-  margin: 0;
-  padding: 0;
-  width: 27vw;
-  height: 75vh;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-  font-weight: 400;
-  font-style: normal;
-  background-color: #da761ffb;
-  border-radius: 30px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: 35%;
-  margin-top: 8vh;
-  margin-bottom: 10vh;
-}
+
+
+ .sign-container {
+position: relative;
+
+}  
 .signup-container {
+  position: absolute;
+top: 50%;
+left: 50%;
+transform: translateX(-50%) translateY(-60%);
   display: flex;
   flex-direction: column;
   margin: auto;
   margin-top: 50px;
   width: 25vw;
-  height: 65vh;
-  background-color: #fff;
+  height: 70vh;
   padding-bottom: 15px;
   border-radius: 30px;
+  border: 10px solid #233565 ;
 }
+
 
 .headerSP {
   display: flex;
@@ -36,14 +28,15 @@
   align-items: center;
 }
 .sp-text-signup {
-  color: rgb(89, 27, 190);
+  color:#233565 ;
   font-size: 20px;
   font-weight: 600;
+  padding-top: 30px;
 }
 .underline-sp {
   width: 7vw;
   height: 0.65vh;
-  background-color: rgb(89, 27, 190);
+  background-color:#233565 ;
   border-radius: 4px;
 }
 .sp-form {
@@ -71,7 +64,7 @@
 }
 .sp-input input {
   height: 4vh;
-  width: 20vw;
+  width: 100vw;
   background: transparent;
   border: none;
   outline: none;
@@ -83,12 +76,13 @@
   justify-content: center;
   gap: 10px;
   margin: 35px;
+  
 }
 .sp-btn-submit {
   width: 40vw;
   height: 6vh;
   color: #fff;
-  background-color: rgb(89, 27, 190);
+  background-color:#233565 ;
   border-radius: 50px;
   font-size: 16px;
   font-weight: 700;
@@ -103,12 +97,12 @@
   font-weight: 600;
   font-size: 12px;
   margin-left: 2vw;
-  color: #6c14c9;
+  color: #233565 ;
 }
 .sp-loglink:hover {
   text-decoration: underline;
 }
-@media(min-width:375px){
+@media(min-width:100px){
 
     .sign-container{
         width: 70vw;
@@ -120,13 +114,15 @@
         width:65vw;
      }
      .sp-input{
-        width: 45vw;
+        width: 50vw;
      }
      .sp-input img{
-        width: 3vw;
+        width: 4vw;
+        margin: 0 10px;
+        
      }
      .sp-input input{
-        width: 55vw;
+        width: 100vw;
         font-size: 12px;
      }
      .sp-btn-submit{
@@ -135,14 +131,14 @@
 
 
  }
- @media (min-width: 1024px) {
+ @media (min-width: 750px) {
     .sign-container {
         width: 27vw;
         margin-left: 35%;
     }
 
     .signup-container {
-        width: 25vw;
+        width: 30vw;
     }
 
     .sp-input {
@@ -159,5 +155,33 @@
 
     .sp-btn-submit {
         width: 40vw;
+        
     }
+}
+
+@media (min-width: 1024px) {
+  .sign-container {
+      width: 27vw;
+      margin-left: 35%;
+  }
+
+  .signup-container {
+      width: 30vw;
+  }
+
+  .sp-input {
+      width: 22vw;
+  }
+
+  .sp-input img {
+      width: 1.5vw;
+  }
+
+  .sp-input input {
+      width: 20vw;
+  }
+
+  .sp-btn-submit {
+      width: 40vw;
+  }
 }

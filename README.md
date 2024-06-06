@@ -45,7 +45,7 @@ In this documentation we will mainly focused about client details and functional
     - JS Library used to fetch data from back-end to client.
 - `Supabase`
     - Service used to allow users upload their own pictures.
-- `Deloplyment`
+- `Deployment`
     - [Netlify](https://app.netlify.com/) -- Front-end deployment
 
 ## Version History

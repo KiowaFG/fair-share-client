@@ -14,10 +14,12 @@ function SideBar({ hideSidebar, setShowAddExpense, setShowAddGroup, handleHideSi
                 handleHideSidebar();
             }}><Link to={"/home"}> Home Page</Link></button>
             <button className="button-sidebar" onClick={() => {
+                setShowAddGroup(false);
                 setShowAddExpense(true);
                 handleHideSidebar();
             }}>Add Expense</button>
             <button className="button-sidebar" onClick={() => {
+                setShowAddExpense(false);
                 setShowAddGroup(true);
                 handleHideSidebar();
             }}>Add Group</button>

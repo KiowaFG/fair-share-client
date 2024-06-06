@@ -46,7 +46,7 @@ function GroupView() {
                                 <h3>{group.name}</h3>
                                 <div className="group-details">
                                     <div className="center-info">
-                                        <h5>Trip Balance:</h5>
+                                        <h5>Balance:</h5>
                                         <p>{`${group.balance} €`}</p>
                                     </div>
                                     <div className="center-info">

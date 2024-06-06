@@ -2,7 +2,7 @@
     display: flex;
     flex-direction: row;
     align-items: center;
-    border: solid 1px wheat;
+    border: solid 2px #233565;
     border-radius: 10px;
     justify-content: space-around;
     cursor: pointer;
@@ -15,6 +15,7 @@
     width: 5em;
     height: 5em;
     border-radius: 50%;
+    margin: 10px;
 }
 
 .group-info{
@@ -34,4 +35,12 @@
 .centr-info{
     display: flex;
     align-items: center;
+}
+
+
+@media (min-width: 750px) {
+
+
+
+
 }

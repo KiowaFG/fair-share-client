@@ -4,7 +4,7 @@ import "./Expenses.css";
 function Expenses(){
     return (
         <div className="expenses">
-            <h1>Expense Group List</h1>
+            <h1 className="expenseTitle">Expense Group List</h1>
             <div className="expensesGroupCard">
                 <GroupView/>
             </div>

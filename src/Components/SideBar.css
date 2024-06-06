@@ -1,63 +1,134 @@
-.sideBar{
-    width: 30vw;
-    height: 70vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-color: aqua;
-    z-index: 2;
-    left: 0px;
-    animation-name: slidein;
-    animation-duration: 500ms;
-    text-decoration: none;
-    align-items: center;
-    position: absolute;
-    
+.sideBar {
+  width: 35vw;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: start;
+  background-color: #8BD8BC;
+  z-index: 2;
+  left: 0px;
+  animation-name: slidein;
+  animation-duration: 500ms;
+  text-decoration: none;
+  align-items: center;
+  position: absolute;
+  padding-bottom: 50px;
+  box-shadow: 2px 4px 5px 0px rgba(191, 191, 191, 0.75);
 }
-.slideout{
-    animation-name: slideout;
-    animation-duration: 500ms;   
+
+.slideout {
+  animation-name: slideout;
+  animation-duration: 500ms;
 }
 
 
 @keyframes slideout {
-    from {
-      transform: translateX(0%);
-    }
-  
-    to {
-      transform: translateX(-100%);
-    }
+  from {
+    transform: translateX(0%);
   }
+
+  to {
+    transform: translateX(-100%);
+  }
+}
 
 
 @keyframes slidein {
-    from {
-      transform: translateX(-100%);
-    }
-  
-    to {
-      transform: translateX(0%);
-    }
+  from {
+    transform: translateX(-100%);
   }
 
-  @keyframes slidedown {
-    from {
-      transform:translateY(-100%);
-    }
-  
-    to {
-      transform: translateY(0%);
-    }
+  to {
+    transform: translateX(0%);
+  }
+}
+
+@keyframes slidedown {
+  from {
+    transform: translateY(-100%);
   }
 
-.sideBar button{
-    padding: 10px;
-    margin: 30px;
+  to {
+    transform: translateY(0%);
+  }
 }
 
-.closeBtn{
-    width: 20px;
+/* .sideBar button {
+  padding: 5px;
+  margin: 5px 0px 5px 0px;
+  width: 80%;
+} */
+
+.sideBar h3 {
+  color: white;
+  margin: 20px 0px 20px 0px;
 }
 
+.closeBtn {
+  width: 20px;
+}
+
+.button-sidebar {
+  background-color: #f8f9fa;
+  border: 1px solid #62b899;
+  border-radius: 4px;
+  color: #3c4043;
+  cursor: pointer;
+  font-family: arial, sans-serif;
+  font-size: 14px;
+  height: 36px;
+  line-height: 27px;
+  width: 70%;
+  margin: 5px 0px 5px 0px;
+  padding: 5px;
+  text-align: center;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  white-space: pre;
+  font-size: 12px;
+}
+
+.button-sidebar:hover {
+  border-color: #27604c;
+  box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+  color: #3c4043;
+}
+
+.button-sidebar:focus {
+  border-color: #27604c;
+  outline: none;
+}
+
+@media (min-width: 750px) and (max-width: 1024px) {
+  .sideBar{
+    width: 25vw;
+  }
+
+  .sideBar h3{
+    font-size: 20px;
+  }
+
+  .button-sidebar {
+    font-size: 14px;
+    margin: 12.5px 0px 12.5px 0px;
+
+  }
+
+}
+
+@media (min-width: 1024px) {
+  .sideBar{
+    width: 20vw;
+  }
+
+  .sideBar h3{
+    font-size: 24px;
+  }
+
+  .button-sidebar {
+    font-size: 16px;
+    margin: 20px 0px 20px 0px;
+
+  }
+}

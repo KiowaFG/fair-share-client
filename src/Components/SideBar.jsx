@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import "./SideBar.css"
 import { Link } from "react-router-dom"
 import { AuthContext } from "../context/auth.context";
+import "./SideBar.css"
 
 function SideBar({ hideSidebar, setShowAddExpense, setShowAddGroup, handleHideSidebar }) {
 
@@ -9,21 +9,22 @@ function SideBar({ hideSidebar, setShowAddExpense, setShowAddGroup, handleHideSi
 
     return (
         <div className={hideSidebar ? "sideBar slideout" : "sideBar"}>
-            <Link to={"/home"}> <button onClick={() => {
+            <h3>Fair Share</h3>
+            <button className="button-sidebar" onClick={() => {
                 handleHideSidebar();
-            }}>Home Page</button></Link>
-            <button onClick={() => {
+            }}><Link to={"/home"}> Home Page</Link></button>
+            <button className="button-sidebar" onClick={() => {
                 setShowAddExpense(true);
                 handleHideSidebar();
             }}>Add Expense</button>
-            <button onClick={() => {
+            <button className="button-sidebar" onClick={() => {
                 setShowAddGroup(true);
                 handleHideSidebar();
             }}>Add Group</button>
-            <Link to={"/user"}><button onClick={() => {
+            <button className="button-sidebar" onClick={() => {
                 handleHideSidebar();
-            }}>User Profile</button></Link>
-            <button onClick={() => {
+            }}><Link to={"/user"}>User Profile</Link></button>
+            <button className="button-sidebar" onClick={() => {
                 logOut();
                 handleHideSidebar();
             }}>Log Out</button>

@@ -9,6 +9,7 @@ import PhoneNumber from "../assets/images/phone-icon.svg";
 import emailIcon from "../assets/images/email-icon.svg";
 import paswordIcon from "../assets/images/password-icon.svg";
 import passwordConfirmIcon from "../assets/images/password-confirm.svg";
+import owl from "../assets/owl.png"
 
 const API_URL = "http://localhost:5005";
 
@@ -67,7 +68,10 @@ function SignUpPage(props) {
     <div className="sign-container">
       <div className="signup-container">
         <div className="headerSP">
-          <div className="sp-text-signup">Sing Up</div>
+          <div className="logoAndTitle">
+            {/* <img className=" owlSignUp" src={owl} alt="" /> */}
+            <div className="sp-text-signup">  Sign Up</div>
+          </div>
           <div className="underline-sp"></div>
         </div>
         <form className="sp-form" onSubmit={handleSignUpSubmit}>

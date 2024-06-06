@@ -60,11 +60,12 @@ function Overview() {
     };
 
     return (
+        <>
         <div className="overview">
-            <h1>Overview</h1>
-            <h3>Total Balance: {`${calculations.balance} €`}</h3>
-            <h3>Total Paid: {`${calculations.paid} €`}</h3>
-            <h3>Total Borrowed: {`${calculations.borrowed} €`}</h3>
+            <h1 className="overTitle">Overview</h1>
+            <p> <strong>Total Balance: </strong>{`${calculations.balance} €`}</p>
+            <p> <strong>Total Paid:</strong> {`${calculations.paid} €`}</p>
+            <p> <strong>Total Borrowed:</strong> {`${calculations.borrowed} €`}</p>
 
             <PieChart width={250} height={200}>
                 <Pie
@@ -82,7 +83,9 @@ function Overview() {
                     ))}
                 </Pie>
             </PieChart>
+            <div className="lineOverview"></div>
         </div>
+        </>
     )
 }
 export default Overview

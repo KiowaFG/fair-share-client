@@ -1,15 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;800&family=Roboto&family=Satisfy&display=swap");
 
+.bodyView {
+  min-width: 90vh;
+}
 
- .sign-container {
-position: relative;
+.sign-container {
+  position: relative;
+}
 
-}  
 .signup-container {
   position: absolute;
-top: 50%;
-left: 50%;
-transform: translateX(-50%) translateY(-60%);
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-60%);
   display: flex;
   flex-direction: column;
   margin: auto;
@@ -18,7 +21,7 @@ transform: translateX(-50%) translateY(-60%);
   height: 70vh;
   padding-bottom: 15px;
   border-radius: 30px;
-  border: 10px solid #233565 ;
+  border: 10px solid #233565;
 }
 
 
@@ -27,28 +30,33 @@ transform: translateX(-50%) translateY(-60%);
   flex-direction: column;
   align-items: center;
 }
+
 .sp-text-signup {
-  color:#233565 ;
+  color: #233565;
   font-size: 20px;
   font-weight: 600;
   padding-top: 30px;
 }
+
 .underline-sp {
   width: 7vw;
   height: 0.65vh;
-  background-color:#233565 ;
+  background-color: #233565;
   border-radius: 4px;
 }
+
 .sp-form {
   margin: 0;
   height: 49vh;
 }
+
 .sp-inputs {
   margin-top: 27px;
   display: flex;
   flex-direction: column;
   gap: 5px;
 }
+
 .sp-input {
   display: flex;
   align-items: center;
@@ -58,10 +66,12 @@ transform: translateX(-50%) translateY(-60%);
   background: #eaeaea;
   border-radius: 6px;
 }
+
 .sp-input img {
   width: 1.5vw;
   margin: 0px 15px;
 }
+
 .sp-input input {
   height: 4vh;
   width: 100vw;
@@ -71,117 +81,129 @@ transform: translateX(-50%) translateY(-60%);
   color: #797979;
   font-size: 14px;
 }
+
 .sp-btn-submit-container {
   display: flex;
   justify-content: center;
   gap: 10px;
   margin: 35px;
-  
+
 }
+
 .sp-btn-submit {
   width: 40vw;
   height: 6vh;
   color: #fff;
-  background-color:#233565 ;
+  background-color: #233565;
   border-radius: 50px;
   font-size: 16px;
   font-weight: 700;
   cursor: pointer;
 }
+
 .sp-haveaccount {
   font-family: "Poppins", sans-serif;
   font-size: 12px;
   margin-left: 2vw;
 }
+
 .sp-loglink {
   font-weight: 600;
   font-size: 12px;
   margin-left: 2vw;
-  color: #233565 ;
+  color: #233565;
 }
+
 .sp-loglink:hover {
   text-decoration: underline;
 }
-@media(min-width:100px){
 
-    .sign-container{
-        width: 70vw;
-        margin-left: 15%;
-        border-bottom: 10vh;
+@media(min-width:100px) {
 
-     }
-     .signup-container{
-        width:65vw;
-     }
-     .sp-input{
-        width: 50vw;
-     }
-     .sp-input img{
-        width: 4vw;
-        margin: 0 10px;
-        
-     }
-     .sp-input input{
-        width: 100vw;
-        font-size: 12px;
-     }
-     .sp-btn-submit{
-        width: 60vw;
-     }
+  .sign-container {
+    width: 70vw;
+    margin-left: 15%;
+    border-bottom: 10vh;
+
+  }
+
+  .signup-container {
+    width: 65vw;
+  }
+
+  .sp-input {
+    width: 50vw;
+  }
+
+  .sp-input img {
+    width: 4vw;
+    margin: 0 10px;
+
+  }
+
+  .sp-input input {
+    width: 100vw;
+    font-size: 12px;
+  }
+
+  .sp-btn-submit {
+    width: 60vw;
+  }
 
 
- }
- @media (min-width: 750px) {
-    .sign-container {
-        width: 27vw;
-        margin-left: 35%;
-    }
+}
 
-    .signup-container {
-        width: 30vw;
-    }
+@media (min-width: 750px) {
+  .sign-container {
+    width: 27vw;
+    margin-left: 35%;
+  }
 
-    .sp-input {
-        width: 22vw;
-    }
+  .signup-container {
+    width: 30vw;
+  }
 
-    .sp-input img {
-        width: 1.5vw;
-    }
+  .sp-input {
+    width: 22vw;
+  }
 
-    .sp-input input {
-        width: 20vw;
-    }
+  .sp-input img {
+    width: 1.5vw;
+  }
 
-    .sp-btn-submit {
-        width: 40vw;
-        
-    }
+  .sp-input input {
+    width: 20vw;
+  }
+
+  .sp-btn-submit {
+    width: 40vw;
+
+  }
 }
 
 @media (min-width: 1024px) {
   .sign-container {
-      width: 27vw;
-      margin-left: 35%;
+    width: 27vw;
+    margin-left: 35%;
   }
 
   .signup-container {
-      width: 30vw;
+    width: 30vw;
   }
 
   .sp-input {
-      width: 22vw;
+    width: 22vw;
   }
 
   .sp-input img {
-      width: 1.5vw;
+    width: 1.5vw;
   }
 
   .sp-input input {
-      width: 20vw;
+    width: 20vw;
   }
 
   .sp-btn-submit {
-      width: 40vw;
+    width: 40vw;
   }
 }

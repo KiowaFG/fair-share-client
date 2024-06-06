@@ -1,17 +1,245 @@
-.expenseForm{
+.message-red{
+    padding-top: 10px;
+    color: rgb(237, 89, 89)
+}
+
+.message-green{
+    padding-top: 10px;
+    color: rgb(28, 72, 51)
+}
+
+.expenseForm {
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 10px;
 
-    
+    label {
+        width: 100%;
+        padding-bottom: 5px;
+    }
+
+    form {
+        width: 100%;
+        height: 100%;
+    }
+
+    input {
+        width: 100%;
+        font-size: 12px;
+        height: 30px;
+        margin-bottom: 10px;
+        vertical-align: middle;
+        padding-left: 5px;
+        color: rgb(134, 132, 132);
+    }
+
+    select {
+        width: 100%;
+        font-size: 12px;
+        height: 30px;
+        margin-bottom: 10px;
+        color: rgb(134, 132, 132);
+    }
 }
 
-.formWraper{
-    background-color:grey;
-    position: absolute;
-    z-index: 2;
-    top:50%;
+.formWraper {
+    background-color: #8BD8BC;
+    border: 1px solid rgb(195, 195, 195);
+    z-index: 3;
+    position: fixed;
+    height: 98%;
+    width: 78vw;
+    top: 50%;
     left: 50%;
     transform: translateX(-50%) translateY(-50%);
 }
+
+.formWraperWraper {
+    background-color: #ffffff;
+    border: 1px solid rgb(189, 189, 189);
+    z-index: 2;
+    position: fixed;
+    height: 84%;
+    width: 80vw;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    box-shadow: 2px 4px 5px 0px rgba(191, 191, 191, 0.75);
+    font-size: 12px;
+}
+
+.column-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.row-form1{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    width: 100%;
+}
+
+.row-form2{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: start;
+    width: 100%;
+}
+
+.button-form {
+    background-color: #f8f9fa;
+    border: 1px solid #62b899;
+    border-radius: 4px;
+    color: #3c4043;
+    cursor: pointer;
+    font-family: arial, sans-serif;
+    height: 36px;
+    line-height: 27px;
+    width: 40%;
+    text-align: center;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: pre;
+    font-size: 12px;
+  }
+  
+  .button-form:hover {
+    border-color: #27604c;
+    box-shadow: rgba(0, 0, 0, .1) 0 1px 1px;
+    color: #3c4043;
+  }
+  
+  .button-form:focus {
+    border-color: #27604c;
+    outline: none;
+  }
+
+  .expense-form-picture{
+    height: 30px;
+  }
+
+.css-13cymwt-control {
+    height: 30px;
+    margin-bottom: 10px;
+    overflow-y: scroll;
+    color: rgb(134, 132, 132);
+}
+
+.css-13cymwt-control:focus {
+    height: 30px;
+    color: rgb(134, 132, 132);
+}
+
+.css-4xgw5l-IndicatorsContainer2 {
+    height: 30px;
+    color: rgb(134, 132, 132);
+}
+
+.css-4xgw5l-IndicatorsContainer2:focus {
+    height: 30px;
+    color: rgb(134, 132, 132);
+}
+
+.css-1i837h3-ValueContainer2 {
+    padding: 0px;
+    color: rgb(134, 132, 132);
+}
+
+.css-art2ul-ValueContainer2 {
+    padding: 0px;
+    overflow-y: scroll;
+    color: rgb(134, 132, 132);
+}
+
+@media (min-width: 750px) and (max-width: 1024px) {
+    .formWraper {
+        background-color: #8BD8BC;
+        border: 1px solid rgb(195, 195, 195);
+        z-index: 3;
+        position: fixed;
+        height: 98%;
+        width: 48vw;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+    
+    .formWraperWraper {
+        background-color: #ffffff;
+        border: 1px solid rgb(189, 189, 189);
+        z-index: 2;
+        position: fixed;
+        height: 78%;
+        width: 50vw;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        box-shadow: 2px 4px 5px 0px rgba(191, 191, 191, 0.75);
+        font-size: 14px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .formWraper {
+        background-color: #8BD8BC;
+        border: 1px solid rgb(195, 195, 195);
+        z-index: 3;
+        position: fixed;
+        height: 98%;
+        width: 33vw;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+    }
+
+    .formWraperWraper {
+        background-color: #ffffff;
+        border: 1px solid rgb(189, 189, 189);
+        z-index: 2;
+        position: fixed;
+        height: 80%;
+        width: 35vw;
+        top: 50%;
+        left: 50%;
+        transform: translateX(-50%) translateY(-50%);
+        box-shadow: 2px 4px 5px 0px rgba(191, 191, 191, 0.75);
+        font-size: 16px;
+    }
+
+    .row-form1{
+        display: flex;
+        flex-direction: column;
+    }
+
+    .expenseForm{
+        input {
+            width: 100%;
+            font-size: 16px;
+            height: 36px;
+            margin-bottom: 10px;
+
+        }
+    
+        select {
+            width: 100%;
+            font-size: 16px;
+            height: 36px;
+            margin-bottom: 10px;
+        }
+
+        button {
+            font-size: 16px;
+        }
+    }
+
+    .expense-form-picture{
+        height: 100px;
+        margin-bottom: 20px;
+    }
+  }

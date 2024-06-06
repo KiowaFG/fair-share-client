@@ -73,11 +73,14 @@ function AddGroup({ setShowAddGroup }) {
                 { headers: { Authorization: `Bearer ${storedToken}` } }
             )
                 .then((response) => {
-                    navigate(`/details/${response.data._id}`)
+                    setErrorMessage("Group added!");
+                    setTimeout(() => {
+                        setErrorMessage(null);
+                        setShowAddGroup(false);
+                        navigate(`/details/${response.data._id}`)
+                    }, 2000);
                 })
                 .catch((error) => { console.log("there has been an error") })
-
-            setShowAddGroup(false);
         };
     };
 
@@ -109,44 +112,52 @@ function AddGroup({ setShowAddGroup }) {
     }, []);
 
     return (
-        <div className='formWrap'>
-            <img onClick={() => setShowAddGroup(false)} className='closeBtn' src={closeBtn} alt="" />
-            <div className='groupFrom'>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Name:</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label>Description:</label>
-                        <textarea
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange} />
-                    </div>
-                    <div>
-                        <label>Users:</label>
-                        <Select options={selectUsers} name="users" onChange={handleChangeUsers} isMulti />
-                    </div>
-                    <div>
-                        <label> Image:</label>
-                        <input
-                            type="file"
-                            name="image"
-                            value={formData.image}
-                            onChange={uploadImage}
-                        />
-                        {formData.groupPic && <img className='group-picture' src={formData.groupPic}></img>}
-                    </div>
-                    <button type="submit">Submit</button>
-                    {errorMessage && <p>{errorMessage}</p>}
-                </form>
+        <div className='formWraperWraper-group'>
+            <div className='formWraper-group'>
+                {/* <img onClick={() => setShowAddGroup(false)} className='closeBtn' src={closeBtn} alt="" /> */}
+                <div className='groupFrom'>
+                    <form onSubmit={handleSubmit}>
+                        <div className='column-form'>
+                            <label>Name:</label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange} />
+                        </div>
+                        <div className='column-form'>
+                            <label>Description:</label>
+                            <input
+                                type="text"
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange} />
+                        </div>
+                        <div className='column-form'>
+                            <label>Users:</label>
+                            <Select options={selectUsers} name="users" onChange={handleChangeUsers} isMulti />
+                        </div>
+                        <div className='column-form'>
+                            <label> Image:</label>
+                            <div className='row-form1'>
+                                <input
+                                    type="file"
+                                    name="image"
+                                    value={formData.image}
+                                    onChange={uploadImage}
+                                />
+                                {formData.groupPic && <img className='group-form-picture' src={formData.groupPic}></img>}
+                            </div>
+                        </div>
+                        <div className='row-form2'>
+                            <button className='button-form' type="submit">Submit</button>
+                            <button className='button-form' onClick={() => setShowAddGroup(false)} type="submit">Cancel</button>
+                        </div>
+                        {errorMessage && <p className={errorMessage === "Group added!" ? "message-green" : "message-red"}>{errorMessage}</p>}
+                    </form>
+                </div >
             </div >
-        </div >
+        </div>
     );
 }
 

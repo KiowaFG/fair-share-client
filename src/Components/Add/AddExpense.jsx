@@ -3,10 +3,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import supabase from '../../utils/config';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
-import closeBtn from "../../assets/X.png"
 import "./AddExpense.css"
 
 const API_URL = import.meta.env.VITE_API_URL
@@ -62,7 +61,7 @@ function AddExpense({ setShowAddExpense, getGroup, handleHideSidebar }) {
                     )
                         .then((updatedGroup) => {
                             getGroup(groupId);
-                            setErrorMessage("Expense added");
+                            setErrorMessage("Expense added!");
                             setTimeout(() => {
                                 setErrorMessage(null);
                                 setShowAddExpense(false);
@@ -134,71 +133,78 @@ function AddExpense({ setShowAddExpense, getGroup, handleHideSidebar }) {
     }, []);
 
     return (
-        <div className='formWraper'>
-            <img onClick={() => setShowAddExpense(false)} className='closeBtn' src={closeBtn} alt="" />
-            <div className='expenseForm'>
-                <form onSubmit={handleSubmit}>
-                    <div>
-                        <label>Name:</label>
-                        <input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Description:</label>
-                        <input
-                            type="text"
-                            name="description"
-                            value={formData.description}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Concept:</label>
-                        <select name="concept" onChange={handleChange} value={formData.concept}>
-                            <option value="---">--</option>
-                            <option value="Food">Food</option>
-                            <option value="Savings">Savings</option>
-                            <option value="Transportation">Transportation</option>
-                            <option value="Personal Care">Personal Care</option>
-                            <option value="Entertainment">Entertainment</option>
-                            <option value="Healthcare">Healthcare</option>
-                            <option value="Housing">Housing</option>
-                        </select>
-                    </div>
-                    <div>
-                        <label>Amount (€):</label>
-                        <input
-                            type="number"
-                            name="amount"
-                            value={formData.amount}
-                            onChange={handleChange}
-                        />
-                    </div>
-                    <div>
-                        <label>Group:</label>
-                        <Select options={selectGroup} name="group" onChange={handleSelectGroup} />
-                    </div>
-                    <div>
-                        <label>Expense Payers:</label>
-                        <Select options={selectPayers} name="expenseUsers" onChange={handleSelectPayer} isMulti />
-                    </div>
-                    <div>
-                        <label> Image:</label>
-                        <input
-                            type="file"
-                            name="image"
-                            value={formData.image}
-                            onChange={uploadImage}
-                        />
-                        {formData.groupPic && <img className='group-picture' src={formData.groupPic}></img>}
-                    </div>
-                    <button type="submit">Submit</button>
-                    {errorMessage && <p>{errorMessage}</p>}
-                </form>
+        <div className='formWraperWraper'>
+            <div className='formWraper'>
+                {/* <img onClick={() => setShowAddExpense(false)} className='closeBtn' src={closeBtn} alt="" /> */}
+                <div className='expenseForm'>
+                    <form onSubmit={handleSubmit}>
+                        <div className='column-form'>
+                            <label>Name:</label>
+                            <input
+                                type="text"
+                                name="name"
+                                value={formData.name}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className='column-form'>
+                            <label>Description:</label>
+                            <input
+                                type="text"
+                                name="description"
+                                value={formData.description}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className='column-form'>
+                            <label>Concept:</label>
+                            <select name="concept" onChange={handleChange} value={formData.concept}>
+                                <option value="---">--</option>
+                                <option value="Food">Food</option>
+                                <option value="Savings">Savings</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Personal Care">Personal Care</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Housing">Housing</option>
+                            </select>
+                        </div>
+                        <div className='column-form'>
+                            <label>Amount (€):</label>
+                            <input
+                                type="number"
+                                name="amount"
+                                value={formData.amount}
+                                onChange={handleChange}
+                            />
+                        </div>
+                        <div className='column-form'>
+                            <label>Group:</label>
+                            <Select options={selectGroup} name="group" onChange={handleSelectGroup} />
+                        </div>
+                        <div className='column-form'>
+                            <label>Expense Payers:</label>
+                            <Select options={selectPayers} name="expenseUsers" onChange={handleSelectPayer} isMulti />
+                        </div>
+                        <div className='column-form'>
+                            <label> Image:</label>
+                            <div className='row-form1'>
+                                <input
+                                    type="file"
+                                    name="image"
+                                    value={formData.image}
+                                    onChange={uploadImage}
+                                />
+                                {formData.expensePic && <img className='expense-form-picture' src={formData.expensePic}></img>}
+                            </div>
+                        </div>
+                        <div className='row-form2'>
+                            <button className='button-form' type="submit">Submit</button>
+                            <button className="button-form" onClick={() => setShowAddExpense(false)}>Cancel</button>
+                        </div>
+                        {errorMessage && <p className={errorMessage === "Expense added!" ? "message-green" : "message-red"}>{errorMessage}</p>}
+                    </form>
+                </div>
             </div>
         </div>
     )

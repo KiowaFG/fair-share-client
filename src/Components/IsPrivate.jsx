@@ -2,7 +2,7 @@ import { useContext } from "react";
 import { AuthContext } from "../context/auth.context";
 import { Navigate } from "react-router-dom";
 
-function IsAnon({ children }) {
+function IsPrivate({ children }) {
 
     const { isLoggedIn, isLoading } = useContext(AuthContext);
 
@@ -18,4 +18,4 @@ function IsAnon({ children }) {
     }
 }
 
-export default IsAnon;
+export default IsPrivate;

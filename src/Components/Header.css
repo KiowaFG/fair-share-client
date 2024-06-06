@@ -1,32 +1,35 @@
 .header {
-    background-color: red;
+    background-color: #8BD8BC;
     width: 100vw;
-    height: 8vh;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    height: 10vh;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .logo {
-    width: 8vh;
-    margin-left: 50px;
+    height: 6vh;
 }
 
 .profile {
     display: flex;
     flex-direction: row;
     align-items: center;
-    height: 100%;
+    height: 8vh;
     cursor: pointer;
     /* position: fixed; */
 }
 
 .profile img {
-    width: 35px;
-    height: 35px;
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
+    position: absolute;
+    top: 50%;
+    right: 50%;
+    transform: translate(50%, -50%)
 }
 
 .burger {
@@ -52,5 +55,189 @@
 
     ul {
         list-style-type: none;
+    }
+}
+
+.header-separator-center {
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+        height: 6vh;
+    }
+}
+
+.header-separator-left {
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: start;
+
+    a {
+        height: 6vh;
+    }
+}
+
+.header-separator-right {
+    height: 100%;
+    width: 33%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    a {
+        height: 6vh;
+    }
+}
+
+.profile-background {
+    height: 55px;
+    background-color: white;
+    border-radius: 50%;
+    width: 55px;
+    position: relative;
+}
+
+@media (max-width: 750px) {
+    .header {
+        background-color: #8BD8BC;
+        width: 100vw;
+        height: 10vh;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .header-email {
+        display: none;
+    }
+
+    .logo {
+        height: 6vh;
+    }
+
+    .profile {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        height: 100%;
+        cursor: pointer;
+        /* position: fixed; */
+    }
+
+    .profile img {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+    }
+
+    .profile-background {
+        height: 43px;
+        width: 43px;
+    }
+
+    .burger {
+        width: 30px;
+    }
+
+    .profile-wrapper {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        height: 100%;
+        position: relative;
+    }
+
+    .profile-menu {
+        position: absolute;
+        width: fit-content;
+        bottom: -30px;
+        left: 0px;
+        background-color: white;
+        border: 1px solid black;
+        width: 100px;
+
+        ul {
+            list-style-type: none;
+        }
+    }
+
+    .header-separator-center {
+        height: 100%;
+        width: 33%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        a {
+            height: 6vh;
+        }
+    }
+
+    .header-separator-left {
+        height: 100%;
+        width: 33%;
+        display: flex;
+        align-items: center;
+        justify-content: start;
+
+        a {
+            height: 6vh;
+        }
+    }
+
+    .header-separator-right {
+        height: 100%;
+        width: 33%;
+        display: flex;
+        align-items: center;
+        justify-content: end;
+
+        a {
+            height: 6vh;
+        }
+    }
+}
+
+@media (min-width: 750px) and (max-width: 1024px) {
+    /* .header {
+        height: 8vh;
+    } */
+
+    .header-email {
+        padding-left: 10px;
+        display: block;
+        color: white;
+    }
+
+}
+
+@media (min-width: 1024px) {
+    /* .header {
+        height: 6vh;
+    }
+
+    .logo {
+        height: 4vh;
+    }
+
+    .profile img {
+        height: 3.6vh;
+    }
+
+    .header-separator-center {
+        a {
+            height: 4vh;
+        }
+    } */
+
+    .header-email {
+        padding-left: 10px;
+        display: block;
+        color: white;
     }
 }

@@ -12,8 +12,8 @@ import UserProfilePage from "./Pages/UserProfilePage";
 import LoginPage from "./Pages/LoginPage";
 import AddExpense from "./Components/Add/AddExpense";
 import AddGroup from "./Components/Add/AddGroup";
+import IsPrivate from "./Components/IsPrivate";
 import "./App.css";
-import IsAnon from "./Components/IsAnon";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -112,11 +112,11 @@ function App() {
         {showAddGroup && <AddGroup setShowAddGroup={setShowAddGroup} />}
         <Routes>
           <Route path="/" element={<LandingPage />} />
-          <Route path="/home" element={<Homepage />} />
-          <Route path="/details/:groupId" element={<DetailsPage setShowAddExpense={setShowAddExpense} getGroup={getGroup} group={group} calculations={calculations} />} />
+          <Route path="/home" element={<IsPrivate><Homepage /></IsPrivate>} />
+          <Route path="/details/:groupId" element={<IsPrivate><DetailsPage setShowAddExpense={setShowAddExpense} getGroup={getGroup} group={group} calculations={calculations} /></IsPrivate>} />
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="/user" element={<UserProfilePage />} />
+          <Route path="/user" element={<IsPrivate><UserProfilePage /></IsPrivate>} />
         </Routes>
       </div>
       <Footer />

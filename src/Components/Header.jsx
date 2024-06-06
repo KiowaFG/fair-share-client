@@ -3,6 +3,7 @@ import { Link } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
 import closeIcon from "../assets/close.png"
 import Logo from "../assets/owl.png"
+import blueLogo from "../assets/blueLogo.png"
 import burger from "../assets/hamburger.png"
 import "./Header.css"
 
@@ -19,7 +20,7 @@ function Header({ showSidebar, handleHideSidebar }) {
             </div>
             <div className="header-separator-center">
                 <Link to={"/home"}>
-                    <img className="logo" src={Logo} alt="" />
+                    <img className="logo" src={blueLogo} alt="" />
                 </Link>
             </div>
             <div className="header-separator-right">

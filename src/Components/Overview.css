@@ -1,5 +1,5 @@
-.overview{
-    padding: 15px 30px 30px 30px ;
+.overview {
+    padding: 15px 30px 30px 30px;
     border-radius: 20px;
     width: 80%;
     margin: 5px;
@@ -7,15 +7,108 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
 }
 
-.overTitle{
-color: #233565;
+.overTitle {
+    color: #233565;
 }
 
-.lineOverview{
+.lineOverview {
     height: 3px;
     width: 80vw;
     background-color: #233565;
     border-radius: 30%;
+}
+
+.metricCards {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    float: left;
+    flex-direction: column;
+    /*break point */
+
+}
+
+.innCard {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    gap: 10px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px;
+    width: 70vw;
+    /*break point */
+    padding: 10px;
+    margin: 10px;
+}
+
+/* .metricCardTitle {} */
+
+.overviewNumber {
+    font-size: 24px;
+}
+
+.overviewgraphic {
+    height: 200px;
+}
+
+.overviewWithoutTitle {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.green {
+    color: green;
+}
+
+.red {
+    color: red;
+}
+
+@media (min-width: 450px) {
+
+    .innCard {
+        width: 300px;
+
+    }
+}
+
+@media (min-width: 750px) {
+    .overviewWithoutTitle {
+
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+
+
+    }
+
+    .innCard {
+        width: 200px;
+        flex-direction: column;
+    }
+
+    .metricCards {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        float: left;
+        flex-direction: column;
+        /*break point */
+
+    }
+
+    .overviewUnder {
+        height: 1px;
+        width: 100%;
+        background-color: black;
+    }
+
+
 }

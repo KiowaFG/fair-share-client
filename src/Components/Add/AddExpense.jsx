@@ -3,10 +3,9 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import supabase from '../../utils/config';
-import { Navigate, useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { AuthContext } from '../../context/auth.context';
-import closeBtn from "../../assets/close.png"
 import "./AddExpense.css"
 
 const API_URL = import.meta.env.VITE_API_URL
@@ -19,8 +18,6 @@ function AddExpense({ setShowAddExpense, getGroup, handleHideSidebar }) {
     const [selectGroup, setSelectGroup] = useState("");
     const [selectPayers, setSelectPayer] = useState("");
     const [errorMessage, setErrorMessage] = useState(null);
-
-    let pic_path = null;
 
     const [formData, setFormData] = useState({
         name: '',
@@ -123,7 +120,7 @@ function AddExpense({ setShowAddExpense, getGroup, handleHideSidebar }) {
             return;
         };
 
-        pic_path = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/${data.fullPath}`;
+        const pic_path = `${import.meta.env.VITE_SUPABASE_URL}/storage/v1/object/public/${data.fullPath}`;
 
         setFormData({
             ...formData,

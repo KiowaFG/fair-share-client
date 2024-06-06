@@ -1,10 +1,11 @@
-import "./Header.css"
-import burger from "../assets/hamburger.png"
-import { Link, useNavigate } from "react-router-dom"
 import { useContext, useState } from "react"
+import { Link } from "react-router-dom"
 import { AuthContext } from "../context/auth.context"
-import closeIcon from "../assets/X.png"
-import Logo from "../assets/Logo.png"
+import closeIcon from "../assets/close.png"
+import Logo from "../assets/owl.png"
+import burger from "../assets/hamburger.png"
+import "./Header.css"
+
 
 function Header({ showSidebar, handleHideSidebar }) {
 
@@ -13,19 +14,26 @@ function Header({ showSidebar, handleHideSidebar }) {
 
     return (
         <nav className="header">
-
-            <img onClick={() => handleHideSidebar()} className="burger" src={showSidebar ? closeIcon : burger} alt="" />
-            <Link to={"/home"}>
-                <img className="logo" src={Logo} alt="" />
-            </Link>
-            <Link to={"/user"}>
-                <div className="profile-wrapper">
-                    <div className="profile" onClick={() => setProfileMenu(!profileMenu)} >
-                        <img src={avatarPic} alt="" />
-                        <p>{user && user.name}</p>
+            <div className="header-separator-left">
+                <img onClick={() => handleHideSidebar()} className="burger" src={showSidebar ? closeIcon : burger} alt="" />
+            </div>
+            <div className="header-separator-center">
+                <Link to={"/home"}>
+                    <img className="logo" src={Logo} alt="" />
+                </Link>
+            </div>
+            <div className="header-separator-right">
+                <Link to={"/user"}>
+                    <div className="profile-wrapper">
+                        <div className="profile" onClick={() => setProfileMenu(!profileMenu)} >
+                            <div className="profile-background">
+                                <img src={avatarPic} alt="" />
+                            </div>
+                            <p className="header-email">{user && user.email}</p>
+                        </div>
                     </div>
-                </div>
-            </Link>
+                </Link>
+            </div>
         </nav>
     )
 }

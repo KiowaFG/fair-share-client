@@ -235,7 +235,7 @@ function ExpenseCard({ expense, getGroup, groupId }) {
                 </div>
             }
         </div>
-    );
+    )
 
 }
 export default ExpenseCard;

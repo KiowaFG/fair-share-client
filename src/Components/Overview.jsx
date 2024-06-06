@@ -61,30 +61,47 @@ function Overview() {
 
     return (
         <>
-        <div className="overview">
-            <h1 className="overTitle">Overview</h1>
-            <p> <strong>Total Balance: </strong>{`${calculations.balance} €`}</p>
-            <p> <strong>Total Paid:</strong> {`${calculations.paid} €`}</p>
-            <p> <strong>Total Borrowed:</strong> {`${calculations.borrowed} €`}</p>
-
-            <PieChart width={250} height={200}>
-                <Pie
-                    data={dataPie}
-                    cx="50%"
-                    cy="50%"
-                    labelLine={false}
-                    label={renderCustomizedLabel}
-                    outerRadius={80}
-                    fill="#8884d8"
-                    dataKey="value"
-                >
-                    {dataPie.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-                    ))}
-                </Pie>
-            </PieChart>
+            <div className="overview">
+                <h1 className="overTitle">Overview</h1>
+                <div className="overviewWithoutTitle">
+                    <div className="metricCards">
+                        <div className="innCard">
+                            <p className="metricCardTitle">Total Balance: </p>
+                            <div className="overviewUnder"></div>
+                            <p className={calculations.balance < 0 ? "overviewNumber red" : "overviewNumber green"}>{`${calculations.balance} €`}</p>
+                        </div>
+                        <div className="innCard">
+                            <p className="metricCardTitle">Total Paid: </p>
+                            <div className="overviewUnder"></div>
+                            <p className="overviewNumber">{`${calculations.paid} €`}</p>
+                        </div>
+                        <div className="innCard">
+                            <p className="metricCardTitle">Total Borrowed: </p>
+                            <div className="overviewUnder"></div>
+                            <p className="overviewNumber">{`${calculations.borrowed} €`}</p>
+                        </div>
+                    </div>
+                    <div className="overviewgraphic">
+                        <PieChart width={360} height={200}>
+                            <Pie
+                                data={dataPie}
+                                cx="50%"
+                                cy="50%"
+                                labelLine={false}
+                                label={renderCustomizedLabel}
+                                outerRadius={80}
+                                fill="#8884d8"
+                                dataKey="value"
+                            >
+                                {dataPie.map((entry, index) => (
+                                    <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
+                                ))}
+                            </Pie>
+                        </PieChart>
+                    </div>
+                </div>
+            </div>
             <div className="lineOverview"></div>
-        </div>
         </>
     )
 }

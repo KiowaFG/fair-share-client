@@ -6,7 +6,7 @@ import { AuthContext } from "../context/auth.context";
 import emailIcon from "../assets/images/email-icon.svg";
 import paswordIcon from "../assets/images/password-icon.svg";
 
-const API_URL = "http://localhost:5005";
+const API_URL = import.meta.env.VITE_API_URL;
 
 function LoginPage(props) {
   const [email, setEmail] = useState("");

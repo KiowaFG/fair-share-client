@@ -3,6 +3,10 @@
 position: relative;
 }
 
+.bodyView{
+  min-height: 90vh;
+}
+
 .log-container {
 
   position: absolute;
@@ -170,3 +174,4 @@ position: relative;
       width: 40vw;
   }
 }
+

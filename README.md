@@ -13,6 +13,7 @@ The application is built on react and its entire functionalities expand across t
 * [React](https://react.dev/)
 * [Node](https://nodejs.org/en)
 
+In this documentation we will mainly focused about client details and functionalities.
 
 ## Functionalities
 

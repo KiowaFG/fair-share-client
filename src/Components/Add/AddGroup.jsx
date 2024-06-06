@@ -3,8 +3,7 @@ import supabase from '../../utils/config';
 import React, { useContext, useEffect, useState } from 'react';
 import Select from 'react-select';
 import { AuthContext } from '../../context/auth.context';
-import { useNavigate, useParams } from 'react-router-dom';
-import closeBtn from "../../assets/X.png"
+import { useNavigate } from 'react-router-dom';
 import "./AddGroup.css"
 
 const API_URL = import.meta.env.VITE_API_URL

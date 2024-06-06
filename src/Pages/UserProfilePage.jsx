@@ -9,7 +9,7 @@ const API_URL = import.meta.env.VITE_API_URL
 const UserProfilePage = () => {
 
     const storedToken = localStorage.getItem("authToken");
-    const { user, avatarPic, storeToken, authenticateUser } = useContext(AuthContext);
+    const { user, avatarPic, storeToken, authenticateUser, logOut } = useContext(AuthContext);
     const [userData, setUserData] = useState("");
     const [profilePic, setProfilePic] = useState("");
     const [messageOutput, setMessageOutput] = useState("");
@@ -45,7 +45,6 @@ const UserProfilePage = () => {
     };
 
     const handleInput = (e) => {
-        setMessageOutput(null);
         const { name, value } = e.target;
         setUserData({ ...userData, [name]: value });
     };
@@ -63,6 +62,7 @@ const UserProfilePage = () => {
             )
             .then((userUpdated) => {
                 setMessageOutput(userUpdated.data.message);
+                setTimeout(() => {setMessageOutput(null)}, 2000);
                 storeToken(userUpdated.data.authToken);
 
                 setProfilePic(null);
@@ -70,6 +70,7 @@ const UserProfilePage = () => {
             })
             .catch((error) => {
                 setMessageOutput(error.response.data.message);
+                setTimeout(() => {setMessageOutput(null)}, 2000);
             });
     };
 
@@ -79,9 +80,13 @@ const UserProfilePage = () => {
 
     return (
         <div className="user-profile-container">
-            <h3>{userData && `Hello ${user.name}!`}</h3>
-            <img src={avatarPic} />
-            <div>
+            <div className="user-form-column1">
+                <div className="center-form-field">
+                    <h3>{userData && `Hello ${user.name}!`}</h3>
+                    <img src={avatarPic} />
+                </div>
+            </div>
+            <div className="user-form-column2">
                 <form className="user-profile-form">
                     <label htmlFor="name">
                         User Name
@@ -132,14 +137,18 @@ const UserProfilePage = () => {
                         Profile Picture
                     </label>
                     <input
+                        className="file-input"
                         onChange={uploadImage}
                         type="file"
                         name="profile"
                     />
                     {profilePic && <img src={profilePic} alt="" />}
-                    <button onClick={handleSubmit}>Save</button>
+                    <div>
+                        <button className="button-userform" onClick={handleSubmit}>Save</button>
+                        <button className="button-userform" onClick={logOut}>Log Out</button>
+                    </div>
                 </form>
-                <p>{messageOutput && messageOutput}</p>
+                <p className={messageOutput === "Please fill all the fields" ? "message-red" : "message-green"}>{messageOutput && messageOutput}</p>
             </div>
         </div>
     )

@@ -47,7 +47,6 @@ In this documentation we will mainly focused about client details and functional
     - Service used to allow users upload their own pictures.
 - `Deloplyment`
     - [Netlify](https://app.netlify.com/) -- Front-end deployment
-    - [Vercel](https://vercel.com/) -- Back-end deployment
 
 ## Version History
 Check the list of [commits](https://github.com/kiowafg/fair-share-client/commits/main/) to see the history of the versions or the design history of our app.

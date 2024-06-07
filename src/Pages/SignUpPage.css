@@ -1,7 +1,7 @@
 @import url("https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100..900;1,100..900&family=Poppins:wght@400;800&family=Roboto&family=Satisfy&display=swap");
 
 .bodyView {
-  min-width: 90vh;
+  min-width: 90vw;
 }
 
 .sign-container {

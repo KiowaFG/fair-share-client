@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { Route, Routes, Link, useLocation } from "react-router-dom";
 import Footer from "./Components/Footer";
 import Header from "./Components/Header";
@@ -14,12 +14,15 @@ import AddExpense from "./Components/Add/AddExpense";
 import AddGroup from "./Components/Add/AddGroup";
 import IsPrivate from "./Components/IsPrivate";
 import "./App.css";
+import { AuthContext } from "./context/auth.context";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
 function App() {
   const storedToken = localStorage.getItem("authToken");
   let location = useLocation();
+  const {user} = useContext(AuthContext)
+  const [newBalance, setNewBalance] = useState("")
   const [showSidebar, setShowSidebar] = useState(false)
   const [hideSidebar, setHideSidebar] = useState(false)
   const [showAddGroup, setShowAddGroup] = useState(false)
@@ -43,16 +46,16 @@ function App() {
         let data = response.data;
         data = getBalance(data);
         setGroup(data);
-        const paid = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
-        const borrowed = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount / curr.expenseUsers.length) : acc + 0, 0));
-        const total = Math.round(response.data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + curr.amount : acc + 0, 0));
+        const paid = Math.round(data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor === user._id ? acc + curr.amount : acc + 0, 0));
+        const borrowed = Math.round(data.groupExpenses.reduce((acc, curr) => curr.expenseAuthor !== user._id ? acc + Math.round(curr.amount / curr.expenseUsers.length) : acc + 0, 0));
+        const total = Math.round(data.groupExpenses.reduce((acc, curr) =>  acc + curr.amount, 0));
         const balance = paid - borrowed;
         setCalculations({
           paid: paid,
           borrowed: borrowed,
           balance: balance,
           total: total
-        })
+        });
       })
       .catch((error) => console.log("error look here"));
   };

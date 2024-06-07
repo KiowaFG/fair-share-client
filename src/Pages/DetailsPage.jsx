@@ -16,7 +16,6 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
     const { groupId } = useParams();
     const navigate = useNavigate();
     const [editMode, setEditMode] = useState(false)
-
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [selectUsers, setSelectUsers] = useState("");
@@ -28,7 +27,6 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
 
     const deleteGroup = () => {
         if (group.groupAuthor._id !== user._id) {
-            console.log(group);
             setEditGroupMessage("You are not the admin of this group");
             setTimeout(() => { setEditGroupMessage(null) }, 3000);
         } else {
@@ -60,7 +58,6 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
 
     const handleSelectAdmin = (e) => {
         setSelectAdmin(e.value);
-        console.log(selectAdmin);
     };
 
     function handleEditMode() {
@@ -97,32 +94,36 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
         getGroup(groupId);
         handleSelectUsers();
     }, [groupId]);
-
+    
     return (
         <div className="detailsWrap-outter">
             {group &&
                 <>
                     <div className="detailsWrap-inner">
                         <div className="detailsPage">
+                            {editMode ? <input value={name} onChange={handleName} placeholder="New Group Name" /> : <h1>{group.name}</h1>}
                             <div className="titleAndBtns">
-                                {editMode ? <input value={name} onChange={handleName} placeholder="New Group Name" ></input> : <h1>{group.name}</h1>}
-                                <img className="detailsPageImg" src={group.groupPic} alt="" />
-                                {editMode ? <input value={description} onChange={handleDescription} placeholder="New Group Description"></input> : <p>{`Description: ${group.description}`}</p>}
-                                {editMode ? <Select options={selectUsers} onChange={handleSelectAdmin} placeholder="Select New Admin" /> : <p>{`Admin: ${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>}
-                                <p>{`Date: ${group.createdAt.split("T")[0]}`}</p>
+                                <div className="column">
+                                    <img className="detailsPageImg" src={group.groupPic} alt="" />
+                                </div>
+                                <div className="div-left">
+                                    {editMode ? <input value={description} onChange={handleDescription} placeholder="New Group Description"></input> : <p><span>Description: </span>{group.description}</p>}
+                                    {editMode ? <Select options={selectUsers} onChange={handleSelectAdmin} placeholder="Select New Admin" /> : <p><span>Admin: </span>{`${group.groupAuthor.name} ${group.groupAuthor.lastName}`}</p>}
+                                    <p ><span>Date: </span>{group.createdAt.split("T")[0]}</p>
+                                </div>
                                 <div className="detailsMetricsWrap">
-                                <p className="detailsMetric">{`Total Trip: ${calculations.total} €`}</p>
-                                <p className="detailsMetric">{`Total Balance: ${calculations.balance} €`}</p>
-                                <p className="detailsMetric">{`Total Paid: ${calculations.paid} €`}</p>
-                                <p className="detailsMetric">{`Total Borrowed: ${calculations.borrowed} €`}</p>
+                                    <p className="detailsMetric">{`Total Spent: ${calculations.total} €`}</p>
+                                    <p className={calculations.balance < 0 ? "detailsMetric red" : "detailsMetric green"}>{`Total Balance: ${calculations.balance} €`}</p>
+                                    <p className="detailsMetric">{`Total Paid: ${calculations.paid} €`}</p>
+                                    <p className="detailsMetric">{`Total Borrowed: ${calculations.borrowed} €`}</p>
                                 </div>
                                 <div className="Btns">
-                                    <button onClick={() => setShowAddExpense(true)} className="detailsbtn">Add Expense</button>
-                                    <button onClick={handleEditMode} className="detailsbtn">{editMode ? "Save" : "Edit Group"}</button>
-                                    {editMode && <button onClick={() => setEditMode(false)} className="detailsbtn">Cancel</button>}
-                                    <button onClick={deleteGroup} className="detailsbtn">Delete Group</button>
+                                    <button onClick={() => setShowAddExpense(true)} className="button-details">Add Expense</button>
+                                    <button onClick={handleEditMode} className="button-details">{editMode ? "Save" : "Edit Group"}</button>
+                                    {editMode && <button onClick={() => setEditMode(false)} className="button-details">Cancel</button>}
+                                    <button onClick={deleteGroup} className="button-details">Delete Group</button>
+                                    {editGroupMessage && <p className="red">{editGroupMessage}</p>}
                                 </div>
-                                {editGroupMessage && <p>{editGroupMessage}</p>}
                             </div>
 
                             {group.groupExpenses ? group.groupExpenses.map((expense) => {
@@ -132,23 +133,18 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
                             }) : <p>Loading expenses</p>}
                         </div>
                     </div>
-                    <div className="detailsDivision"></div>
                     <div className="users-wrapper">
-                    <h2 className="group-members">Group Members</h2>
+                        <h2 className="group-members">Group Members</h2>
                         {
-                            
                             group.groupUsers.map((user) => {
                                 return (
-                                    <>
-                                   
                                     <div key={user._id} className="profile-details">
                                         <img className="user-profile-picture" src={user.profilePic} alt="" />
                                         <div>
                                             <p>{`${user.name} ${user.lastName}`}</p>
-                                            <p>{`${user.balance} €`}</p>
+                                            <p>{user.balance < 0 ? "Owes: " : "Receives "}<span className={user.balance < 0 ? "red" : "green"}>{`${user.balance.toFixed(2)} €`}</span></p>
                                         </div>
                                     </div>
-                                    </>
                                 )
                             })
                         }

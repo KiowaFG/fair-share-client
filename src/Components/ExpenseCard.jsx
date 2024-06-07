@@ -6,8 +6,8 @@ import { AuthContext } from "../context/auth.context";
 import trashBin from "../assets/images/bin.png";
 import glassIcon from "../assets/images/magnifying-glass.png";
 import editIcon from "../assets/images/edit.png";
-import "./ExpenseCard.css"; 
-import closeBtn from"../assets/X.png"; 
+import "./ExpenseCard.css";
+import closeBtn from "../assets/X.png";
 
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -95,10 +95,10 @@ function ExpenseCard({ expense, getGroup, groupId }) {
                 )
                     .then((updatedExpense) => {
                         setEditMessage("Expense updated");
+                        setEditMode(false);
                         setTimeout(() => {
                             setShowInfo("content-not-visible")
                             setEditMessage(null);
-                            setEditMode(false);
                             displayInfo();
                             getGroup(groupId);
                         }, 2000)
@@ -133,7 +133,7 @@ function ExpenseCard({ expense, getGroup, groupId }) {
 
     const handleDelete = () => {
         if (expenseInfo.expenseAuthor._id !== user._id) {
-            setEditMessage("Please fill all the information");
+            setEditMessage("You need to be the author to delete");
             setTimeout(() => { setEditMessage(null) }, 2000);
         } else {
             axios
@@ -167,19 +167,19 @@ function ExpenseCard({ expense, getGroup, groupId }) {
             <div className="expenseItem">
                 {showInfo === "content-not-visible" &&
                     <div className="column-div">
-                        <p>Name:</p>
+                        <p className="blue">Name:</p>
                         <p>{expense.name}</p>
                     </div>
                 }
                 {showInfo === "content-not-visible" &&
                     <div className="column-div">
-                        <p>Price:</p>
+                        <p className="blue">Price:</p>
                         <p>{expense.amount} €</p>
                     </div>
                 }
                 {showInfo === "content-not-visible" &&
                     <div className="column-div">
-                        <p>Date:</p>
+                        <p className="blue">Date:</p>
                         <p>{expense.createdAt.split("T")[0]}</p>
                     </div>
                 }
@@ -191,47 +191,51 @@ function ExpenseCard({ expense, getGroup, groupId }) {
             {expenseInfo &&
                 <div className={showInfo}>
                     <div className="imgInDetails">
-                    <img className="trash-bin-image" src={editMode ? closeBtn : glassIcon} alt="" onClick={displayInfo} />
-                    <img className="trash-bin-image" src={editIcon} alt="" onClick={() => {
-                        setEditMode(true);
-                        getPayers();
-                    }} />
-                    <img className="trash-bin-image" src={trashBin} alt="" onClick={handleDelete} />
+                        <img className="trash-bin-image" src={editMode ? closeBtn : glassIcon} alt="" onClick={displayInfo} />
+                        <img className="trash-bin-image" src={editIcon} alt="" onClick={() => {
+                            setEditMode(true);
+                            getPayers();
+                        }} />
+                        <img className="trash-bin-image" src={trashBin} alt="" onClick={handleDelete} />
                     </div>
-                    <div>
-                    {editMode ? <input type="text" placeholder="Name of expense" name="name" onChange={handleChange} /> : <p>{`Name: ${expenseInfo.name}`}</p>}
-                    {editMode ? <select name="concept" onChange={handleChange} >
-                        <option value="---">--</option>
-                        <option value="Food">Food</option>
-                        <option value="Savings">Savings</option>
-                        <option value="Transportation">Transportation</option>
-                        <option value="Personal Care">Personal Care</option>
-                        <option value="Entertainment">Entertainment</option>
-                        <option value="Healthcare">Healthcare</option>
-                        <option value="Housing">Housing</option>
-                    </select> : <p>{`Concept: ${expenseInfo.concept}`}</p>}
-                    {editMode ? <input type="text" placeholder="Description of expense" name="description" onChange={handleChange} /> : <p>{`Description: ${expenseInfo.description}`}</p>}
-                    {editMode ? <Select options={selectPayer} name="expenseAuthor" onChange={(e) => handleChangeUsers(e, "author")} /> : <p>{`Paid by: ${expenseInfo.expenseAuthor.name} ${expenseInfo.expenseAuthor.lastName}`}</p>}
-                    <p>{`Expense Date: ${expenseInfo.createdAt.split("T")[0]}`}</p>
-                    <p>{`Last Update: ${expenseInfo.updatedAt.split("T")[0]}`}</p>
-                    {editMode ? <input type="number" name="amount" placeholder="set the amount" onChange={handleChange} /> : <p>{`Price: ${expenseInfo.amount} €`}</p>}
-                    {
-                        editMode ? <Select options={selectPayer} name="expenseUsers" onChange={(e) => handleChangeUsers(e, "payers")} isMulti /> : <ul>Expense Participants:
+                    <div className="expense-details-info">
+                        <form className="column">
+                            {editMode ? <input type="text" placeholder="Name of expense" name="name" onChange={handleChange} /> : <p><span>Name: </span>{`${expenseInfo.name}`}</p>}
+                            {editMode ? <select name="concept" onChange={handleChange} >
+                                <option value="---">--</option>
+                                <option value="Food">Food</option>
+                                <option value="Savings">Savings</option>
+                                <option value="Transportation">Transportation</option>
+                                <option value="Personal Care">Personal Care</option>
+                                <option value="Entertainment">Entertainment</option>
+                                <option value="Healthcare">Healthcare</option>
+                                <option value="Housing">Housing</option>
+                            </select> : <p><span>Concept: </span>{`${expenseInfo.concept}`}</p>}
+                            {editMode ? <input type="text" placeholder="Description of expense" name="description" onChange={handleChange} /> : <p><span>Description: </span>{`${expenseInfo.description}`}</p>}
+                            {editMode ? <Select options={selectPayer} name="expenseAuthor" onChange={(e) => handleChangeUsers(e, "author")} /> : <p><span>Paid by: </span>{`${expenseInfo.expenseAuthor.name} ${expenseInfo.expenseAuthor.lastName}`}</p>}
+                            <p><span>Expense Date: </span>{`${expenseInfo.createdAt.split("T")[0]}`}</p>
+                            <p><span>Last Update: </span>{`${expenseInfo.updatedAt.split("T")[0]}`}</p>
+                            {editMode ? <input type="number" name="amount" placeholder="set the amount" onChange={handleChange} /> : <p><span>Amount: </span>{`${expenseInfo.amount} €`}</p>}
                             {
-                                expenseInfo.expenseUsers.map((user, index) => {
-                                    return (
-                                        <li key={`expense_card ${index}`}>{`${user.name} ${user.lastName}`}</li>
-                                    )
-                                })
+                                editMode ? <Select options={selectPayer} name="expenseUsers" onChange={(e) => handleChangeUsers(e, "payers")} isMulti /> : <ul><span>Expense Participants: </span>
+                                    {
+                                        expenseInfo.expenseUsers.map((user, index) => {
+                                            return (
+                                                <li key={`expense_card ${index}`}>{`${user.name} ${user.lastName}: ${(expenseInfo.amount / expenseInfo.expenseUsers.length).toFixed(2)} €`}</li>
+                                            )
+                                        })
+                                    }
+                                </ul>
                             }
-                        </ul>
-                    }
-                    {editMode ? <input type="file" onChange={uploadImage} /> : <img className="expense-picture" src={expenseInfo.expensePic} alt="" />}
-                    {editMode && <img src={formData.expensePic} />}
+                        </form>
+                        <div className="centered-div">
+                            {editMode ? <input type="file" onChange={uploadImage} /> : <img className="expense-picture" src={expenseInfo.expensePic} alt="" />}
+                            {editMode && <img className="expense-picture" src={formData.expensePic} />}
+                        </div>
+                        {editMode && <button className="button-details-expense" onClick={handleSubmit}>Save</button>}
+                        {editMode && <button className="button-details-expense" onClick={() => setEditMode(false)}>Cancel</button>}
+                        {editMessage && <p className={editMessage === "Expense updated" ? "green" : "red"}>{editMessage}</p>}
                     </div>
-                    {editMode && <button onClick={handleSubmit}>Save</button>}
-                    {editMode && <button onClick={() => setEditMode(false)}>Cancel</button>}
-                    {editMessage && <p>{editMessage}</p>}
                 </div>
             }
         </div>

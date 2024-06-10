@@ -47,7 +47,7 @@ function GroupView() {
                                 <div className="group-details">
                                     <div className="center-info">
                                         <h5>Balance:</h5>
-                                        <p>{`${group.balance} €`}</p>
+                                        <p className={group.balance < 0 ? "red" : "green"}>{`${group.balance} €`}</p>
                                     </div>
                                     <div className="center-info">
                                         <h5>Paid:</h5>

@@ -94,7 +94,7 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
         getGroup(groupId);
         handleSelectUsers();
     }, [groupId]);
-    
+
     return (
         <div className="detailsWrap-outter">
             {group &&
@@ -112,10 +112,9 @@ function DetailsPage({ setShowAddExpense, getGroup, calculations, group }) {
                                     <p ><span>Date: </span>{group.createdAt.split("T")[0]}</p>
                                 </div>
                                 <div className="detailsMetricsWrap">
-                                    <p className="detailsMetric">{`Total Spent: ${calculations.total} €`}</p>
-                                    <p className={calculations.balance < 0 ? "detailsMetric red" : "detailsMetric green"}>{`Total Balance: ${calculations.balance} €`}</p>
+                                    <p className="detailsMetric">{`Total Group Spent: ${calculations.total} €`}</p>
                                     <p className="detailsMetric">{`Total Paid: ${calculations.paid} €`}</p>
-                                    <p className="detailsMetric">{`Total Borrowed: ${calculations.borrowed} €`}</p>
+                                    <p className={calculations.balance < 0 ? "detailsMetric red" : "detailsMetric green"}>{`Total Balance: ${group.groupUsers.filter((userSarch) => userSarch._id === user._id)[0].balance} €`}</p>
                                 </div>
                                 <div className="Btns">
                                     <button onClick={() => setShowAddExpense(true)} className="button-details">Add Expense</button>

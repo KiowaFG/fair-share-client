@@ -56,7 +56,7 @@ function AuthProviderWrapper(props) {
     localStorage.removeItem("authToken");
     setIsLoggedIn(false);
     setAvatarPic("https://static1.colliderimages.com/wordpress/wp-content/uploads/2022/06/Gandalf-Lord-Of-The-Rings-You-Shall-Not-Pass.jpg")
-    navigate("/login");
+    navigate("/");
   };
   
   useEffect(() => {   

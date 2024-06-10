@@ -16,7 +16,7 @@
 .expenseItem {
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    align-items: start;
     width: 100%;
 }
 
@@ -101,6 +101,7 @@
 .expenseCardImg {
     display: flex;
     flex-direction: column;
+    width: 10%;
 }
 
 .column-div {
@@ -108,6 +109,7 @@
     flex-direction: column;
     align-items: start;
     justify-content: center;
+    width: 30%;
 }
 
 .imgInDetails {

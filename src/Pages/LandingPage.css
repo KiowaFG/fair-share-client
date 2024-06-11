@@ -64,17 +64,33 @@
 
 }
 
-.btn {
+.loginBtn  {
   width: 10em;
   height: 2em;
-  color: #fff;
-  background-color: #233565;
+  color: #233565;
+  border: 2px solid #233565;
+  background-color: #fff;
   margin-top: 20px;
   border-radius: 50px;
   font-size: 20px;
   font-weight: 700;
   cursor: pointer;
+  transition: background-color 0.4s ease;
 
+}
+
+.signupBtn{
+  width: 10em;
+  height: 2em;
+  color: #fff;
+  background-color: #233565;
+  border: 2px solid #233565;
+  margin-top: 20px;
+  border-radius: 50px;
+  font-size: 20px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.4s ease;
 }
 
 .slogan {
@@ -161,4 +177,14 @@
     width: 80%;
     margin-top: 10vh;
   }
+
+  .loginBtn:hover {
+    background-color: #8BD8BC ;
+    color: #fff;
+  }
+
+  .signupBtn:hover {
+    background-color: #8BD8BC ;
+  }
+
 }

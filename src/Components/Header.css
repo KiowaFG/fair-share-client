@@ -227,4 +227,8 @@
         display: block;
         color: white;
     }
+    .burger {
+        width: 30px;
+        cursor: pointer;
+    }
 }

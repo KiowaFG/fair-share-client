@@ -26,11 +26,11 @@ function LandingPage() {
         </div>
         <div>
           <div className="landingBtns">
-            <Link to="/signup">
-              <button className="btn">SignUp</button>{" "}
-            </Link>
             <Link to="/login">
-              <button className="btn">LogIn</button>
+              <button className="loginBtn">LogIn</button>
+            </Link>
+            <Link to="/signup">
+              <button className="signupBtn">SignUp</button>{" "}
             </Link>
           </div>
           <img className="landingImageDeco" src={decoImg} alt="" />
